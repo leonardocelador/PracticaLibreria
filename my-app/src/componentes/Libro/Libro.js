@@ -14,9 +14,7 @@ export const Libro = () => {
 
     return (
         <>
-            <h1>Bienvenido a libro</h1>
-            <label>Libro</label>
-            <input type="text" name="nombre-libro"></input>
+            
 
         </>
     )
