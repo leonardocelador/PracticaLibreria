@@ -5,11 +5,14 @@ import {Container, FormControl, TextField, Button} from '@material-ui/core';
 export const Libro = () => {
 
     const [libro, setLibro] = useState({
+        Id:'',
         nombre:'',
         dueño:'',
         imagen:'',
         fechaPrestamo: '',
         fechaDevolucion:'',
+        eliminado:false,
+        Pedido:''
     })
 
 

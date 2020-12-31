@@ -6,8 +6,7 @@ import Listar from './componentes/Listar/Listar';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Libro />
-    <Listar />
+    <Libro/>
   </React.StrictMode>,
   document.getElementById('root')
 );
