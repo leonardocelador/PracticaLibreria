@@ -12,7 +12,7 @@ import Modificar from './Modificar';
 import Nuevo from './Nuevo';
 import  Modal  from './Modal';
 
-const ListarConDatos = ({libros}) => {
+const ListarConDatos = ({libros, btnNuevo}) => {
 
         
         const [color,] = useState("#dca4a4") // color que tendra la fila morosa
@@ -97,14 +97,14 @@ const ListarConDatos = ({libros}) => {
           <TableBody>
            
             {libros.map((libro) => {
-                if (libro.prestamo > "27/12/20" && libro.devolucion === "") {
+                if (libro.fechaPrestamo > "27/12/20" && libro.fechaDevolucion === "") {
                   return (
                     <StyledTableRow  style={{background: color}} key={libro.Id}>
-                      <StyledTableCell align="left">{libro.Nombre}</StyledTableCell>
-                      <StyledTableCell align="left">{libro.Dueño}</StyledTableCell>
+                      <StyledTableCell align="left">{libro.nombre}</StyledTableCell>
+                      <StyledTableCell align="left">{libro.dueño}</StyledTableCell>
                       <StyledTableCell align="left">{libro.Pedido}</StyledTableCell>
-                      <StyledTableCell align="left">{libro.prestamo}</StyledTableCell>
-                      <StyledTableCell align="left">{libro.devolucion}</StyledTableCell>
+                      <StyledTableCell align="left">{libro.fechaPrestamo}</StyledTableCell>
+                      <StyledTableCell align="left">{libro.fechaDevolucion}</StyledTableCell>
                       <StyledTableCell align="left">
                         <button className="btn-floating btn-small waves-effect waves-light red" 
                              onClick={()=>btnModificar(libro)}><i className="material-icons">brush</i>
@@ -116,11 +116,11 @@ const ListarConDatos = ({libros}) => {
                 }
                 return (
                     <StyledTableRow  style={{background:""}} key={libro.Id}>
-                    <StyledTableCell align="left">{libro.Nombre}</StyledTableCell>
-                    <StyledTableCell align="left">{libro.Dueño}</StyledTableCell>
+                    <StyledTableCell align="left">{libro.nombre}</StyledTableCell>
+                    <StyledTableCell align="left">{libro.dueño}</StyledTableCell>
                     <StyledTableCell align="left">{libro.Pedido}</StyledTableCell>
-                    <StyledTableCell align="left">{libro.prestamo}</StyledTableCell>
-                    <StyledTableCell align="left">{libro.devolucion}</StyledTableCell>
+                    <StyledTableCell align="left">{libro.fechaPrestamo}</StyledTableCell>
+                    <StyledTableCell align="left">{libro.fechaDevolucion}</StyledTableCell>
                     <StyledTableCell align="left">
                       <button className="btn-floating btn-small waves-effect waves-light red" 
                           onClick={()=>btnModificar(libro)}> <i className="material-icons">brush</i>
@@ -143,7 +143,7 @@ const ListarConDatos = ({libros}) => {
       {estadomodif? <Modificar/> : null}
       <hr></hr>
       <button className="waves-effect waves-light btn" onClick={()=>setestadoNuevo(!estadoNuevo)}>Nuevo</button>
-      {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo}/></Modal> : null}
+      {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo} agregarNuevo={btnNuevo}/></Modal> : null}
       </div>
     )
        

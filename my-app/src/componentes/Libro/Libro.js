@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Container, FormControl, TextField, Button} from '@material-ui/core';
     
-export const Libro = () => {
+export const Libro = ({NuevoLibro}) => {
 
     const [libro, setLibro] = useState({
         nombre:'',
@@ -86,8 +86,9 @@ export const Libro = () => {
             if(Date.parse(fechaPrestamo)>=Date.parse(fechaDevolucion))
               alert("Fechas Inválidas! Verificar!!");
             if(dueño){
-              if(imagen)
-                alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");
+              if(imagen){
+                NuevoLibro(libro);
+                alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");}
                 else
                   alert("Debe cargar Imagen");
             }
