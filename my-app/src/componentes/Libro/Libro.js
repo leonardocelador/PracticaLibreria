@@ -2,7 +2,11 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Container, FormControl, TextField, Button} from '@material-ui/core';
     
+<<<<<<< HEAD
 export const Libro = ({NuevoLibro}) => {
+=======
+const Libro = () => {
+>>>>>>> 201bd40db839a4aa5a031526ccb2fb2c7605d588
 
     const [libro, setLibro] = useState({
         Id:'',
@@ -218,4 +222,5 @@ export const Libro = ({NuevoLibro}) => {
         </>
     )
 }
+export default Libro;
 
