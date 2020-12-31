@@ -2,19 +2,26 @@
     "Libros":
     [
         {
+            "Id":1,
             "Nombre":"Gabbi Potter",
             "Dueño":"Gabriel",
-            "F-prestamo":"",
-            "F-devolucion":"",
-            "Imagen":""
+            "Pedido":"Jose",
+            "prestamo":"27/12/20",
+            "devolucion":"1/1/20",
+            "Imagen":"",
+            "eliminado":false
         },
 
         {
+            "Id":2,
             "Nombre":"Leo y Lowa",
             "Dueño":"Leo",
-            "F-prestamo":"",
-            "F-devolucion":"",
-            "Imagen":""
+            "Pedido":"Sergio",
+            "prestamo":"29/01/20",
+            "devolucion":"",
+            "Imagen":"",
+            "eliminado":false
         }
     ]
+    
 }
