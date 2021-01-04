@@ -14,7 +14,7 @@ const App = () => {
 
     return (
         <>
-            <h1>soy app</h1>
+            <h1>Mis Libros</h1>
             {controlVista?<Listar Libros={libres} controlBtnNuevo={setcontrolVista}/>:<Libro NuevoLibro={setLibres}/>}
         </>
     )
