@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import {Libros} from '../../data/Libros.json'
 import ListarConDatos from './ListarConDatos';
 
-const Listar = () => {
-    const [libres,] = useState(Libros)
+const Listar = ({Libros, controlBtnNuevo}) => {
     
-    if(libres !== null){
-      if(libres.length !== 0){
+    if(Libros !== null){
+      if(Libros.length !== 0){
         return(
           <div>
     
-            <ListarConDatos libros={libres} />
+            <ListarConDatos libros={Libros} btnNuevo={controlBtnNuevo}/>
     
           </div>
         );
@@ -18,7 +16,7 @@ const Listar = () => {
         return(
           <div>
     
-            <ListarConDatos libros={libres} />
+            <ListarConDatos libros={Libros} />
             <h2>No se encontraron Datos!!!</h2>
     
           </div>

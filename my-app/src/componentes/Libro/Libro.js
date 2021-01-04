@@ -4,7 +4,7 @@ import {Container, FormControl, TextField, Button, ThemeProvider, Grid} from '@m
 import theme from '../Theme/theme';
 import '../Libro/libro.css';
     
-const Libro = () => {
+export const Libro = ({NuevoLibro}) => {
 
     const [libro, setLibro] = useState({
         Id:'',
@@ -91,8 +91,9 @@ const Libro = () => {
             if(Date.parse(fechaPrestamo)>=Date.parse(fechaDevolucion))
               alert("Fechas Inválidas! Verificar!!");
             if(dueño){
-              if(imagen)
-                alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");
+              if(imagen){
+                NuevoLibro(libro);
+                alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");}
                 else
                   alert("Debe cargar Imagen");
             }

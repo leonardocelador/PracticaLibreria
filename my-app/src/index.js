@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import Libro  from './componentes/Libro/Libro';
+
 import './index.css';
-import Listar from './componentes/Listar/Listar';
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Libro/>
+   <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );

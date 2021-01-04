@@ -4,7 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
-const Nuevo = ({estadoNuevoModal}) => {
+const Nuevo = ({estadoNuevoModal, agregarNuevo}) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
 
@@ -14,8 +14,9 @@ const Nuevo = ({estadoNuevoModal}) => {
     estadoNuevoModal(false)
     }
 
-  const eliminarLibro = () => {
+  const OK = () => {
     // okEliminado(id)
+    agregarNuevo(false)
     }
 
     const cancelarEliminacion =()=>{
@@ -42,7 +43,7 @@ const Nuevo = ({estadoNuevoModal}) => {
             <section >
                 <div style={{marginLeft:"12rem"}}>
                 <button className="waves-effect waves-light btn-small" onClick={()=>cancelarEliminacion()}><i class="material-icons left">clear</i>Cancelar</button>
-                <button className="waves-effect waves-light btn-small" onClick={()=>eliminarLibro()}><i class="material-icons left">check</i>OK</button>
+                <button className="waves-effect waves-light btn-small" onClick={()=>OK()}><i class="material-icons left">check</i>OK</button>
             </div>
             </section>
           </div>
