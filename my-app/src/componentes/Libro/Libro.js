@@ -1,19 +1,18 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Container, FormControl, TextField, Button, ThemeProvider, Grid} from '@material-ui/core';
-import theme from '../Theme/theme';
+import {FormControl, TextField, Button} from '@material-ui/core';
 import '../Libro/libro.css';
     
 export const Libro = ({NuevoLibro}) => {
 
     const [libro, setLibro] = useState({
         Id:'',
-        nombre:'',
-        dueño:'',
-        imagen:'',
-        fechaPrestamo: '',
-        fechaDevolucion:'',
-        eliminado:false,
+        Nombre:'',
+        Dueño:'',
+        Imagen:'',
+        prestamo: '',
+        devolucion:'',
+        Eliminado:false,
         Pedido:''
     })
 
@@ -46,7 +45,7 @@ export const Libro = ({NuevoLibro}) => {
     //
 
     const validacionLibro = () => {
-      if(libro.nombre==="")
+      if(libro.Nombre==="")
         setControlLibro(true);
         else{
           setControlDueño(false);
@@ -56,7 +55,7 @@ export const Libro = ({NuevoLibro}) => {
     }
     
     const validacionDueño = () =>{
-      if(libro.dueño==="")
+      if(libro.Dueño==="")
         setControlDueño(true);
       else{
         setControlDueño(false);
@@ -65,7 +64,7 @@ export const Libro = ({NuevoLibro}) => {
     }
 
     const validarFechaPrestamo = (e) =>{
-      if(libro.fechaPrestamo==="")
+      if(libro.prestamo==="")
         setcontrolFechaPrestamo(true);
         else{
           setControlDueño(false);
@@ -74,7 +73,7 @@ export const Libro = ({NuevoLibro}) => {
     }
 
     const validarFechaDevolucion = (e) =>{
-      if(libro.fechaDevolucion==="")
+      if(libro.devolucion==="")
       setcontrolFechaDevolucion(true);
       else{
         setControlDueño(false);
@@ -83,17 +82,18 @@ export const Libro = ({NuevoLibro}) => {
     }
 
     const validarDatos = ()=>{
-      const {nombre, dueño, imagen, fechaDevolucion, fechaPrestamo}=libro;
+      const {Nombre, Dueño, Imagen, devolucion, prestamo}=libro;
       
-      if(nombre){
-        if(fechaPrestamo){
-          if(fechaDevolucion){
-            if(Date.parse(fechaPrestamo)>=Date.parse(fechaDevolucion))
+      if(Nombre){
+        if(prestamo){
+          if(devolucion){
+            if(Date.parse(prestamo)>=Date.parse(devolucion))
               alert("Fechas Inválidas! Verificar!!");
-            if(dueño){
-              if(imagen){
+            if(Dueño){
+              if(Imagen){
+                alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");
                 NuevoLibro(libro);
-                alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");}
+              }
                 else
                   alert("Debe cargar Imagen");
             }
@@ -113,26 +113,25 @@ export const Libro = ({NuevoLibro}) => {
     }
     const resetear = () => {
       setLibro({
-        nombre:'',
-        dueño:'',
-        imagen:'',
-        fechaPrestamo: '',
-        fechaDevolucion:'',
+        Nombre:'',
+        Dueño:'',
+        Imagen:'',
+        prestamo: '',
+        devolucion:'',
       })
     }
 
     return (
         <div className="body">
-          <ThemeProvider theme={theme}>
                 <FormControl id="formulario" className="formulario">
                     <br/>
                     <TextField
-                      name="nombre"
+                      name="Nombre"
                       error={controlLibro}
                       id="nombre" 
                       type="text"
                       label="Libro" 
-                      value={libro.nombre}
+                      value={libro.Nombre}
                       variant="standard"
                       onChange={(e)=> controlCambios(e)}
                       onBlur={validacionLibro}
@@ -143,10 +142,10 @@ export const Libro = ({NuevoLibro}) => {
 
                     <TextField
                       id="fechaPrestamo"
-                      name="fechaPrestamo"
+                      name="prestamo"
                       type="date"
                       label="Fecha de Préstamo"
-                      value={libro.fechaPrestamo}
+                      value={libro.prestamo}
                       className={classes.textField}
                       onChange={ e =>controlCambios(e)}
                       InputLabelProps={{
@@ -158,10 +157,10 @@ export const Libro = ({NuevoLibro}) => {
                     />
                     <TextField
                       id="fechaDevolucion"
-                      name="fechaDevolucion"
+                      name="devolucion"
                       label="Fecha de Devolución"
                       type="date"
-                      value={libro.fechaDevolucion}
+                      value={libro.devolucion}
                       className={classes.textField}
                       onChange={ e =>controlCambios(e)}
                       InputLabelProps={{
@@ -174,11 +173,11 @@ export const Libro = ({NuevoLibro}) => {
 
                     
                     <TextField
-                      name="dueño" 
+                      name="Dueño" 
                       id="dueño" 
                       label="Propietario" 
                       variant="standard"
-                      value={libro.dueño}
+                      value={libro.Dueño}
                       onChange={(e)=> controlCambios(e)}
                       error={controlDueño}
                       onBlur={validacionDueño}
@@ -188,7 +187,7 @@ export const Libro = ({NuevoLibro}) => {
                     <br/>
                     <div className="contained">
                         <input
-                            name="imagen"
+                            name="Imagen"
                             accept="image/*"
                             className={classes.input}
                             id="contained-button-file"
@@ -200,7 +199,7 @@ export const Libro = ({NuevoLibro}) => {
                             <Button variant="outlined" color="primary" component="span">
                                 Examinar
                             </Button>
-                            <span>{libro.imagen}</span>
+                            <span>{libro.Imagen}</span>
                         </label>
                     </div>
                     <br/>
@@ -220,7 +219,6 @@ export const Libro = ({NuevoLibro}) => {
                   </div>
 
 
-          </ThemeProvider>
         </div>
     )
 }
