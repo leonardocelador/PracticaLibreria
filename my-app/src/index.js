@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import Libro  from './componentes/Libro/Libro';
-
-import './index.css';
 import App from './App';
+import theme from '../src/componentes/Theme/theme';
+import { ThemeProvider } from '@material-ui/core';
+import './index.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-   <App/>
-  </React.StrictMode>,
-  document.getElementById('root')
+  <ThemeProvider theme={theme}>
+    <App/>
+  </ThemeProvider>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
