@@ -1,0 +1,20 @@
+.body {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.formulario {
+  width: 50%;
+  height: auto;
+}
+.contenedor-botones {
+  padding-top: 100px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
