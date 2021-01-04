@@ -44,8 +44,8 @@ const cancelarEliminacion =()=>{
           <h4>Esta Seguro  que desea eliminar el libro {id}</h4>
             <section >
                 <div style={{marginLeft:"12rem"}}>
-                <button className="waves-effect waves-light btn-small" onClick={()=>cancelarEliminacion()}><i class="material-icons left">clear</i>Cancelar</button>
-                <button className="waves-effect waves-light btn-small" onClick={()=>eliminarLibro()}><i class="material-icons left">check</i>OK</button>
+                <button className="waves-effect waves-light btn-small" onClick={()=>cancelarEliminacion()}><i className="material-icons left">clear</i>Cancelar</button>
+                <button className="waves-effect waves-light btn-small" onClick={()=>eliminarLibro()}><i className="material-icons left">check</i>OK</button>
             </div>
             </section>
           </div>
