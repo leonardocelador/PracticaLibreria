@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Container, FormControl, TextField, Button} from '@material-ui/core';
+import {Container, FormControl, TextField, Button, ThemeProvider, Grid} from '@material-ui/core';
+import theme from '../Theme/theme';
+import '../Libro/libro.css';
     
 const Libro = () => {
 
@@ -119,9 +121,9 @@ const Libro = () => {
     }
 
     return (
-        <>
-            <Container>
-                <FormControl id="formulario">
+        <div className="body">
+          <ThemeProvider theme={theme}>
+                <FormControl id="formulario" className="formulario">
                     <br/>
                     <TextField
                       name="nombre"
@@ -201,6 +203,9 @@ const Libro = () => {
                         </label>
                     </div>
                     <br/>
+                    </FormControl>
+                  <div className="contenedor-botones">
+
                     <Button onClick={e=>resetear(e)} variant="outlined" color="primary">Limpiar Campos</Button>
                     
                     <br/>
@@ -211,10 +216,11 @@ const Libro = () => {
                       disabled={controlBoton}
                     >Agregar Libro</Button>
 
+                  </div>
 
-                </FormControl>
-            </Container>
-        </>
+
+          </ThemeProvider>
+        </div>
     )
 }
 export default Libro;
