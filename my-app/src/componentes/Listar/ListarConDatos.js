@@ -97,7 +97,7 @@ const ListarConDatos = ({libros, btnNuevo}) => {
           <TableBody>
            
             {libros.map((libro) => {
-                if (libro.fechaPrestamo > "27/12/20" && libro.fechaDevolucion === "") {
+                if (Date.parse(libro.devolucion) < Date.now()) {
                   return (
                     <StyledTableRow  style={{background: color}} key={libro.Id}>
                       <StyledTableCell align="left">{libro.Nombre}</StyledTableCell>

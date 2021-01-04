@@ -109,7 +109,7 @@ export const Libro = ({NuevoLibro}) => {
       else
         alert("Debe cargar Nombre de Libro");
     
-      console.log(libro);
+      
     }
     const resetear = () => {
       setLibro({
