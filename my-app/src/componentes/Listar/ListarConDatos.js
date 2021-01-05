@@ -16,7 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 
-const ListarConDatos = ({libros, btnNuevo}) => {
+const ListarConDatos = ({libros, btnNuevo, Libr}) => {
 
         
         const [color,] = useState("#dca4a4") // color que tendra la fila morosa
@@ -25,7 +25,7 @@ const ListarConDatos = ({libros, btnNuevo}) => {
         const [estadomodif, setestadomodif] = useState(false) //ocultar - mostrar modal
         const [estadoNuevo, setestadoNuevo] = useState(false) //ocultar - mostrar modal
         const [libroaModificar, setlibroaModificar] = useState() 
-        
+
         // Estilos del Table
         const useStyles = makeStyles({
             table: {
@@ -61,11 +61,14 @@ const ListarConDatos = ({libros, btnNuevo}) => {
             // setTimeout( console.log(libroaModificar),3000);   
         }
 
+        
         // funcionalidad Cancelar del modal Elminar
         const cancelarEliminar = () => {
            setestadoEliminar(false)
           }
-
+        const cerrarModificar = () => {
+          setestadomodif(false)
+        }
         // funcionalidad al presionar Ok del modal eliminar, accion elimina el libro correspondiente
         const okEliminar = (idEliminado) => {
             setestadoEliminar(false)
@@ -146,7 +149,7 @@ const ListarConDatos = ({libros, btnNuevo}) => {
       </TableContainer>
       
       {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
-      {estadomodif? <Modificar/> : null}
+      {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={btnNuevo} LibroSeleccionado={libroaModificar} AsignarLib={Libr} /> : null}
       <hr></hr>
       <Button 
         onClick={()=>setestadoNuevo(!estadoNuevo)} 

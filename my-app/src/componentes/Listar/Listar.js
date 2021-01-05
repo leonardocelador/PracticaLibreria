@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SearchAppBar from '../App Bar/SearchAppBar';
 import ListarConDatos from './ListarConDatos';
 
-const Listar = ({Libros, controlBtnNuevo}) => {
+const Listar = ({Libros, controlBtnNuevo, libr}) => {
     
     if(Libros !== null){
       if(Libros.length !== 0){
@@ -10,7 +10,7 @@ const Listar = ({Libros, controlBtnNuevo}) => {
           <div>
             <SearchAppBar />
             <br></br>
-            <ListarConDatos libros={Libros} btnNuevo={controlBtnNuevo}/>
+            <ListarConDatos libros={Libros} btnNuevo={controlBtnNuevo} Libr={libr}/>
     
           </div>
         );
