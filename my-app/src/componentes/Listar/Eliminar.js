@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import Button from '@material-ui/core/Button';
 
 
  const Eliminar =({id, cancelar, okEliminado, estadoEliminarModal})=> {
@@ -44,8 +45,8 @@ const cancelarEliminacion =()=>{
           <h4>Esta Seguro  que desea eliminar el libro {id}</h4>
             <section >
                 <div style={{marginLeft:"12rem"}}>
-                <button className="waves-effect waves-light btn-small" onClick={()=>cancelarEliminacion()}><i className="material-icons left">clear</i>Cancelar</button>
-                <button className="waves-effect waves-light btn-small" onClick={()=>eliminarLibro()}><i className="material-icons left">check</i>OK</button>
+                <Button variant="outlined" color="primary"  onClick={()=>cancelarEliminacion()}>Cancelar</Button>
+                <Button variant="outlined" color="primary" style={{marginLeft:"1rem"}}  onClick={()=>eliminarLibro()}>Ok</Button>
             </div>
             </section>
           </div>

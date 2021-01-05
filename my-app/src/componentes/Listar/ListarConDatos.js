@@ -69,7 +69,7 @@ const ListarConDatos = ({libros, btnNuevo}) => {
         // funcionalidad al presionar Ok del modal eliminar, accion elimina el libro correspondiente
         const okEliminar = (idEliminado) => {
             setestadoEliminar(false)
-            alert("Libro" + idEliminado + "Eliminado con exito")
+            // alert("Libro" + idEliminado + "Eliminado con exito")
             var indice = libros.indexOf(idEliminado); // obtenemos el indice del objeto a eliminar
             libros.splice(indice, 1); // 1 es la cantidad de elemento a eliminar
             console.log( libros );
