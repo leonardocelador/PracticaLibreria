@@ -11,6 +11,7 @@ import Borrar from './Eliminar';
 import Modificar from './Modificar';
 import Nuevo from './Nuevo';
 import  Modal  from './Modal';
+import { Button } from '@material-ui/core';
 
 const ListarConDatos = ({libros, btnNuevo}) => {
 
@@ -21,9 +22,6 @@ const ListarConDatos = ({libros, btnNuevo}) => {
         const [estadomodif, setestadomodif] = useState(false) //ocultar - mostrar modal
         const [estadoNuevo, setestadoNuevo] = useState(false) //ocultar - mostrar modal
         const [libroaModificar, setlibroaModificar] = useState() 
-        const f = new Date();
-        const fechaActual = f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear();
-        console.log(fechaActual)
         
         // Estilos del Table
         const useStyles = makeStyles({
@@ -106,12 +104,9 @@ const ListarConDatos = ({libros, btnNuevo}) => {
                       <StyledTableCell align="left">{libro.prestamo}</StyledTableCell>
                       <StyledTableCell align="left">{libro.devolucion}</StyledTableCell>
                       <StyledTableCell align="left">
-                        <button className="btn-floating btn-small waves-effect waves-light red" 
-                             onClick={()=>btnModificar(libro)}><i className="material-icons">brush</i>
-                        </button> 
-                        <button className="btn-floating btn-small waves-effect waves-light red" 
-                            onClick={()=>LlamaModalEliminar(libro.Id)}><i className="material-icons">delete</i>
-                        </button></StyledTableCell>
+                        <Button size="small" variant="outlined" color="primary" onClick={()=>btnModificar(libro)} >Modificar</Button> 
+                        <Button size="small" variant="outlined" color="primary" onClick={()=>LlamaModalEliminar(libro.Id)} >Eliminar</Button>
+                        </StyledTableCell>
                     </StyledTableRow>);
                 }
                 return (
@@ -122,13 +117,9 @@ const ListarConDatos = ({libros, btnNuevo}) => {
                     <StyledTableCell align="left">{libro.prestamo}</StyledTableCell>
                     <StyledTableCell align="left">{libro.devolucion}</StyledTableCell>
                     <StyledTableCell align="left">
-                      <button className="btn-floating btn-small waves-effect waves-light red" 
-                          onClick={()=>btnModificar(libro)}> <i className="material-icons">brush</i>
-                      </button> 
-                      
-                      <button className="btn-floating btn-small waves-effect waves-light red" 
-                          onClick={()=>LlamaModalEliminar(libro.Id)}><i className="material-icons">delete</i>
-                      </button></StyledTableCell>
+                      <Button size="small" variant="outlined" color="primary" onClick={()=>btnModificar(libro)} >Modificar</Button>
+                      <Button size="small" variant="outlined" color="primary" onClick={()=>LlamaModalEliminar(libro.Id)} >Eliminar</Button>
+                    </StyledTableCell>
                     </StyledTableRow>
                 );
                
@@ -142,7 +133,11 @@ const ListarConDatos = ({libros, btnNuevo}) => {
       {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
       {estadomodif? <Modificar/> : null}
       <hr></hr>
-      <button className="waves-effect waves-light btn" onClick={()=>setestadoNuevo(!estadoNuevo)}>Nuevo</button>
+      <Button 
+        onClick={()=>setestadoNuevo(!estadoNuevo)} 
+        variant="outlined" 
+        color="primary" 
+      >Nuevo Libro</Button>
       {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo} agregarNuevo={btnNuevo}/></Modal> : null}
       </div>
     )
