@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Listar from './componentes/Listar/Listar';
 import { Libro } from './componentes/Libro/Libro';
 import {Libros} from '../src/data/Libros.json'
-import SearchAppBar from './componentes/App Bar/barraNavegacion';
 
 
 const App = () => {
