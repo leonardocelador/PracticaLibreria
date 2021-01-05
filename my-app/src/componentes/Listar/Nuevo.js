@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { Button } from '@material-ui/core';
+
 
 const Nuevo = ({estadoNuevoModal, agregarNuevo}) => {
     const classes = useStyles();
@@ -18,11 +20,7 @@ const Nuevo = ({estadoNuevoModal, agregarNuevo}) => {
     // okEliminado(id)
     agregarNuevo(false)
     }
-
-    const cancelarEliminacion =()=>{
-    // cancelar()
-    }
-
+    
   return (
     <div>
       <Modal
@@ -42,8 +40,24 @@ const Nuevo = ({estadoNuevoModal, agregarNuevo}) => {
           <h4>Desea Ingresar un Nuevo Libro</h4>
             <section >
                 <div style={{marginLeft:"12rem"}}>
-                <button className="waves-effect waves-light btn-small" onClick={()=>cancelarEliminacion()}><i class="material-icons left">clear</i>Cancelar</button>
-                <button className="waves-effect waves-light btn-small" onClick={()=>OK()}><i class="material-icons left">check</i>OK</button>
+                <Button
+                  size="small"
+                  variant="outlined"
+                  color="primary"
+                  className={classes.margin}
+                  onClick={()=>handleClose()}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  size="small"
+                  variant="outlined"
+                  color="primary"
+                  className={classes.margin}
+                  onClick={()=>OK()}
+                >
+                  Agregar
+                </Button>
             </div>
             </section>
           </div>
@@ -58,6 +72,12 @@ export default Nuevo
 
 // Estilos correspondiente al modal
 const useStyles = makeStyles((theme) => ({
+   margin: {
+      margin: theme.spacing(1),
+   },
+   extendedIcon: {
+     marginRight: theme.spacing(1),
+   },
     modal: {
       display: 'flex',
       alignItems: 'center',
@@ -70,3 +90,4 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(2, 4, 3),
     },
   }));
+

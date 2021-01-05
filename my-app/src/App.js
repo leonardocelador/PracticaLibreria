@@ -20,9 +20,6 @@ const App = () => {
    
     return (
         <>
-            <SearchAppBar/>
-            <br/>
-            
             {controlVista?<Listar Libros={libres} controlBtnNuevo={setcontrolVista}/>:<Libro NuevoLibro={AgregarNuevoLibro}/>}
         </>
     )

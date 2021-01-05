@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SearchAppBar from '../App Bar/barraNavegacion';
 import ListarConDatos from './ListarConDatos';
 
 const Listar = ({Libros, controlBtnNuevo}) => {
@@ -7,7 +8,8 @@ const Listar = ({Libros, controlBtnNuevo}) => {
       if(Libros.length !== 0){
         return(
           <div>
-    
+            <SearchAppBar/>
+            <br></br>
             <ListarConDatos libros={Libros} btnNuevo={controlBtnNuevo}/>
     
           </div>

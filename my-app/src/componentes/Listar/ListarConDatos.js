@@ -12,6 +12,9 @@ import Modificar from './Modificar';
 import Nuevo from './Nuevo';
 import  Modal  from './Modal';
 import { Button } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CreateIcon from '@material-ui/icons/Create';
 
 const ListarConDatos = ({libros, btnNuevo}) => {
 
@@ -104,8 +107,14 @@ const ListarConDatos = ({libros, btnNuevo}) => {
                       <StyledTableCell align="left">{libro.prestamo}</StyledTableCell>
                       <StyledTableCell align="left">{libro.devolucion}</StyledTableCell>
                       <StyledTableCell align="left">
-                        <Button size="small" variant="outlined" color="primary" onClick={()=>btnModificar(libro)} >Modificar</Button> 
-                        <Button size="small" variant="outlined" color="primary" onClick={()=>LlamaModalEliminar(libro.Id)} >Eliminar</Button>
+
+                        <IconButton aria-label="modify" className={classes.margin} onClick={()=>btnModificar(libro)}>
+                          <CreateIcon fontSize="small" />
+                        </IconButton>
+                        <IconButton aria-label="delete" className={classes.margin} onClick={()=>LlamaModalEliminar(libro.Id)}>
+                          <DeleteIcon fontSize="small" />
+                        </IconButton>
+                        
                         </StyledTableCell>
                     </StyledTableRow>);
                 }
@@ -117,8 +126,14 @@ const ListarConDatos = ({libros, btnNuevo}) => {
                     <StyledTableCell align="left">{libro.prestamo}</StyledTableCell>
                     <StyledTableCell align="left">{libro.devolucion}</StyledTableCell>
                     <StyledTableCell align="left">
-                      <Button size="small" variant="outlined" color="primary" onClick={()=>btnModificar(libro)} >Modificar</Button>
-                      <Button size="small" variant="outlined" color="primary" onClick={()=>LlamaModalEliminar(libro.Id)} >Eliminar</Button>
+
+                      <IconButton aria-label="modify" className={classes.margin} onClick={()=>btnModificar(libro)}>
+                        <CreateIcon fontSize="small" />
+                      </IconButton>
+                      <IconButton  aria-label="delete" className={classes.margin} onClick={()=>LlamaModalEliminar(libro.Id)}>
+                        <DeleteIcon fontSize="small" />
+                      </IconButton>
+
                     </StyledTableCell>
                     </StyledTableRow>
                 );
