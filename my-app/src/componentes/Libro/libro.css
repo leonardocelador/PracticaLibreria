@@ -7,12 +7,15 @@
   align-items: center;
 }
 .formulario {
-  width: 50%;
+  width: 40%;
   height: auto;
+  height: 350px;
 }
 .contenedor-botones {
-  padding-top: 100px;
+  margin-top: 50px;
+  background: rgba(155, 155, 153, 0.308);
   width: 100%;
+  padding: 40px;
   height: auto;
   display: flex;
   flex-direction: row;

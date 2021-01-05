@@ -8,7 +8,7 @@ const Listar = ({Libros, controlBtnNuevo}) => {
       if(Libros.length !== 0){
         return(
           <div>
-            <SearchAppBar/>
+            <SearchAppBar />
             <br></br>
             <ListarConDatos libros={Libros} btnNuevo={controlBtnNuevo}/>
     
