@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar({volver}) {
   const classes = useStyles();
 
   return (
@@ -17,7 +17,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
               Help Book
           </Typography>
-          <Button onClick={()=>{}} className={classes.colorTextoBtn} size="small" variant="contained"color="secondary">Ver Listado</Button>
+          <Button onClick={()=>{volver(true)}} className={classes.colorTextoBtn} size="small" variant="contained"color="secondary">Ver Listado</Button>
         </Toolbar>
       </AppBar>
     </div>

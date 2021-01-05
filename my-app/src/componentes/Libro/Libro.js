@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {FormControl, TextField, Button} from '@material-ui/core';
 import '../Libro/libro.css';
-import ButtonAppBar from '../App Bar/BarraNuevoLibro';
+import ButtonAppBar from '../App Bar/ButtonAppBar';
     
-export const Libro = ({NuevoLibro}) => {
+export const Libro = ({NuevoLibro , Volver}) => {
 
     const [libro, setLibro] = useState({
         Id:'',
@@ -124,7 +124,7 @@ export const Libro = ({NuevoLibro}) => {
 
     return (
       <>
-        <ButtonAppBar/>
+        <ButtonAppBar volver={Volver}/>
         <div className="body">
                 <FormControl id="formulario" className="formulario">
                     <br/>
@@ -209,7 +209,11 @@ export const Libro = ({NuevoLibro}) => {
                     </FormControl>
                   <div className="contenedor-botones">
 
-                    <Button className="boton1"onClick={e=>resetear(e)} variant="outlined" color="primary">Limpiar Campos</Button>
+                    <Button 
+                      className="boton1"
+                      onClick={e=>resetear(e)} 
+                      variant="outlined" 
+                      color="primary">Limpiar Campos</Button>
                     
                     <br/>
                     <Button 
@@ -217,8 +221,7 @@ export const Libro = ({NuevoLibro}) => {
                       variant="outlined" 
                       color="primary" 
                       disabled={controlBoton}
-                      className="boton2"
-                    >Agregar Libro</Button>
+                      className="boton2">Agregar Libro</Button>
 
                   </div>
         </div>

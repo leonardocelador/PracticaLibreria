@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SearchAppBar from '../App Bar/barraNavegacion';
+import SearchAppBar from '../App Bar/SearchAppBar';
 import ListarConDatos from './ListarConDatos';
 
 const Listar = ({Libros, controlBtnNuevo}) => {

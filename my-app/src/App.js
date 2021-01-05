@@ -16,10 +16,12 @@ const App = () => {
         libres.push(nuevoLibro);
         console.log(libres)
     }
-   
+    const controlVistaLibro = (cerrar) =>{
+        setcontrolVista(cerrar)
+    }
     return (
         <>
-            {controlVista?<Listar Libros={libres} controlBtnNuevo={setcontrolVista}/>:<Libro NuevoLibro={AgregarNuevoLibro}/>}
+            {controlVista?<Listar Libros={libres} controlBtnNuevo={setcontrolVista}/>:<Libro NuevoLibro={AgregarNuevoLibro} Volver={controlVistaLibro}/>}
         </>
     )
 }
