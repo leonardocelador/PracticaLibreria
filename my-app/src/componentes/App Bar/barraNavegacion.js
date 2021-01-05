@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { createStyles, fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -67,8 +69,9 @@ export default function SearchAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Biblioteca
+          <LibraryBooksIcon/>
+          <Typography variant="h6" className={classes.title}>
+              Help Book
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
