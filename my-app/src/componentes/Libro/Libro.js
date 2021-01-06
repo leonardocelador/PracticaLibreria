@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {FormControl, TextField, Button} from '@material-ui/core';
 import '../Libro/libro.css';
 import ButtonAppBar from '../App Bar/ButtonAppBar';
+
     
 export const Libro = ({NuevoLibro , Volver}) => {
 
@@ -95,8 +96,9 @@ export const Libro = ({NuevoLibro , Volver}) => {
                 alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");
                 NuevoLibro(libro);
               }
-                else
+                else{
                   alert("Debe cargar Imagen");
+                }
             }
             else
              alert("Debe cargar Propietario");
