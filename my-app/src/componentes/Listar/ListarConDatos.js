@@ -60,7 +60,6 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
 
         // funcionalidad ocultar o mostrar modal Modificar 
         const btnModificar = (libroSelect) =>{
-          //  debugger;
             setestadomodif(!estadomodif)
             setlibroaModificar(libroSelect)
             // setTimeout( console.log(libroaModificar),3000);   
@@ -177,7 +176,7 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
         variant="outlined" 
         color="primary"
         className={classes.margin} 
-      >Nuevo Libro</Button>
+      >Nueva Solicitud</Button>
       {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo} agregarNuevo={btnNuevo}/></Modal> : null}
       </div>
     )

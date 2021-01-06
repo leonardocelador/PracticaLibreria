@@ -135,7 +135,7 @@ export const Libro = ({NuevoLibro , Volver}) => {
                       error={controlLibro}
                       id="nombre" 
                       type="text"
-                      label="Libro" 
+                      label="Nombre de Libro" 
                       value={libro.Nombre}
                       variant="standard"
                       onChange={(e)=> controlCambios(e)}
@@ -223,7 +223,7 @@ export const Libro = ({NuevoLibro , Volver}) => {
                       variant="outlined" 
                       color="primary" 
                       disabled={controlBoton}
-                      className="boton2">Agregar Libro</Button>
+                      className="boton2">Agregar Solicitud</Button>
 
                   </div>
         </div>
