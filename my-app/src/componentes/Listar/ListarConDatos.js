@@ -11,10 +11,12 @@ import Borrar from './Eliminar';
 import Modificar from './Modificar';
 import Nuevo from './Nuevo';
 import  Modal  from './Modal';
-import { Button } from '@material-ui/core';
+import { Button, Container, Grid, Typography } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import './ListarConDatos.css';
 
 const ListarConDatos = ({libros, btnNuevo, Libr}) => {
 
@@ -27,11 +29,14 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
         const [libroaModificar, setlibroaModificar] = useState() 
 
         // Estilos del Table
-        const useStyles = makeStyles({
+        const useStyles = makeStyles((theme)=>({
+          margin: {
+            margin: theme.spacing(1),
+          },
             table: {
               minWidth: 650,
             },
-          });
+          }));
           
           const StyledTableCell = withStyles((theme) => ({
             head: {
@@ -86,7 +91,8 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
 
       return (
       <div>
-        <TableContainer component={Paper }>
+      <Container> {/* AGREGUE CONTAINER PARA CENTRAR LA TABLA */}
+      <TableContainer component={Paper }>
         <Table className={classes.table} size="small" aria-label="customized table">
           <TableHead>
             <TableRow>
@@ -106,17 +112,25 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
                     <StyledTableRow  style={{background: color}} key={libro.Id}>
                       <StyledTableCell align="left">{libro.Nombre}</StyledTableCell>
                       <StyledTableCell align="left">{libro.Dueño}</StyledTableCell>
-                      <StyledTableCell align="left">{libro.pedido}</StyledTableCell>
+                      <StyledTableCell align="left"><IconButton aria-label="delete"><ExpandMoreIcon/></IconButton></StyledTableCell> {/* Agregue iconbutton para desplegar detalles */}
                       <StyledTableCell align="left">{libro.prestamo}</StyledTableCell>
                       <StyledTableCell align="left">{libro.devolucion}</StyledTableCell>
                       <StyledTableCell align="left">
 
-                        <IconButton aria-label="modify" className={classes.margin} onClick={()=>btnModificar(libro)}>
-                          <CreateIcon fontSize="small" />
-                        </IconButton>
-                        <IconButton aria-label="delete" className={classes.margin} onClick={()=>LlamaModalEliminar(libro.Id)}>
-                          <DeleteIcon fontSize="small" />
-                        </IconButton>
+                      <Grid container justify='space-around'>  {/* Utilice Componente Grid para poder alinear verticalmente y centrar elementos */}
+                        <Grid item>
+                          <Typography>Modificar</Typography>
+                          <IconButton aria-label="modify" className={classes.margin} onClick={()=>btnModificar(libro)}>
+                            <CreateIcon fontSize="small" />
+                          </IconButton>
+                        </Grid>
+                        <Grid item>
+                          <Typography>Eliminar</Typography>
+                          <IconButton  aria-label="delete" className={classes.margin} onClick={()=>LlamaModalEliminar(libro.Id)}>
+                            <DeleteIcon fontSize="small" />
+                          </IconButton>
+                        </Grid>
+                      </Grid>
                         
                         </StyledTableCell>
                     </StyledTableRow>);
@@ -125,18 +139,24 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
                     <StyledTableRow  style={{background:""}} key={libro.Id}>
                     <StyledTableCell align="left">{libro.Nombre}</StyledTableCell>
                     <StyledTableCell align="left">{libro.Dueño}</StyledTableCell>
-                    <StyledTableCell align="left">{libro.Pedido}</StyledTableCell>
+                    <StyledTableCell align="left"><IconButton aria-label="delete"><ExpandMoreIcon/></IconButton></StyledTableCell>
                     <StyledTableCell align="left">{libro.prestamo}</StyledTableCell>
                     <StyledTableCell align="left">{libro.devolucion}</StyledTableCell>
                     <StyledTableCell align="left">
-
-                      <IconButton aria-label="modify" className={classes.margin} onClick={()=>btnModificar(libro)}>
-                        <CreateIcon fontSize="small" />
-                      </IconButton>
-                      <IconButton  aria-label="delete" className={classes.margin} onClick={()=>LlamaModalEliminar(libro.Id)}>
-                        <DeleteIcon fontSize="small" />
-                      </IconButton>
-
+                      <Grid container justify='space-around'>  
+                        <Grid item>
+                          <Typography>Modificar</Typography>
+                          <IconButton aria-label="modify" className={classes.margin} onClick={()=>btnModificar(libro)}>
+                            <CreateIcon fontSize="small" />
+                          </IconButton>
+                        </Grid>
+                        <Grid item>
+                        <Typography>Eliminar</Typography>
+                        <IconButton  aria-label="delete" className={classes.margin} onClick={()=>LlamaModalEliminar(libro.Id)}>
+                          <DeleteIcon fontSize="small" />
+                        </IconButton>
+                        </Grid>
+                      </Grid>
                     </StyledTableCell>
                     </StyledTableRow>
                 );
@@ -147,14 +167,16 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
           </TableBody>
         </Table>
       </TableContainer>
+      </Container>
       
       {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
       {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={btnNuevo} LibroSeleccionado={libroaModificar} AsignarLib={Libr} /> : null}
-      <hr></hr>
+      <br></br>
       <Button 
         onClick={()=>setestadoNuevo(!estadoNuevo)} 
         variant="outlined" 
-        color="primary" 
+        color="primary"
+        className={classes.margin} 
       >Nuevo Libro</Button>
       {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo} agregarNuevo={btnNuevo}/></Modal> : null}
       </div>
