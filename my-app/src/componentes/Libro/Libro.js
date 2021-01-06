@@ -15,7 +15,9 @@ export const Libro = ({NuevoLibro , Volver}) => {
         prestamo: '',
         devolucion:'',
         Eliminado:false,
-        Pedido:''
+        Autor:'',
+        Editorial:'',
+        Año:''
     })
 
 
