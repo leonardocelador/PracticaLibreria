@@ -5,7 +5,7 @@ import Modificar from './Modificar';
 import Nuevo from './Nuevo';
 import  Modal  from './Modal';
 import { Button } from '@material-ui/core';
-import './ListarConDatos.css';
+// import './ListarConDatos.css';
 import TablaListado from '../Experimentando/TablaListado';
 
 

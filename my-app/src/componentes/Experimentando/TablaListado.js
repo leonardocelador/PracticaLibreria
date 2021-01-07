@@ -12,7 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import '../Listar/ListarConDatos.css';
+// import '../Listar/ListarConDatos.css';
 
 const TablaListado = ({librosC, colorc, btnModificarC, LlamaModalEliminarC }) => {
     const useStyles = makeStyles((theme)=>({
