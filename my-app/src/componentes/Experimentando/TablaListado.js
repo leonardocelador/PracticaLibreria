@@ -45,7 +45,7 @@ const TablaListado = ({librosC, colorc, btnModificarC, LlamaModalEliminarC }) =>
       const classes = useStyles();
 
       const handleClick = (Id) => {
-        alert("click"+Id);
+        // alert("click"+Id);
       }
     return (
         <div>

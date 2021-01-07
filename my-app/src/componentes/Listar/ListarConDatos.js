@@ -50,11 +50,11 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
         }
         // funcionalidad al presionar Ok del modal eliminar, accion elimina el libro correspondiente
         const okEliminar = (idEliminado) => {
+          
             setestadoEliminar(false)
-            // alert("Libro" + idEliminado + "Eliminado con exito")
-            var indice = libros.indexOf(idEliminado); // obtenemos el indice del objeto a eliminar
+            const indice = libros.findIndex(element => element.Id == idEliminado);
             libros.splice(indice, 1); // 1 es la cantidad de elemento a eliminar
-            console.log( libros );
+           
         }
         
         // muestra u oculta modal eliminar y envia el id correspondiente del libro seleccionado
