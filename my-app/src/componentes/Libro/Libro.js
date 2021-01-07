@@ -25,9 +25,11 @@ export const Libro = ({NuevoLibro , Volver}) => {
     const [controlDueño, setControlDueño] = useState(false);
     const [controlFechaPrestamo, setcontrolFechaPrestamo] = useState(false);
     const [controlFechaDevolucion, setcontrolFechaDevolucion] = useState(false);
-    const [controlBoton, setcontrolBoton] = useState(true)
+    const [controlAutor, setcontrolAutor] = useState(false);
+    const [controlEditorial, setcontrolEditorial] = useState(false);
+    const [controlAño, setcontrolAño] = useState(false);
 
-
+    const [controlBoton, setcontrolBoton] = useState(true);
 
         //CAMBIOS LIBRO Y PROPIETARIO
     const controlCambios = (e)=>{
@@ -84,9 +86,33 @@ export const Libro = ({NuevoLibro , Volver}) => {
         setcontrolBoton(false);
       }
     }
+    const validarAutor = (e) =>{
+      if(libro.devolucion==="")
+      setcontrolAutor(true);
+      else{
+        setcontrolAutor(false);
+        setcontrolBoton(false);
+      }
+    }
+    const validarEditorial = (e) =>{
+      if(libro.devolucion==="")
+      setcontrolEditorial(true);
+      else{
+        setcontrolEditorial(false);
+        setcontrolBoton(false);
+      }
+    }
+    const validarAño = (e) =>{
+      if(libro.devolucion==="")
+      setcontrolAño(true);
+      else{
+        setcontrolAño(false);
+        setcontrolBoton(false);
+      }
+    }
 
     const validarDatos = ()=>{
-      const {Nombre, Dueño, Imagen, devolucion, prestamo}=libro;
+      const {Nombre, Dueño, Imagen, devolucion, prestamo, Autor, Editorial, Año}=libro;
       
       if(Nombre){
         if(prestamo){
@@ -95,8 +121,21 @@ export const Libro = ({NuevoLibro , Volver}) => {
               alert("Fechas Inválidas! Verificar!!");
             if(Dueño){
               if(Imagen){
-                alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");
-                NuevoLibro(libro);
+                if(Autor){
+                  if(Editorial){
+                    if(Año){
+                      alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");
+                      console.log(Libro);
+                      NuevoLibro(libro);
+                    }
+                    else
+                      alert("Debe cargar Año de la Edición del Libro");
+                  }
+                  else
+                    alert("Debe cargar Editorial del Libro");
+                }
+                else
+                  alert("Debe cargar Autor del Libro");
               }
                 else{
                   alert("Debe cargar Imagen");
@@ -123,6 +162,9 @@ export const Libro = ({NuevoLibro , Volver}) => {
         Imagen:'',
         prestamo: '',
         devolucion:'',
+        Autor:'',
+        Editorial:'',
+        Año:''
       })
     }
 
@@ -132,8 +174,7 @@ export const Libro = ({NuevoLibro , Volver}) => {
         <Container className="contenedor-Form">
                   <Grid container direction="row" justify="space-evenly" alignItems="center" spacing={1}>
                     <Grid item lg={4}>
-                    <FormControl id="formulario" className="formulario">
-                    <br/>
+                    <FormControl id="formulario" className="formulario-left">
                     <TextField
                       name="Nombre"
                       error={controlLibro}
@@ -147,8 +188,6 @@ export const Libro = ({NuevoLibro , Volver}) => {
                       helperText={''}
                       required
                      />
-                    <br/>
-
                     <TextField
                       id="fechaPrestamo"
                       name="prestamo"
@@ -164,6 +203,7 @@ export const Libro = ({NuevoLibro , Volver}) => {
                       onBlur={(e)=>validarFechaPrestamo(e)}
                       required
                     />
+                    <br/>
                     <TextField
                       id="fechaDevolucion"
                       name="devolucion"
@@ -193,7 +233,6 @@ export const Libro = ({NuevoLibro , Volver}) => {
                       required
                     />
 
-                    <br/>
                     <div className="contained">
                         <input
                             name="Imagen"
@@ -211,11 +250,56 @@ export const Libro = ({NuevoLibro , Volver}) => {
                             <span>{libro.Imagen}</span>
                         </label>
                     </div>
-                    <br/>
                     </FormControl>
                     </Grid>
                     <Grid item lg={4}>
-                      <h1>Detalles</h1>
+                    <FormControl id="formulario" className="formulario-right">
+                        <TextField
+                          id="Autor"
+                          name="Autor"
+                          type="text"
+                          label="Autor"
+                          value={libro.Autor}
+                          className={classes.textField}
+                          onChange={ e =>controlCambios(e)}
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          error={controlAutor}
+                          onBlur={(e)=>validarAutor(e)}
+                          required
+                        />
+                        <TextField
+                          id="Editorial"
+                          name="Editorial"
+                          type="text"
+                          label="Editorial"
+                          value={libro.Editorial}
+                          className={classes.textField}
+                          onChange={ e =>controlCambios(e)}
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          error={controlEditorial}
+                          onBlur={(e)=>validarEditorial(e)}
+                          required
+                        />
+                        <TextField
+                          id="Año"
+                          name="Año"
+                          type="text"
+                          label="Año de Edición"
+                          value={libro.Año}
+                          className={classes.textField}
+                          onChange={ e =>controlCambios(e)}
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          error={controlAño}
+                          onBlur={(e)=>validarAño(e)}
+                          required
+                        />
+                    </FormControl>
                     </Grid>
                   </Grid>
         </Container>

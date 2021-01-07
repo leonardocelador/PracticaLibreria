@@ -46,7 +46,6 @@ const App = () => {
                             <h1>hola</h1>
                         )
                 }
-
             })()}
             {/* {controlVista?<Listar Libros={libres} controlBtnNuevo={setcontrolVista}/>:<Libro NuevoLibro={AgregarNuevoLibro} Volver={controlVistaLibro}/>} */}
         </>

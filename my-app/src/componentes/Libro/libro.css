@@ -1,9 +1,17 @@
 .contenedor-Form {
-  margin: 80px;
-  padding: 20px;
+  margin: 40px;
 }
-.formulario {
+.formulario-left {
   width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: space-around;
+}
+.formulario-right {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: space-evenly;
 }
 .contenedor-botones {
   background: rgba(155, 155, 153, 0.308);
