@@ -33,7 +33,7 @@ const useStyles = makeStyles(() =>
       flexGrow: 1,
     },
     colorTextoBtn:{
-        color:"#8e24aa"
+        color:"#8e24aa",        
     }
   }),
 );

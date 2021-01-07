@@ -5,7 +5,7 @@ import ButtonAppBar from '../App Bar/ButtonAppBar';
 import '../Libro/libro.css';
 
     
-export const Libro = ({NuevoLibro , Volver}) => {
+export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
 
     const [libro, setLibro] = useState({
         Id:'',
@@ -28,8 +28,11 @@ export const Libro = ({NuevoLibro , Volver}) => {
     const [controlAutor, setcontrolAutor] = useState(false);
     const [controlEditorial, setcontrolEditorial] = useState(false);
     const [controlAño, setcontrolAño] = useState(false);
-
     const [controlBoton, setcontrolBoton] = useState(true);
+
+    useEffect(() => {
+      
+    }, [solicitudAModificar])
 
         //CAMBIOS LIBRO Y PROPIETARIO
     const controlCambios = (e)=>{

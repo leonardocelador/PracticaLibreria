@@ -15,7 +15,6 @@ import { Button, Container, Grid, Typography } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const ListarConDatos = ({libros, btnNuevo, Libr}) => {
 
@@ -25,7 +24,9 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
         const [estadoEliminar, setestadoEliminar] = useState(false)//ocultar - mostrar modal
         const [estadomodif, setestadomodif] = useState(false) //ocultar - mostrar modal
         const [estadoNuevo, setestadoNuevo] = useState(false) //ocultar - mostrar modal
-        const [libroaModificar, setlibroaModificar] = useState() 
+        const [libroaModificar, setlibroaModificar] = useState();
+        
+        
 
         // Estilos del Table
         const useStyles = makeStyles((theme)=>({
@@ -110,7 +111,9 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
                     <StyledTableRow  style={{background: color}} key={libro.Id}>
                       <StyledTableCell align="left">{libro.Nombre}</StyledTableCell>
                       <StyledTableCell align="left">{libro.Dueño}</StyledTableCell>
-                      <StyledTableCell align="left"><IconButton aria-label="delete"><ExpandMoreIcon/></IconButton></StyledTableCell> {/* Agregue iconbutton para desplegar detalles */}
+                      <StyledTableCell align="left">
+                        
+                      </StyledTableCell> 
                       <StyledTableCell align="left">{libro.prestamo}</StyledTableCell>
                       <StyledTableCell align="left">{libro.devolucion}</StyledTableCell>
                       <StyledTableCell align="left">
@@ -138,7 +141,9 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
                     <StyledTableRow  style={{background:""}} key={libro.Id}>
                     <StyledTableCell align="left">{libro.Nombre}</StyledTableCell>
                     <StyledTableCell align="left">{libro.Dueño}</StyledTableCell>
-                    <StyledTableCell align="left"><IconButton aria-label="delete"><ExpandMoreIcon/></IconButton></StyledTableCell>
+                    <StyledTableCell align="left">
+                      
+                    </StyledTableCell>
                     <StyledTableCell align="left">{libro.prestamo}</StyledTableCell>
                     <StyledTableCell align="left">{libro.devolucion}</StyledTableCell>
                     <StyledTableCell align="left">
