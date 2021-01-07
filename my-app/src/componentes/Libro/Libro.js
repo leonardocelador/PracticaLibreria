@@ -172,9 +172,10 @@ export const Libro = ({NuevoLibro , Volver}) => {
       <>
         <ButtonAppBar volver={Volver}/>
         <Container className="contenedor-Form">
-                  <Grid container direction="row" justify="space-evenly" alignItems="center" spacing={1}>
-                    <Grid item lg={4}>
+                  <Grid container direction="row" justify="space-evenly" alignItems="center" spacing={1} className="margen">
+                    <Grid item lg={5}>
                     <FormControl id="formulario" className="formulario-left">
+                      <h2>Detalles de Solicitud</h2>
                     <TextField
                       name="Nombre"
                       error={controlLibro}
@@ -188,6 +189,7 @@ export const Libro = ({NuevoLibro , Volver}) => {
                       helperText={''}
                       required
                      />
+                     <br/>
                     <TextField
                       id="fechaPrestamo"
                       name="prestamo"
@@ -219,12 +221,11 @@ export const Libro = ({NuevoLibro , Volver}) => {
                       onBlur={(e)=>validarFechaDevolucion(e)}
                       required
                     />
-
-                    
+                    <br/>                    
                     <TextField
                       name="Dueño" 
                       id="dueño" 
-                      label="Propietario" 
+                      label="Solicitante" 
                       variant="standard"
                       value={libro.Dueño}
                       onChange={(e)=> controlCambios(e)}
@@ -232,8 +233,56 @@ export const Libro = ({NuevoLibro , Volver}) => {
                       onBlur={validacionDueño}
                       required
                     />
-
-                    <div className="contained">
+                    <br/>
+                    
+                    </FormControl>
+                    </Grid>
+                    <Grid item lg={5} className="">
+                    <FormControl size="medium" id="formulario" className="formulario-right">
+                        <h2>Detalles de Libro</h2>
+                        <TextField
+                          id="Autor"
+                          name="Autor"
+                          type="text"
+                          label="Autor"
+                          variant="standard"
+                          value={libro.Autor}
+                          className={classes.textField}
+                          onChange={ e =>controlCambios(e)}
+                          error={controlAutor}
+                          onBlur={(e)=>validarAutor(e)}
+                          required
+                        />
+                        <br/>
+                        <TextField
+                          id="Editorial"
+                          name="Editorial"
+                          type="text"
+                          label="Editorial"
+                          variant="standard"
+                          value={libro.Editorial}
+                          className={classes.textField}
+                          onChange={ e =>controlCambios(e)}
+                          error={controlEditorial}
+                          onBlur={(e)=>validarEditorial(e)}
+                          required
+                        />
+                        <br/>
+                        <TextField
+                          id="Año"
+                          name="Año"
+                          type="text"
+                          label="Año de Edición"
+                          value={libro.Año}
+                          className={classes.textField}
+                          onChange={ e =>controlCambios(e)}
+                          error={controlAño}
+                          onBlur={(e)=>validarAño(e)}
+                          required
+                        />
+                        <br/>
+                        <br/>
+                        <div className="contained">
                         <input
                             name="Imagen"
                             accept="image/*"
@@ -250,56 +299,7 @@ export const Libro = ({NuevoLibro , Volver}) => {
                             <span>{libro.Imagen}</span>
                         </label>
                     </div>
-                    </FormControl>
-                    </Grid>
-                    <Grid item lg={4}>
-                    <FormControl id="formulario" className="formulario-right">
-                        <TextField
-                          id="Autor"
-                          name="Autor"
-                          type="text"
-                          label="Autor"
-                          value={libro.Autor}
-                          className={classes.textField}
-                          onChange={ e =>controlCambios(e)}
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          error={controlAutor}
-                          onBlur={(e)=>validarAutor(e)}
-                          required
-                        />
-                        <TextField
-                          id="Editorial"
-                          name="Editorial"
-                          type="text"
-                          label="Editorial"
-                          value={libro.Editorial}
-                          className={classes.textField}
-                          onChange={ e =>controlCambios(e)}
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          error={controlEditorial}
-                          onBlur={(e)=>validarEditorial(e)}
-                          required
-                        />
-                        <TextField
-                          id="Año"
-                          name="Año"
-                          type="text"
-                          label="Año de Edición"
-                          value={libro.Año}
-                          className={classes.textField}
-                          onChange={ e =>controlCambios(e)}
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          error={controlAño}
-                          onBlur={(e)=>validarAño(e)}
-                          required
-                        />
-                    </FormControl>
+                   </FormControl>
                     </Grid>
                   </Grid>
         </Container>
