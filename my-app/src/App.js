@@ -43,7 +43,7 @@ const App = () => {
                         )
                     default:
                         return (
-                            <Listar/>
+                            <h1>hola</h1>
                         )
                 }
 

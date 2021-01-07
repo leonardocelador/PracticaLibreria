@@ -5,22 +5,26 @@
             "Id":1,
             "Nombre":"Gabbi Potter",
             "Dueño":"Gabriel",
-            "Pedido":"Jose",
             "prestamo":"27/12/20",
             "devolucion":"1/1/20",
             "Imagen":"",
-            "eliminado":false
+            "eliminado":false,
+            "Autor":"Fernandez",
+            "Editorial": "El Rayo",
+            "Año":"2020"
         },
 
         {
             "Id":2,
             "Nombre":"Leo y Lowa",
             "Dueño":"Leo",
-            "Pedido":"Sergio",
             "prestamo":"29/01/20",
-            "devolucion":"",
+            "devolucion":"29/02/20",
             "Imagen":"",
-            "eliminado":false
+            "eliminado":false,
+            "Autor":"Celador",
+            "Editorial": "La Visión",
+            "Año":"2020"
         }
     ]
     

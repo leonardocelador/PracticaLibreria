@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {FormControl, TextField, Button} from '@material-ui/core';
-import '../Libro/libro.css';
+import {FormControl, TextField, Button, Grid, Container} from '@material-ui/core';
 import ButtonAppBar from '../App Bar/ButtonAppBar';
+import '../Libro/libro.css';
 
     
 export const Libro = ({NuevoLibro , Volver}) => {
@@ -127,15 +127,17 @@ export const Libro = ({NuevoLibro , Volver}) => {
     return (
       <>
         <ButtonAppBar volver={Volver}/>
-        <div className="body">
-                <FormControl id="formulario" className="formulario">
+        <Container className="contenedor-Form">
+                  <Grid container direction="row" justify="space-evenly" alignItems="center" spacing={1}>
+                    <Grid item lg={4}>
+                    <FormControl id="formulario" className="formulario">
                     <br/>
                     <TextField
                       name="Nombre"
                       error={controlLibro}
                       id="nombre" 
                       type="text"
-                      label="Libro" 
+                      label="Nombre de Libro" 
                       value={libro.Nombre}
                       variant="standard"
                       onChange={(e)=> controlCambios(e)}
@@ -202,30 +204,33 @@ export const Libro = ({NuevoLibro , Volver}) => {
                         />
                         <label htmlFor="contained-button-file">
                             <Button variant="outlined" color="primary" component="span">
-                                Examinar
+                                Imagen Libro
                             </Button>
                             <span>{libro.Imagen}</span>
                         </label>
                     </div>
                     <br/>
                     </FormControl>
-                  <div className="contenedor-botones">
-
-                    <Button 
-                      className="boton1"
-                      onClick={e=>resetear(e)} 
-                      variant="outlined" 
-                      color="primary">Limpiar Campos</Button>
-                    
-                    <br/>
-                    <Button 
-                      onClick={validarDatos} 
-                      variant="outlined" 
-                      color="primary" 
-                      disabled={controlBoton}
-                      className="boton2">Agregar Libro</Button>
-
-                  </div>
+                    </Grid>
+                    <Grid item lg={4}>
+                      <h1>Detalles</h1>
+                    </Grid>
+                  </Grid>
+        </Container>
+        
+        <div className="contenedor-botones">
+          <Button 
+            className="boton1"
+            onClick={e=>resetear(e)} 
+            variant="outlined" 
+            color="primary">Limpiar Campos</Button>
+            <br/>
+         <Button 
+            onClick={validarDatos} 
+            variant="outlined" 
+            color="primary" 
+            disabled={controlBoton}
+            className="boton2">Agregar Solicitud</Button>
         </div>
       </>  
     )
