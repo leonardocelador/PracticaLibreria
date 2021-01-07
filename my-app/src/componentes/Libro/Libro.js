@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {FormControl, TextField, Button, Grid, Container} from '@material-ui/core';
 import ButtonAppBar from '../App Bar/ButtonAppBar';
@@ -31,8 +31,10 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
     const [controlBoton, setcontrolBoton] = useState(true);
 
     useEffect(() => {
-      
-    }, [solicitudAModificar])
+      if(solicitudAModificar){
+        setLibro(solicitudAModificar);
+      }
+    }, [])
 
         //CAMBIOS LIBRO Y PROPIETARIO
     const controlCambios = (e)=>{
