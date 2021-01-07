@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Listar from './componentes/Listar/Listar';
 import { Libro } from './componentes/Libro/Libro';
 import {Libros} from '../src/data/Libros.json'
-import ModificarLibro from './componentes/Libro/ModificarLibro';
 
 const App = () => {
     const [libres,] = useState(Libros)
@@ -39,16 +38,14 @@ const App = () => {
                         )
                     case 3:
                         return (
-                            <ModificarLibro UpdateLibro={ModLibro} Volver={controlVistaLibro} LibroUpd={LibroSelected}/>
+                            <Libro NuevoLibro={AgregarNuevoLibro} Volver={controlVistaLibro} solicitudAModificar={LibroSelected}/>
                         )
                     default:
                         return (
                             <h1>hola</h1>
                         )
                 }
-
             })()}
-            {/* {controlVista?<Listar Libros={libres} controlBtnNuevo={setcontrolVista}/>:<Libro NuevoLibro={AgregarNuevoLibro} Volver={controlVistaLibro}/>} */}
         </>
     )
 }

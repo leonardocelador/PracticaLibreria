@@ -5,7 +5,7 @@ import ButtonAppBar from '../App Bar/ButtonAppBar';
 import '../Libro/libro.css';
 
     
-export const Libro = ({NuevoLibro , Volver}) => {
+export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
 
     const [libro, setLibro] = useState({
         Id:'',
@@ -15,7 +15,9 @@ export const Libro = ({NuevoLibro , Volver}) => {
         prestamo: '',
         devolucion:'',
         Eliminado:false,
-        Pedido:''
+        Autor:'',
+        Editorial:'',
+        Año:''
     })
 
 
@@ -23,9 +25,14 @@ export const Libro = ({NuevoLibro , Volver}) => {
     const [controlDueño, setControlDueño] = useState(false);
     const [controlFechaPrestamo, setcontrolFechaPrestamo] = useState(false);
     const [controlFechaDevolucion, setcontrolFechaDevolucion] = useState(false);
-    const [controlBoton, setcontrolBoton] = useState(true)
+    const [controlAutor, setcontrolAutor] = useState(false);
+    const [controlEditorial, setcontrolEditorial] = useState(false);
+    const [controlAño, setcontrolAño] = useState(false);
+    const [controlBoton, setcontrolBoton] = useState(true);
 
-
+    useEffect(() => {
+      
+    }, [solicitudAModificar])
 
         //CAMBIOS LIBRO Y PROPIETARIO
     const controlCambios = (e)=>{
@@ -82,9 +89,33 @@ export const Libro = ({NuevoLibro , Volver}) => {
         setcontrolBoton(false);
       }
     }
+    const validarAutor = (e) =>{
+      if(libro.devolucion==="")
+      setcontrolAutor(true);
+      else{
+        setcontrolAutor(false);
+        setcontrolBoton(false);
+      }
+    }
+    const validarEditorial = (e) =>{
+      if(libro.devolucion==="")
+      setcontrolEditorial(true);
+      else{
+        setcontrolEditorial(false);
+        setcontrolBoton(false);
+      }
+    }
+    const validarAño = (e) =>{
+      if(libro.devolucion==="")
+      setcontrolAño(true);
+      else{
+        setcontrolAño(false);
+        setcontrolBoton(false);
+      }
+    }
 
     const validarDatos = ()=>{
-      const {Nombre, Dueño, Imagen, devolucion, prestamo}=libro;
+      const {Nombre, Dueño, Imagen, devolucion, prestamo, Autor, Editorial, Año}=libro;
       
       if(Nombre){
         if(prestamo){
@@ -93,8 +124,21 @@ export const Libro = ({NuevoLibro , Volver}) => {
               alert("Fechas Inválidas! Verificar!!");
             if(Dueño){
               if(Imagen){
-                alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");
-                NuevoLibro(libro);
+                if(Autor){
+                  if(Editorial){
+                    if(Año){
+                      alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");
+                      console.log(Libro);
+                      NuevoLibro(libro);
+                    }
+                    else
+                      alert("Debe cargar Año de la Edición del Libro");
+                  }
+                  else
+                    alert("Debe cargar Editorial del Libro");
+                }
+                else
+                  alert("Debe cargar Autor del Libro");
               }
                 else{
                   alert("Debe cargar Imagen");
@@ -121,6 +165,9 @@ export const Libro = ({NuevoLibro , Volver}) => {
         Imagen:'',
         prestamo: '',
         devolucion:'',
+        Autor:'',
+        Editorial:'',
+        Año:''
       })
     }
 
@@ -128,10 +175,10 @@ export const Libro = ({NuevoLibro , Volver}) => {
       <>
         <ButtonAppBar volver={Volver}/>
         <Container className="contenedor-Form">
-                  <Grid container direction="row" justify="space-evenly" alignItems="center" spacing={1}>
-                    <Grid item lg={4}>
-                    <FormControl id="formulario" className="formulario">
-                    <br/>
+                  <Grid container direction="row" justify="space-evenly" alignItems="center" spacing={1} className="margen">
+                    <Grid item lg={5}>
+                    <FormControl id="formulario" className="formulario-left">
+                      <h2>Detalles de Solicitud</h2>
                     <TextField
                       name="Nombre"
                       error={controlLibro}
@@ -145,8 +192,7 @@ export const Libro = ({NuevoLibro , Volver}) => {
                       helperText={''}
                       required
                      />
-                    <br/>
-
+                     <br/>
                     <TextField
                       id="fechaPrestamo"
                       name="prestamo"
@@ -162,6 +208,7 @@ export const Libro = ({NuevoLibro , Volver}) => {
                       onBlur={(e)=>validarFechaPrestamo(e)}
                       required
                     />
+                    <br/>
                     <TextField
                       id="fechaDevolucion"
                       name="devolucion"
@@ -177,12 +224,11 @@ export const Libro = ({NuevoLibro , Volver}) => {
                       onBlur={(e)=>validarFechaDevolucion(e)}
                       required
                     />
-
-                    
+                    <br/>                    
                     <TextField
                       name="Dueño" 
                       id="dueño" 
-                      label="Propietario" 
+                      label="Solicitante" 
                       variant="standard"
                       value={libro.Dueño}
                       onChange={(e)=> controlCambios(e)}
@@ -190,9 +236,56 @@ export const Libro = ({NuevoLibro , Volver}) => {
                       onBlur={validacionDueño}
                       required
                     />
-
                     <br/>
-                    <div className="contained">
+                    
+                    </FormControl>
+                    </Grid>
+                    <Grid item lg={5} className="">
+                    <FormControl size="medium" id="formulario" className="formulario-right">
+                        <h2>Detalles de Libro</h2>
+                        <TextField
+                          id="Autor"
+                          name="Autor"
+                          type="text"
+                          label="Autor"
+                          variant="standard"
+                          value={libro.Autor}
+                          className={classes.textField}
+                          onChange={ e =>controlCambios(e)}
+                          error={controlAutor}
+                          onBlur={(e)=>validarAutor(e)}
+                          required
+                        />
+                        <br/>
+                        <TextField
+                          id="Editorial"
+                          name="Editorial"
+                          type="text"
+                          label="Editorial"
+                          variant="standard"
+                          value={libro.Editorial}
+                          className={classes.textField}
+                          onChange={ e =>controlCambios(e)}
+                          error={controlEditorial}
+                          onBlur={(e)=>validarEditorial(e)}
+                          required
+                        />
+                        <br/>
+                        <TextField
+                          id="Año"
+                          name="Año"
+                          type="text"
+                          label="Año de Edición"
+                          value={libro.Año}
+                          className={classes.textField}
+                          onChange={ e =>controlCambios(e)}
+                          error={controlAño}
+                          onBlur={(e)=>validarAño(e)}
+                          required
+                        />
+                        <br/>
+                        <br/>
+                        <div className="contained">
                         <input
                             name="Imagen"
                             accept="image/*"
@@ -209,11 +302,7 @@ export const Libro = ({NuevoLibro , Volver}) => {
                             <span>{libro.Imagen}</span>
                         </label>
                     </div>
-                    <br/>
-                    </FormControl>
-                    </Grid>
-                    <Grid item lg={4}>
-                      <h1>Detalles</h1>
+                   </FormControl>
                     </Grid>
                   </Grid>
         </Container>

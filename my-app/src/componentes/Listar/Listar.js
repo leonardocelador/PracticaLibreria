@@ -3,7 +3,6 @@ import SearchAppBar from '../App Bar/SearchAppBar';
 import ListarConDatos from './ListarConDatos';
 
 const Listar = ({Libros, controlBtnNuevo, libr}) => {
-    console.log(Libros);
     if(Libros !== null){
       if(Libros.length !== 0){
         return(

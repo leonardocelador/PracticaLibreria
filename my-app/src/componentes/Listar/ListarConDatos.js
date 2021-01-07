@@ -17,7 +17,9 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
         const [estadoEliminar, setestadoEliminar] = useState(false)//ocultar - mostrar modal
         const [estadomodif, setestadomodif] = useState(false) //ocultar - mostrar modal
         const [estadoNuevo, setestadoNuevo] = useState(false) //ocultar - mostrar modal
-        const [libroaModificar, setlibroaModificar] = useState() 
+        const [libroaModificar, setlibroaModificar] = useState();
+        
+        
 
         // Estilos del Table
         const useStyles = makeStyles((theme)=>({
