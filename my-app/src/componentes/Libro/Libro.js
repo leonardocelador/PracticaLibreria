@@ -142,6 +142,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                     if(Año){
                       alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");
                       console.log(Libro);
+                      Volver(1);
                       NuevoLibro(libro);
                     }
                     else

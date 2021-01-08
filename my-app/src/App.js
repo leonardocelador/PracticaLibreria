@@ -15,6 +15,19 @@ const App = () => {
         libres.push(nuevoLibro);
         console.log(libres)
     }
+
+    const ModificarLibro = (LibroModif) => {
+        console.log(LibroModif)
+        const id = LibroModif.Id
+        const found = libres.findIndex(element => element.Id === id);
+        libres[found].Nombre = LibroModif.Nombre
+        libres[found].Dueño = LibroModif.Dueño
+        libres[found].prestamo = LibroModif.prestamo
+        libres[found].devolucion = LibroModif.devolucion
+        
+    }
+
+
     const ModLibro = (LibroUpdate) => {
         setLibroSelected(LibroUpdate)
     }
@@ -36,7 +49,7 @@ const App = () => {
                         )
                     case 3:
                         return (
-                            <Libro NuevoLibro={AgregarNuevoLibro} Volver={controlVistaLibro} solicitudAModificar={LibroSelected}/>
+                            <Libro NuevoLibro={ModificarLibro} Volver={controlVistaLibro} solicitudAModificar={LibroSelected}/>
                         )
                     default:
                         return (
