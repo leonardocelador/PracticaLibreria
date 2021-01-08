@@ -28,13 +28,22 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
     const [controlAutor, setcontrolAutor] = useState(false);
     const [controlEditorial, setcontrolEditorial] = useState(false);
     const [controlAño, setcontrolAño] = useState(false);
+    
+    const [disabledLibro, setDisabledLibro] = useState(false);
+    const [disabledAutor, setDisabledAutor] = useState(false);
+    const [disabledEditorial, setDisabledEditorial] = useState(false);
+    const [disabledAño, setDisabledAño] = useState(false);
+    const [disabledImagen, setDisabledImagen] = useState(false);
     const [controlBoton, setcontrolBoton] = useState(true);
-
+    
     useEffect(() => {
       if(solicitudAModificar){
-        console.log(Date.parse(solicitudAModificar.prestamo));
-        const fprestamo =solicitudAModificar.prestamo;
         setLibro(solicitudAModificar);
+        setDisabledLibro(true);
+        setDisabledAutor(true);
+        setDisabledEditorial(true);
+        setDisabledAño(true);
+        setDisabledImagen(true);
       }
     }, [])
 
@@ -183,19 +192,6 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                     <Grid item lg={5}>
                     <FormControl id="formulario" className="formulario-left">
                       <h2>Detalles de Solicitud</h2>
-                    <TextField
-                      name="Nombre"
-                      error={controlLibro}
-                      id="nombre" 
-                      type="text"
-                      label="Nombre de Libro" 
-                      value={libro.Nombre}
-                      variant="standard"
-                      onChange={(e)=> controlCambios(e)}
-                      onBlur={validacionLibro}
-                      helperText={''}
-                      required
-                     />
                      <br/>
                     <TextField
                       id="fechaPrestamo"
@@ -248,6 +244,21 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                     <FormControl size="medium" id="formulario" className="formulario-right">
                         <h2>Detalles de Libro</h2>
                         <TextField
+                          name="Nombre"
+                          error={controlLibro}
+                          disabled={disabledLibro}
+                          id="nombre" 
+                          type="text"
+                          label="Nombre de Libro" 
+                          value={libro.Nombre}
+                          variant="standard"
+                          onChange={(e)=> controlCambios(e)}
+                          onBlur={validacionLibro}
+                          helperText={''}
+                          required
+                        />
+                        <br/>
+                        <TextField
                           id="Autor"
                           name="Autor"
                           type="text"
@@ -257,6 +268,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           className={classes.textField}
                           onChange={ e =>controlCambios(e)}
                           error={controlAutor}
+                          disabled={disabledAutor}
                           onBlur={(e)=>validarAutor(e)}
                           required
                         />
@@ -271,6 +283,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           className={classes.textField}
                           onChange={ e =>controlCambios(e)}
                           error={controlEditorial}
+                          disabled={disabledEditorial}
                           onBlur={(e)=>validarEditorial(e)}
                           required
                         />
@@ -284,6 +297,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           className={classes.textField}
                           onChange={ e =>controlCambios(e)}
                           error={controlAño}
+                          disabled={disabledAño}
                           onBlur={(e)=>validarAño(e)}
                           required
                         />
@@ -298,9 +312,10 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                             multiple
                             type="file"
                             onChange={e=>controlCambios(e)}
+                            disabled={disabledImagen}
                         />
                         <label htmlFor="contained-button-file">
-                            <Button variant="outlined" color="primary" component="span">
+                            <Button disabled={disabledImagen} variant="outlined" color="primary" component="span">
                                 Imagen Libro
                             </Button>
                             <span>{libro.Imagen}</span>

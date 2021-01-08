@@ -9,7 +9,6 @@ const App = () => {
     const [LibroSelected, setLibroSelected] = useState({})
     
     const AgregarNuevoLibro = (nuevoLibro) => {
-        console.log(nuevoLibro)
         setcontrolVista(1)
         const cant = libres.length+1;
         nuevoLibro.Id=cant;
@@ -17,7 +16,6 @@ const App = () => {
         console.log(libres)
     }
     const ModLibro = (LibroUpdate) => {
-        console.log("hola soy ModificarLibro")
         setLibroSelected(LibroUpdate)
     }
     const controlVistaLibro = (cerrar) =>{

@@ -9,7 +9,7 @@
 }
 .formulario-right {
   width: 100%;
-  height: 400px;
+  height: auto;
   background: rgba(146, 171, 241, 0.1);
   text-align: center;
 }

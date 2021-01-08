@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,11 +11,10 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import '../Listar/ListarConDatos.css';
+import PopOver from '../PopOver/PopOver'
 
 const TablaListado = ({librosC, colorc, btnModificarC, LlamaModalEliminarC }) => {
-    const useStyles = makeStyles((theme)=>({
+    const useStyles = makeStyles((theme)=>({  
         margin: {
           margin: theme.spacing(1),
         },
@@ -63,14 +62,17 @@ const TablaListado = ({librosC, colorc, btnModificarC, LlamaModalEliminarC }) =>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                
                     {librosC.map((libro) => {
                         if (Date.parse(libro.devolucion) < Date.now()) {
                         return (
                             <StyledTableRow onClick={()=>handleClick(libro.Id)} style={{background: colorc}} key={libro.Id}>
                             <StyledTableCell align="left">{libro.Nombre}</StyledTableCell>
                             <StyledTableCell align="left">{libro.Dueño}</StyledTableCell>
-                            <StyledTableCell align="left"><IconButton aria-label="delete"><ExpandMoreIcon/></IconButton></StyledTableCell> {/* Agregue iconbutton para desplegar detalles */}
+                            <StyledTableCell align="left">
+                              {console.log(libro)}
+                              <PopOver Detalles={libro}/>
+                              
+                            </StyledTableCell> 
                             <StyledTableCell align="left">{libro.prestamo}</StyledTableCell>
                             <StyledTableCell align="left">{libro.devolucion}</StyledTableCell>
                             <StyledTableCell align="left">
@@ -97,7 +99,9 @@ const TablaListado = ({librosC, colorc, btnModificarC, LlamaModalEliminarC }) =>
                             <StyledTableRow onClick={()=>handleClick(libro.Id)} style={{background:""}} key={libro.Id}>
                             <StyledTableCell align="left">{libro.Nombre}</StyledTableCell>
                             <StyledTableCell align="left">{libro.Dueño}</StyledTableCell>
-                            <StyledTableCell align="left"><IconButton aria-label="delete"><ExpandMoreIcon/></IconButton></StyledTableCell>
+                            <StyledTableCell align="left">
+                            <PopOver Detalles={libro}/>
+                            </StyledTableCell>
                             <StyledTableCell align="left">{libro.prestamo}</StyledTableCell>
                             <StyledTableCell align="left">{libro.devolucion}</StyledTableCell>
                             <StyledTableCell align="left">
