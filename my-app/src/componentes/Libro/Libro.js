@@ -32,6 +32,8 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
 
     useEffect(() => {
       if(solicitudAModificar){
+        console.log(Date.parse(solicitudAModificar.prestamo));
+        const fprestamo =solicitudAModificar.prestamo;
         setLibro(solicitudAModificar);
       }
     }, [])
