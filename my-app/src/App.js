@@ -4,20 +4,18 @@ import { Libro } from './componentes/Libro/Libro';
 import {Libros} from '../src/data/Libros.json'
 
 const App = () => {
-    const [libres,] = useState(Libros)
+    const [libres, ] = useState(Libros)
     const [controlVista, setcontrolVista] = useState(1);
     const [LibroSelected, setLibroSelected] = useState({})
     
     const AgregarNuevoLibro = (nuevoLibro) => {
-        setcontrolVista(1)
         const cant = libres.length+1;
         nuevoLibro.Id=cant;
         libres.push(nuevoLibro);
-        console.log(libres)
+        setcontrolVista(1)
     }
 
     const ModificarLibro = (LibroModif) => {
-        console.log(LibroModif)
         const id = LibroModif.Id
         const found = libres.findIndex(element => element.Id === id);
         libres[found].Nombre = LibroModif.Nombre
