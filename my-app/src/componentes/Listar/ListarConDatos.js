@@ -52,7 +52,7 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
         const okEliminar = (idEliminado) => {
           
             setestadoEliminar(false)
-            const indice = libros.findIndex(element => element.Id == idEliminado);
+            const indice = libros.findIndex(element => element.Id === idEliminado);
             libros.splice(indice, 1); // 1 es la cantidad de elemento a eliminar
            
         }
