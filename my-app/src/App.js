@@ -22,7 +22,7 @@ const App = () => {
         libres[found].Dueño = LibroModif.Dueño
         libres[found].prestamo = LibroModif.prestamo
         libres[found].devolucion = LibroModif.devolucion
-        
+        setcontrolVista(1)
     }
 
 

@@ -45,7 +45,7 @@ const TablaListado = ({librosC, colorc, btnModificarC, LlamaModalEliminarC }) =>
             minWidth: 650,
           },
           estilosMorosos: {
-            marginLeft:"-2rem", marginTop:"-1rem", position:"fixed"
+            marginLeft:"-2rem", marginTop:"-1rem", position:"absolute"
           },
           colorBorder:{
             borderColor: "chocolate", borderWidth: "medium",
