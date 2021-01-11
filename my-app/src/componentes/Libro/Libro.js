@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {FormControl, TextField, Button, Grid, Container} from '@material-ui/core';
+import {FormControl, TextField, Button, Grid, Container, Snackbar} from '@material-ui/core';
 import ButtonAppBar from '../App Bar/ButtonAppBar';
 import '../Libro/libro.css';
+import Alert from '@material-ui/lab/Alert';
 
     
 export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
@@ -34,9 +35,13 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
     const [disabledEditorial, setDisabledEditorial] = useState(false);
     const [disabledAño, setDisabledAño] = useState(false);
     const [disabledImagen, setDisabledImagen] = useState(false);
+    const [disabledLimpiarCampos, setDisabledLimpiarCampos] = useState(false);
+    
+    const [controlAlert, setControlAlert] = useState(false);
+    const [mensajeAlert, setMensajeAlert] = useState('');
+    const [severity, setSeverity] = useState('error');
     
     const [controlBoton, setcontrolBoton] = useState(true);
-    const [disabledLimpiarCampos, setDisabledLimpiarCampos] = useState(false);
     useEffect(() => {
       if(solicitudAModificar){
         setLibro(solicitudAModificar);
@@ -72,7 +77,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
       if(libro.Nombre==="")
         setControlLibro(true);
         else{
-          setControlDueño(false);
+          setControlLibro(false);
           setcontrolBoton(false);
         }
 
@@ -87,93 +92,103 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
       }
     }
 
-    const validarFechaPrestamo = (e) =>{
+    const validarFechaPrestamo = () =>{
       if(libro.prestamo==="")
         setcontrolFechaPrestamo(true);
         else{
-          setControlDueño(false);
+          setcontrolFechaPrestamo(false);
           setcontrolBoton(false);
         }
     }
 
-    const validarFechaDevolucion = (e) =>{
+    const validarFechaDevolucion = () =>{
       if(libro.devolucion==="")
       setcontrolFechaDevolucion(true);
       else{
-        setControlDueño(false);
+        setcontrolFechaDevolucion(false);
         setcontrolBoton(false);
       }
     }
-    const validarAutor = (e) =>{
-      if(libro.devolucion==="")
+    const validarAutor = () =>{
+      if(libro.Autor==="")
       setcontrolAutor(true);
       else{
         setcontrolAutor(false);
         setcontrolBoton(false);
       }
     }
-    const validarEditorial = (e) =>{
-      if(libro.devolucion==="")
+    const validarEditorial = () =>{
+      if(libro.Editorial==="")
       setcontrolEditorial(true);
       else{
         setcontrolEditorial(false);
         setcontrolBoton(false);
       }
     }
-    const validarAño = (e) =>{
-      if(libro.devolucion==="")
+    const validarAño = () =>{
+      if(libro.Año==="")
       setcontrolAño(true);
       else{
         setcontrolAño(false);
         setcontrolBoton(false);
       }
     }
-
-    const validarDatos = ()=>{
+  
+   function validarDatos () {
       const {Nombre, Dueño, Imagen, devolucion, prestamo, Autor, Editorial, Año}=libro;
-      
       if(Nombre){
         if(prestamo){
           if(devolucion){
-            if(Date.parse(prestamo)>=Date.parse(devolucion))
-              alert("Fechas Inválidas! Verificar!!");
+            if(Date.parse(prestamo)>=Date.parse(devolucion)){
+              setControlAlert(true);
+              setMensajeAlert("Fechas Inválidas! Verificar!!");}
               else{
                   if(Dueño){
-                    if(Imagen){
+                    if(Año){
                       if(Autor){
                         if(Editorial){
-                          if(Año){
-                            alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");
-                            console.log(libro);
-                            Volver(1);
-                            NuevoLibro(libro);
+                          if(Imagen){
+                            setSeverity("success");
+                            setControlAlert(true);
+                            setMensajeAlert("Datos Correctos");
+                            
+                            setTimeout(()=>{NuevoLibro(libro); },1000)
                           }
-                        else
-                          alert("Debe cargar Año de la Edición del Libro");
+                        else{
+                          setControlAlert(true);
+                          setMensajeAlert("Debe cargar Imagen del Libro");
+                        }
                       }
-                      else
-                        alert("Debe cargar Editorial del Libro");
+                      else{
+                        setControlAlert(true);
+                        setMensajeAlert("Debe cargar Editorial del Libro");}
                     }
-                    else
-                      alert("Debe cargar Autor del Libro");
+                    else{
+                      setControlAlert(true);
+                      setMensajeAlert("Debe cargar Autor del Libro");}
                   }
-                  else
-                    alert("Debe cargar Imagen");
+                  else{
+                    setControlAlert(true);
+                    setMensajeAlert("Debe cargar Año de Edición del Libro");}
                   }
-                else
-                  alert("Debe cargar Propietario");
+                else{
+                  setControlAlert(true);
+                  setMensajeAlert("Debe cargar Solicitante");}
                }
           }
-          else
-            alert("Debe cargar Fecha de Devolución");
+          else{
+            setControlAlert(true);
+            setMensajeAlert("Debe cargar Fecha de Devolución");}
         }
-        else
-          alert("Debe cargar Fecha de Préstamo");
+        else{
+          setControlAlert(true);
+          setMensajeAlert("Debe Cargar Fecha de Préstamo");}
       }
-      else
-        alert("Debe cargar Nombre de Libro");   
+      else{
+        setControlAlert(true);
+        setMensajeAlert("Debe Cargar Nombre de Libro");
+      }
     }
-    
     const resetear = () => {
       setLibro({
         Nombre:'',
@@ -272,7 +287,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           onChange={ e =>controlCambios(e)}
                           error={controlAutor}
                           disabled={disabledAutor}
-                          onBlur={(e)=>validarAutor(e)}
+                          onBlur={validarAutor}
                           required
                         />
                         <br/>
@@ -284,10 +299,10 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           variant="standard"
                           value={libro.Editorial}
                           className={classes.textField}
-                          onChange={ e =>controlCambios(e)}
+                          onChange={ (e) =>controlCambios(e)}
                           error={controlEditorial}
                           disabled={disabledEditorial}
-                          onBlur={(e)=>validarEditorial(e)}
+                          onBlur={validarEditorial}
                           required
                         />
                         <br/>
@@ -297,11 +312,11 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           type="text"
                           label="Año de Edición"
                           value={libro.Año}
-                          className={classes.textField}
-                          onChange={ e =>controlCambios(e)}
+                          variant="standard"
+                          onChange={ (e) =>controlCambios(e)}
                           error={controlAño}
                           disabled={disabledAño}
-                          onBlur={(e)=>validarAño(e)}
+                          onBlur={validarAño}
                           required
                         />
                         <br/>
@@ -314,7 +329,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                             id="contained-button-file"
                             multiple
                             type="file"
-                            onChange={e=>controlCambios(e)}
+                            onChange={(e)=>controlCambios(e)}
                             disabled={disabledImagen}
                         />
                         <label htmlFor="contained-button-file">
@@ -343,6 +358,16 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
             color="primary" 
             disabled={controlBoton}
             className="boton2">Agregar Solicitud</Button>
+          <Snackbar 
+            open={controlAlert} 
+            autoHideDuration={2000} 
+            onClose={controlAlert,()=>setControlAlert(false)}
+            anchorOrigin={{ vertical:'top', horizontal:'center' }}
+          >
+            <Alert onClose={controlAlert, ()=>setControlAlert(false)} severity={severity} variant="filled">
+              {mensajeAlert}
+            </Alert>
+          </Snackbar>
         </div>
       </>  
     )
