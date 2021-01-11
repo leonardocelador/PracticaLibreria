@@ -34,8 +34,9 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
     const [disabledEditorial, setDisabledEditorial] = useState(false);
     const [disabledAño, setDisabledAño] = useState(false);
     const [disabledImagen, setDisabledImagen] = useState(false);
-    const [controlBoton, setcontrolBoton] = useState(true);
     
+    const [controlBoton, setcontrolBoton] = useState(true);
+    const [disabledLimpiarCampos, setDisabledLimpiarCampos] = useState(false);
     useEffect(() => {
       if(solicitudAModificar){
         setLibro(solicitudAModificar);
@@ -44,6 +45,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
         setDisabledEditorial(true);
         setDisabledAño(true);
         setDisabledImagen(true);
+        setDisabledLimpiarCampos(true);
       }
     }, [])
 
@@ -135,31 +137,32 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
           if(devolucion){
             if(Date.parse(prestamo)>=Date.parse(devolucion))
               alert("Fechas Inválidas! Verificar!!");
-            if(Dueño){
-              if(Imagen){
-                if(Autor){
-                  if(Editorial){
-                    if(Año){
-                      alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");
-                      console.log(Libro);
-                      Volver(1);
-                      NuevoLibro(libro);
+              else{
+                  if(Dueño){
+                    if(Imagen){
+                      if(Autor){
+                        if(Editorial){
+                          if(Año){
+                            alert("DATOS CORRECTOS!!! OBJETO CARGADO CORRECTAMENTE!!!");
+                            console.log(libro);
+                            Volver(1);
+                            NuevoLibro(libro);
+                          }
+                        else
+                          alert("Debe cargar Año de la Edición del Libro");
+                      }
+                      else
+                        alert("Debe cargar Editorial del Libro");
                     }
                     else
-                      alert("Debe cargar Año de la Edición del Libro");
+                      alert("Debe cargar Autor del Libro");
                   }
                   else
-                    alert("Debe cargar Editorial del Libro");
-                }
+                    alert("Debe cargar Imagen");
+                  }
                 else
-                  alert("Debe cargar Autor del Libro");
-              }
-                else{
-                  alert("Debe cargar Imagen");
-                }
-            }
-            else
-             alert("Debe cargar Propietario");
+                  alert("Debe cargar Propietario");
+               }
           }
           else
             alert("Debe cargar Fecha de Devolución");
@@ -168,10 +171,9 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
           alert("Debe cargar Fecha de Préstamo");
       }
       else
-        alert("Debe cargar Nombre de Libro");
-    
-      
+        alert("Debe cargar Nombre de Libro");   
     }
+    
     const resetear = () => {
       setLibro({
         Nombre:'',
@@ -331,7 +333,8 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
           <Button 
             className="boton1"
             onClick={e=>resetear(e)} 
-            variant="outlined" 
+            variant="outlined"
+            disabled={disabledLimpiarCampos}
             color="primary">Limpiar Campos</Button>
             <br/>
          <Button 

@@ -4,7 +4,6 @@ import Button from "@material-ui/core/Button";
 import AppCard from '../Card/AppCard'
 
 export default function PopOver( {Detalles} ) {
-    console.log(Detalles);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = event => {

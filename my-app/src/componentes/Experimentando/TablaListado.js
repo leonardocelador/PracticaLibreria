@@ -69,7 +69,6 @@ const TablaListado = ({librosC, colorc, btnModificarC, LlamaModalEliminarC }) =>
                             <StyledTableCell align="left">{libro.Nombre}</StyledTableCell>
                             <StyledTableCell align="left">{libro.Dueño}</StyledTableCell>
                             <StyledTableCell align="left">
-                              {console.log(libro)}
                               <PopOver Detalles={libro}/>
                               
                             </StyledTableCell> 
