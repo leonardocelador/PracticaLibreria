@@ -10,8 +10,21 @@ import estilista from './estilista';
 
 
 
-export default function SearchAppBar() {
+export default function SearchAppBar({Solicitudes}) {
+  
   const classes = estilista();
+
+  const escucharBuscar = (e) => {
+    
+    const texto = e.target.value.toUpperCase();
+    console.log(texto);
+    
+    const resultado = Solicitudes.findIndex( solicitud => solicitud.Nombre.toUpperCase() === texto );
+    console.log(resultado);
+    console.log(Solicitudes[resultado]);
+
+
+  }
 
   return (
     <div className={classes.root}>
@@ -27,11 +40,13 @@ export default function SearchAppBar() {
             </div>
             <InputBase
               placeholder="Buscar Libro…"
+              id="search"
+              onChange={escucharBuscar}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ 'aria-label': 'Buscar' }}
             />
           </div>
         </Toolbar>
