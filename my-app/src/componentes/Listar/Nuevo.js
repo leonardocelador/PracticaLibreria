@@ -6,7 +6,7 @@ import Fade from '@material-ui/core/Fade';
 import { Button } from '@material-ui/core';
 
 
-const Nuevo = ({estadoNuevoModal, agregarNuevo}) => {
+const Nuevo = ({estadoNuevoModal, agregarNuevo, ctrlok}) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
 
@@ -18,7 +18,7 @@ const Nuevo = ({estadoNuevoModal, agregarNuevo}) => {
 
   const OK = () => {
     // okEliminado(id)
-    agregarNuevo(2)
+    agregarNuevo(false)
     }
     
   return (

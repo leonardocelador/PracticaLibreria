@@ -5,26 +5,30 @@ import {Libros} from '../src/data/Libros.json'
 
 const App = () => {
     const [libres, ] = useState(Libros)
-    const [controlVista, setcontrolVista] = useState(1);
+    const [controlVista, setcontrolVista] = useState(true);
     const [LibroSelected, setLibroSelected] = useState({})
     
-    const AgregarNuevoLibro = (nuevoLibro) => {
-        const cant = libres.length+1;
-        nuevoLibro.Id=cant;
-        libres.push(nuevoLibro);
-        setcontrolVista(1)
+    const SolicitudLibro = (nuevoLibro) => {
+
+        if(nuevoLibro.Id==""){
+            const cant = libres.length+1;
+            nuevoLibro.Id=cant;
+            libres.push(nuevoLibro);
+            setcontrolVista(!controlVista)
+        }else{
+            const id = nuevoLibro.Id
+            const found = libres.findIndex(element => element.Id === id);
+            libres[found].Nombre = nuevoLibro.Nombre
+            libres[found].Dueño = nuevoLibro.Dueño
+            libres[found].prestamo = nuevoLibro.prestamo
+            libres[found].devolucion = nuevoLibro.devolucion
+            setcontrolVista(!controlVista)   
+            setLibroSelected({})
+        }
+        
     }
 
-    const ModificarLibro = (LibroModif) => {
-        const id = LibroModif.Id
-        const found = libres.findIndex(element => element.Id === id);
-        libres[found].Nombre = LibroModif.Nombre
-        libres[found].Dueño = LibroModif.Dueño
-        libres[found].prestamo = LibroModif.prestamo
-        libres[found].devolucion = LibroModif.devolucion
-        setcontrolVista(1)
-    }
-
+   
 
     const ModLibro = (LibroUpdate) => {
         setLibroSelected(LibroUpdate)
@@ -32,47 +36,18 @@ const App = () => {
     const controlVistaLibro = (cerrar) =>{
         setcontrolVista(cerrar)
     }
-    if(controlVista===1)
+    if(controlVista)
     {
         return (
-            <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro}/>
+            <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro} />
         )
     }else{
-        if(controlVista===2)
-        {
-            return (
-                <Libro NuevoLibro={AgregarNuevoLibro} Volver={controlVistaLibro}/>
-            )
-        }else{
-            return (
-                <Libro NuevoLibro={ModificarLibro} Volver={controlVistaLibro} solicitudAModificar={LibroSelected}/>
-            )
-        }
+        return(
+            
+            <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Datos = {LibroSelected}/>
+        )
+        
     }
-    // return (
-    //     <>
-    //          {(() => {
-  
-    //             switch (controlVista) {
-    //                 case 1:
-    //                     return (
-    //                         <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro}/>
-    //                     )
-    //                 case 2:
-    //                     return (
-    //                         <Libro NuevoLibro={AgregarNuevoLibro} Volver={controlVistaLibro}/>
-    //                     )
-    //                 case 3:
-    //                     return (
-    //                         <Libro NuevoLibro={ModificarLibro} Volver={controlVistaLibro} solicitudAModificar={LibroSelected}/>
-    //                     )
-    //                 default:
-    //                     return (
-    //                         <h1>hola</h1>
-    //                     )
-    //             }
-    //         })()}
-    //     </>
-    // )
+    
 }
 export default App;

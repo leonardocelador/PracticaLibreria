@@ -33,7 +33,7 @@ const seleccionar = (event, Id) => {
   }
  
 }
-const TablaListado = ({librosC, colorc, btnModificarC, LlamaModalEliminarC }) => {
+const TablaListado = ({librosC, btnModificarC, LlamaModalEliminarC }) => {
     const useStyles = makeStyles((theme)=>({  
         margin: {
           border: "#eccfcf  5px solid"

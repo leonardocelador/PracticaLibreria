@@ -12,7 +12,7 @@ import TablaListado from '../Experimentando/TablaListado';
 const ListarConDatos = ({libros, btnNuevo, Libr}) => {
 
         
-        const [color,] = useState("#dca4a4") // color que tendra la fila morosa
+
         const [idEliminar, setidEliminar] = useState("") 
         const [estadoEliminar, setestadoEliminar] = useState(false)//ocultar - mostrar modal
         const [estadomodif, setestadomodif] = useState(false) //ocultar - mostrar modal
@@ -65,9 +65,9 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
 
       return (
       <div>
-      <TablaListado librosC={libros} colorC={color} btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} />
+      <TablaListado librosC={libros} btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} />
       {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
-      {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={btnNuevo} LibroSeleccionado={libroaModificar} AsignarLib={Libr} /> : null}
+      {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={btnNuevo} LibroSeleccionado={libroaModificar} AsignarLib={Libr}  /> : null}
       <br></br>
       <Button 
         onClick={()=>setestadoNuevo(!estadoNuevo)} 
@@ -75,7 +75,7 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
         color="primary"
         className={classes.margin} 
       >Nueva Solicitud</Button>
-      {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo} agregarNuevo={btnNuevo}/></Modal> : null}
+      {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo} agregarNuevo={btnNuevo} /></Modal> : null}
       </div>
     )
        
