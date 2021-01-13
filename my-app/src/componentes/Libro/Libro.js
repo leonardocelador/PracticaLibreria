@@ -23,12 +23,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
     
     const [errores, setErrores] = useState({});
 
-    const [disabledLibro, setDisabledLibro] = useState(solicitudAModificar?true:false);
-    const [disabledAutor, setDisabledAutor] = useState(solicitudAModificar?true:false);
-    const [disabledEditorial, setDisabledEditorial] = useState(solicitudAModificar?true:false);
-    const [disabledAño, setDisabledAño] = useState(solicitudAModificar?true:false);
-    const [disabledImagen, setDisabledImagen] = useState(solicitudAModificar?true:false);
-    const [disabledLimpiarCampos, setDisabledLimpiarCampos] = useState(solicitudAModificar?true:false);
+    const [disabledCampos, setdisabledCampos] = useState(solicitudAModificar?true:false);
     
     const [controlAlert, setControlAlert] = useState(false);
     const [mensajeAlert, setMensajeAlert] = useState('');
@@ -39,9 +34,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
 
         //CAMBIOS LIBRO Y PROPIETARIO
     const controlCambios = (name, value)=>{
-      
         setLibro({ ...libro,[name]:value })
-      
     }
 
         // BOTON EXAMINAR //
@@ -66,7 +59,6 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
         setErrores({...errores,[name]:false});
         setcontrolBoton(false);
       }
-      console.log(errores);
     }
 
    function validarDatos () {
@@ -198,7 +190,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                         <h2>Detalles de Libro</h2>
                         <TextField
                           name="Nombre"
-                          disabled={disabledLibro}
+                          disabled={disabledCampos}
                           id="nombre" 
                           type="text"
                           label="Nombre de Libro" 
@@ -220,7 +212,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           value={libro.Autor}
                           className={classes.textField}
                           onChange={ e =>controlCambios(e.target.name, e.target.value)}
-                          disabled={disabledAutor}
+                          disabled={disabledCampos}
                           error={errores.Autor?errores.Autor:false}
                           onBlur={e=>validarCampos(e.target.name)}
                           required
@@ -235,7 +227,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           value={libro.Editorial}
                           className={classes.textField}
                           onChange={ (e) =>controlCambios(e.target.name, e.target.value)}
-                          disabled={disabledEditorial}
+                          disabled={disabledCampos}
                           error={errores.Editorial?errores.Editorial:false}
                           onBlur={e=>validarCampos(e.target.name)}
                           required
@@ -249,7 +241,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           value={libro.Año}
                           variant="standard"
                           onChange={ (e) =>controlCambios(e.target.name, e.target.value)}
-                          disabled={disabledAño}
+                          disabled={disabledCampos}
                           error={errores.Año?errores.Año:false}
                           onBlur={e=>validarCampos(e.target.name)}
                           required
@@ -265,10 +257,10 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                             multiple
                             type="file"
                             onChange={(e)=>controlCambios(e.target.name, e.target.value)}
-                            disabled={disabledImagen}
+                            disabled={disabledCampos}
                         />
                         <label htmlFor="contained-button-file">
-                            <Button disabled={disabledImagen} variant="outlined" color="primary" component="span">
+                            <Button disabled={disabledCampos} variant="outlined" color="primary" component="span">
                                 Imagen Libro
                             </Button>
                             <span>{libro.Imagen}</span>
@@ -284,7 +276,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
             className="boton1"
             onClick={e=>resetear(e)} 
             variant="outlined"
-            disabled={disabledLimpiarCampos}
+            disabled={disabledCampos}
             color="primary">Limpiar Campos</Button>
             <br/>
          <Button 
