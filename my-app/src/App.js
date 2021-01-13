@@ -41,11 +41,11 @@ const App = () => {
         if(controlVista===2)
         {
             return (
-                <Libro NuevoLibro={AgregarNuevoLibro} Volver={controlVistaLibro} Dato={LibroSelected}/>
+                <Libro solicitud={AgregarNuevoLibro} Volver={controlVistaLibro} Dato={{}}/>
             )
         }else{
             return (
-                <Libro NuevoLibro={ModificarLibro} Volver={controlVistaLibro} Dato={LibroSelected}/>
+                <Libro solicitud={ModificarLibro} Volver={controlVistaLibro} Dato={LibroSelected}/>
             )
         }
     }

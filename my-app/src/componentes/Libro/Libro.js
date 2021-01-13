@@ -6,24 +6,27 @@ import '../Libro/libro.css';
 import Alert from '@material-ui/lab/Alert';
 
     
-export const Libro = ({NuevoLibro , Volver, Dato}) => {
+export const Libro = ({solicitud , Volver, Dato}) => {
+  console.log(Object.values(Dato));
 
     const [libro, setLibro] =  useState(Dato)
     
     const [errores, setErrores] = useState({});
 
-    const [disabledCampos, setdisabledCampos] = useState(Dato?true:false);
+    const [disabledCampos, setdisabledCampos] = useState(Object.keys(Dato).length>0?true:false);
     
     const [controlAlert, setControlAlert] = useState(false);
     const [mensajeAlert, setMensajeAlert] = useState('');
     const [severity, setSeverity] = useState('error');
     
-    const [controlBoton, setcontrolBoton] = useState(true);
     
 
         //CAMBIOS LIBRO Y PROPIETARIO
     const controlCambios = (name, value)=>{
-        setLibro({ ...libro,[name]:value })
+      if(!value){
+        setErrores({...errores,[name]:true})
+      }
+      setLibro({ ...libro,[name]:value })
     }
 
         // BOTON EXAMINAR //
@@ -39,16 +42,6 @@ export const Libro = ({NuevoLibro , Volver, Dato}) => {
       }));
     const classes = useStyles();
     //
-    
-    const validarCampos = (name) => {
-      
-      if(libro[name].trim()==="")
-        setErrores({...errores,[name]:true});
-      else{
-        setErrores({...errores,[name]:false});
-        setcontrolBoton(false);
-      }
-    }
 
    function validarDatos () {
       const {Nombre, Dueño, Imagen, devolucion, prestamo, Autor, Editorial, Año}=libro;
@@ -68,7 +61,7 @@ export const Libro = ({NuevoLibro , Volver, Dato}) => {
                             setControlAlert(true);
                             setMensajeAlert("Datos Correctos");
                             
-                            setTimeout(()=>{NuevoLibro(libro); },1000)
+                            setTimeout(()=>{solicitud(libro); },1000)
                           }
                         else{
                           setControlAlert(true);
@@ -107,14 +100,14 @@ export const Libro = ({NuevoLibro , Volver, Dato}) => {
     }
     const resetear = () => {
       setLibro({
-        Nombre:'',
+        /* Nombre:'',
         Dueño:'',
         Imagen:'',
         prestamo: '',
         devolucion:'',
         Autor:'',
         Editorial:'',
-        Año:''
+        Año:'' */
       })
     }
 
@@ -139,7 +132,7 @@ export const Libro = ({NuevoLibro , Volver, Dato}) => {
                         shrink: true,
                       }}
                       error={errores.prestamo?errores.prestamo:false}
-                      onBlur={e=>validarCampos(e.target.name)}
+                      
                       required
                     />
                     <br/>
@@ -155,7 +148,6 @@ export const Libro = ({NuevoLibro , Volver, Dato}) => {
                         shrink: true,
                       }}
                       error={errores.devolucion?errores.devolucion:false}
-                      onBlur={e=>validarCampos(e.target.name)}
                       required
                     />
                     <br/>                    
@@ -167,7 +159,6 @@ export const Libro = ({NuevoLibro , Volver, Dato}) => {
                       value={libro.Dueño?libro.Dueño:''}
                       onChange={e => controlCambios(e.target.name, e.target.value)}
                       error={errores.Dueño?errores.Dueño:false}
-                      onBlur={e=>validarCampos(e.target.name)}
                       required
                     />
                     <br/>
@@ -187,7 +178,6 @@ export const Libro = ({NuevoLibro , Volver, Dato}) => {
                           variant="standard"
                           onChange={(e)=> controlCambios(e.target.name, e.target.value)}
                           error={errores.Nombre?errores.Nombre:false}
-                          onBlur={e=>validarCampos(e.target.name)}
                           helperText={''}
                           required
                         />
@@ -203,7 +193,6 @@ export const Libro = ({NuevoLibro , Volver, Dato}) => {
                           onChange={ e =>controlCambios(e.target.name, e.target.value)}
                           disabled={disabledCampos}
                           error={errores.Autor?errores.Autor:false}
-                          onBlur={e=>validarCampos(e.target.name)}
                           required
                         />
                         <br/>
@@ -218,7 +207,6 @@ export const Libro = ({NuevoLibro , Volver, Dato}) => {
                           onChange={ (e) =>controlCambios(e.target.name, e.target.value)}
                           disabled={disabledCampos}
                           error={errores.Editorial?errores.Editorial:false}
-                          onBlur={e=>validarCampos(e.target.name)}
                           required
                         />
                         <br/>
@@ -232,7 +220,6 @@ export const Libro = ({NuevoLibro , Volver, Dato}) => {
                           onChange={ (e) =>controlCambios(e.target.name, e.target.value)}
                           disabled={disabledCampos}
                           error={errores.Año?errores.Año:false}
-                          onBlur={e=>validarCampos(e.target.name)}
                           required
                         />
                         <br/>
@@ -272,7 +259,6 @@ export const Libro = ({NuevoLibro , Volver, Dato}) => {
             onClick={validarDatos} 
             variant="outlined" 
             color="primary" 
-            disabled={controlBoton}
             className="boton2">Agregar Solicitud</Button>
           <Snackbar 
             open={controlAlert} 
