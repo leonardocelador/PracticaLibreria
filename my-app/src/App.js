@@ -41,13 +41,20 @@ const App = () => {
         if(controlVista===2)
         {
             return (
-                <Libro NuevoLibro={AgregarNuevoLibro} Volver={controlVistaLibro}/>
+                <Libro NuevoLibro={AgregarNuevoLibro} Volver={controlVistaLibro} Dato={LibroSelected}/>
             )
         }else{
             return (
-                <Libro NuevoLibro={ModificarLibro} Volver={controlVistaLibro} solicitudAModificar={LibroSelected}/>
+                <Libro NuevoLibro={ModificarLibro} Volver={controlVistaLibro} Dato={LibroSelected}/>
             )
         }
     }
 }
 export default App;
+
+/* {controlVistaLibro?
+    <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro}/>
+:
+    <Libro NuevoLibro={ModificarLibro} Volver={controlVistaLibro} Dato={LibroSelected}/>}
+
+} */

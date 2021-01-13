@@ -19,7 +19,7 @@ const seleccionar = (event, Id) => {
   const valor = document.getElementById(Id);
 
   if(array.length !== 0){
-    const found = array.findIndex(element => element == Id);
+    const found = array.findIndex(element => element === Id);
     if(found !== -1){
       valor.removeAttribute('style');
       array.splice(found,1);

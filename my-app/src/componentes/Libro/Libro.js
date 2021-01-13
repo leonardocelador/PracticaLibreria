@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {FormControl, TextField, Button, Grid, Container, Snackbar} from '@material-ui/core';
 import ButtonAppBar from '../App Bar/ButtonAppBar';
@@ -6,24 +6,13 @@ import '../Libro/libro.css';
 import Alert from '@material-ui/lab/Alert';
 
     
-export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
+export const Libro = ({NuevoLibro , Volver, Dato}) => {
 
-    const [libro, setLibro] =  useState(solicitudAModificar?solicitudAModificar:{
-        Id:'',
-        Nombre:'',
-        Dueño:'',
-        Imagen:'',
-        prestamo: '',
-        devolucion:'',
-        Eliminado:false,
-        Autor:'',
-        Editorial:'',
-        Año:''
-    })
+    const [libro, setLibro] =  useState(Dato)
     
     const [errores, setErrores] = useState({});
 
-    const [disabledCampos, setdisabledCampos] = useState(solicitudAModificar?true:false);
+    const [disabledCampos, setdisabledCampos] = useState(Dato?true:false);
     
     const [controlAlert, setControlAlert] = useState(false);
     const [mensajeAlert, setMensajeAlert] = useState('');
@@ -143,7 +132,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                       name="prestamo"
                       type="date"
                       label="Fecha de Préstamo"
-                      value={libro.prestamo}
+                      value={libro.prestamo?libro.prestamo:''}
                       className={classes.textField}
                       onChange={ e =>controlCambios(e.target.name, e.target.value)}
                       InputLabelProps={{
@@ -159,7 +148,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                       name="devolucion"
                       label="Fecha de Devolución"
                       type="date"
-                      value={libro.devolucion}
+                      value={libro.devolucion?libro.devolucion:''}
                       className={classes.textField}
                       onChange={ e =>controlCambios(e.target.name, e.target.value)}
                       InputLabelProps={{
@@ -175,7 +164,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                       id="dueño" 
                       label="Solicitante" 
                       variant="standard"
-                      value={libro.Dueño}
+                      value={libro.Dueño?libro.Dueño:''}
                       onChange={e => controlCambios(e.target.name, e.target.value)}
                       error={errores.Dueño?errores.Dueño:false}
                       onBlur={e=>validarCampos(e.target.name)}
@@ -194,7 +183,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           id="nombre" 
                           type="text"
                           label="Nombre de Libro" 
-                          value={libro.Nombre}
+                          value={libro.Nombre?libro.Nombre:''}
                           variant="standard"
                           onChange={(e)=> controlCambios(e.target.name, e.target.value)}
                           error={errores.Nombre?errores.Nombre:false}
@@ -209,7 +198,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           type="text"
                           label="Autor"
                           variant="standard"
-                          value={libro.Autor}
+                          value={libro.Autor?libro.Autor:''}
                           className={classes.textField}
                           onChange={ e =>controlCambios(e.target.name, e.target.value)}
                           disabled={disabledCampos}
@@ -224,7 +213,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           type="text"
                           label="Editorial"
                           variant="standard"
-                          value={libro.Editorial}
+                          value={libro.Editorial?libro.Editorial:''}
                           className={classes.textField}
                           onChange={ (e) =>controlCambios(e.target.name, e.target.value)}
                           disabled={disabledCampos}
@@ -238,7 +227,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           name="Año"
                           type="text"
                           label="Año de Edición"
-                          value={libro.Año}
+                          value={libro.Año?libro.Año:''}
                           variant="standard"
                           onChange={ (e) =>controlCambios(e.target.name, e.target.value)}
                           disabled={disabledCampos}
@@ -299,5 +288,6 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
       </>  
     )
 }
+
 export default Libro;
 
