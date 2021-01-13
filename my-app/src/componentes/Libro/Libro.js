@@ -74,7 +74,8 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
     //
 
     const validacionLibro = () => {
-      if(libro.Nombre==="")
+      console.log(libro);
+      if(libro.Nombre.trim()==="")//.trim sirve para eliminar los espacios en blanco
         setControlLibro(true);
         else{
           setControlLibro(false);
@@ -84,7 +85,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
     }
     
     const validacionDueño = () =>{
-      if(libro.Dueño==="")
+      if(libro.Dueño.trim()==="")
         setControlDueño(true);
       else{
         setControlDueño(false);
@@ -93,7 +94,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
     }
 
     const validarFechaPrestamo = () =>{
-      if(libro.prestamo==="")
+      if(libro.prestamo.trim()==="")
         setcontrolFechaPrestamo(true);
         else{
           setcontrolFechaPrestamo(false);
@@ -102,7 +103,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
     }
 
     const validarFechaDevolucion = () =>{
-      if(libro.devolucion==="")
+      if(libro.devolucion.trim()==="")
       setcontrolFechaDevolucion(true);
       else{
         setcontrolFechaDevolucion(false);
@@ -110,7 +111,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
       }
     }
     const validarAutor = () =>{
-      if(libro.Autor==="")
+      if(libro.Autor.trim()==="")
       setcontrolAutor(true);
       else{
         setcontrolAutor(false);
@@ -118,7 +119,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
       }
     }
     const validarEditorial = () =>{
-      if(libro.Editorial==="")
+      if(libro.Editorial.trim()==="")
       setcontrolEditorial(true);
       else{
         setcontrolEditorial(false);
@@ -126,7 +127,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
       }
     }
     const validarAño = () =>{
-      if(libro.Año==="")
+      if(libro.Año.trim()==="")
       setcontrolAño(true);
       else{
         setcontrolAño(false);
@@ -139,7 +140,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
       if(Nombre){
         if(prestamo){
           if(devolucion){
-            if(Date.parse(prestamo)>=Date.parse(devolucion)){
+            if(Date.parse(prestamo)>Date.parse(devolucion)){
               setControlAlert(true);
               setMensajeAlert("Fechas Inválidas! Verificar!!");}
               else{

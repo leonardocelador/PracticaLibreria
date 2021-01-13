@@ -13,7 +13,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
 import PopOver from '../PopOver/PopOver'
-import { red } from '@material-ui/core/colors';
+
 const array = [];
 const seleccionar = (event, Id) => {
   const valor = document.getElementById(Id);
@@ -33,7 +33,7 @@ const seleccionar = (event, Id) => {
   }
  
 }
-const TablaListado = ({librosC, colorc, btnModificarC, LlamaModalEliminarC }) => {
+const TablaListado = ({librosC, btnModificarC, LlamaModalEliminarC }) => {
     const useStyles = makeStyles((theme)=>({  
         margin: {
           border: "#eccfcf  5px solid"
@@ -158,8 +158,6 @@ const TablaListado = ({librosC, colorc, btnModificarC, LlamaModalEliminarC }) =>
                             </StyledTableCell>
                             </TableRow>
                         );
-                    
-                    
                     
                         })}
                 </TableBody>

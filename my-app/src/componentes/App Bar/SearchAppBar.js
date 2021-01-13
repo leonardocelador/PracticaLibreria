@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -7,23 +7,20 @@ import SearchIcon from '@material-ui/icons/Search';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import estilista from './estilista';
 
-
-
-
 export default function SearchAppBar({Solicitudes}) {
   
   const classes = estilista();
-
-  const escucharBuscar = (e) => {
-    
+  
+  const escucharBuscar = (e) => {  
     const texto = e.target.value.toUpperCase();
-    console.log(texto);
-    
-    const resultado = Solicitudes.findIndex( solicitud => solicitud.Nombre.toUpperCase() === texto );
-    console.log(resultado);
-    console.log(Solicitudes[resultado]);
 
-
+    Solicitudes.map((solicitud)=>{
+      console.log(solicitud)
+      if(solicitud.Nombre.toUpperCase() === texto)
+        console.log("se encontró",solicitud.Nombre);
+      else
+        console.log("No se encontró");
+    })
   }
 
   return (
@@ -41,6 +38,7 @@ export default function SearchAppBar({Solicitudes}) {
             <InputBase
               placeholder="Buscar Libro…"
               id="search"
+              autoComplete="off"
               onChange={escucharBuscar}
               classes={{
                 root: classes.inputRoot,
@@ -48,6 +46,7 @@ export default function SearchAppBar({Solicitudes}) {
               }}
               inputProps={{ 'aria-label': 'Buscar' }}
             />
+            
           </div>
         </Toolbar>
       </AppBar>
