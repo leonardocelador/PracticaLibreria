@@ -13,13 +13,13 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
 import PopOver from '../PopOver/PopOver'
-import { red } from '@material-ui/core/colors';
+
 const array = [];
 const seleccionar = (event, Id) => {
   const valor = document.getElementById(Id);
 
   if(array.length !== 0){
-    const found = array.findIndex(element => element == Id);
+    const found = array.findIndex(element => element === Id);
     if(found !== -1){
       valor.removeAttribute('style');
       array.splice(found,1);
@@ -158,8 +158,6 @@ const TablaListado = ({librosC, btnModificarC, LlamaModalEliminarC }) => {
                             </StyledTableCell>
                             </TableRow>
                         );
-                    
-                    
                     
                         })}
                 </TableBody>

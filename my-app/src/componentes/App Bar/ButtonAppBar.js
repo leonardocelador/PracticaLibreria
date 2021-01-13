@@ -17,7 +17,7 @@ export default function ButtonAppBar({volver}) {
           <Typography variant="h6" className={classes.title}>
               Help Book
           </Typography>
-          <Button onClick={()=>{volver(1)}} className={classes.colorTextoBtn} size="small" variant="contained"color="secondary">Ver Listado</Button>
+          <Button onClick={()=>{volver(true)}} className={classes.colorTextoBtn} size="small" variant="contained"color="secondary">Ver Listado</Button>
         </Toolbar>
       </AppBar>
     </div>

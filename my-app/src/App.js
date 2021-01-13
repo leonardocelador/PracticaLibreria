@@ -10,12 +10,7 @@ const App = () => {
     
     const SolicitudLibro = (nuevoLibro) => {
 
-        if(nuevoLibro.Id==""){
-            const cant = libres.length+1;
-            nuevoLibro.Id=cant;
-            libres.push(nuevoLibro);
-            setcontrolVista(!controlVista)
-        }else{
+        if(nuevoLibro.Id){
             const id = nuevoLibro.Id
             const found = libres.findIndex(element => element.Id === id);
             libres[found].Nombre = nuevoLibro.Nombre
@@ -24,6 +19,11 @@ const App = () => {
             libres[found].devolucion = nuevoLibro.devolucion
             setcontrolVista(!controlVista)   
             setLibroSelected({})
+        }else{
+            const cant = libres.length+1;
+            nuevoLibro.Id=cant;
+            libres.push(nuevoLibro);
+            setcontrolVista(!controlVista)
         }
         
     }
@@ -35,6 +35,7 @@ const App = () => {
     }
     const controlVistaLibro = (cerrar) =>{
         setcontrolVista(cerrar)
+        setLibroSelected({})
     }
     if(controlVista)
     {
@@ -44,10 +45,17 @@ const App = () => {
     }else{
         return(
             
-            <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Datos = {LibroSelected}/>
+            <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {LibroSelected}/>
         )
         
     }
     
 }
 export default App;
+
+/* {controlVistaLibro?
+    <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro}/>
+:
+    <Libro NuevoLibro={ModificarLibro} Volver={controlVistaLibro} Dato={LibroSelected}/>}
+
+} */
