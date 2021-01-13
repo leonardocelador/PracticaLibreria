@@ -32,30 +32,47 @@ const App = () => {
     const controlVistaLibro = (cerrar) =>{
         setcontrolVista(cerrar)
     }
-    return (
-        <>
-             {(() => {
+    if(controlVista===1)
+    {
+        return (
+            <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro}/>
+        )
+    }else{
+        if(controlVista===2)
+        {
+            return (
+                <Libro NuevoLibro={AgregarNuevoLibro} Volver={controlVistaLibro}/>
+            )
+        }else{
+            return (
+                <Libro NuevoLibro={ModificarLibro} Volver={controlVistaLibro} solicitudAModificar={LibroSelected}/>
+            )
+        }
+    }
+    // return (
+    //     <>
+    //          {(() => {
   
-                switch (controlVista) {
-                    case 1:
-                        return (
-                            <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro}/>
-                        )
-                    case 2:
-                        return (
-                            <Libro NuevoLibro={AgregarNuevoLibro} Volver={controlVistaLibro}/>
-                        )
-                    case 3:
-                        return (
-                            <Libro NuevoLibro={ModificarLibro} Volver={controlVistaLibro} solicitudAModificar={LibroSelected}/>
-                        )
-                    default:
-                        return (
-                            <h1>hola</h1>
-                        )
-                }
-            })()}
-        </>
-    )
+    //             switch (controlVista) {
+    //                 case 1:
+    //                     return (
+    //                         <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro}/>
+    //                     )
+    //                 case 2:
+    //                     return (
+    //                         <Libro NuevoLibro={AgregarNuevoLibro} Volver={controlVistaLibro}/>
+    //                     )
+    //                 case 3:
+    //                     return (
+    //                         <Libro NuevoLibro={ModificarLibro} Volver={controlVistaLibro} solicitudAModificar={LibroSelected}/>
+    //                     )
+    //                 default:
+    //                     return (
+    //                         <h1>hola</h1>
+    //                     )
+    //             }
+    //         })()}
+    //     </>
+    // )
 }
 export default App;
