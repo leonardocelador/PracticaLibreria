@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {FormControl, TextField, Button, Grid, Container, Snackbar} from '@material-ui/core';
 import ButtonAppBar from '../App Bar/ButtonAppBar';
@@ -8,7 +8,7 @@ import Alert from '@material-ui/lab/Alert';
     
 export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
 
-    const [libro, setLibro] = useState({
+    const [libro, setLibro] =  useState(solicitudAModificar?solicitudAModificar:{
         Id:'',
         Nombre:'',
         Dueño:'',
@@ -20,43 +20,28 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
         Editorial:'',
         Año:''
     })
-
-
-    const [controlLibro, setControlLibro] = useState(false);
-    const [controlDueño, setControlDueño] = useState(false);
-    const [controlFechaPrestamo, setcontrolFechaPrestamo] = useState(false);
-    const [controlFechaDevolucion, setcontrolFechaDevolucion] = useState(false);
-    const [controlAutor, setcontrolAutor] = useState(false);
-    const [controlEditorial, setcontrolEditorial] = useState(false);
-    const [controlAño, setcontrolAño] = useState(false);
     
-    const [disabledLibro, setDisabledLibro] = useState(false);
-    const [disabledAutor, setDisabledAutor] = useState(false);
-    const [disabledEditorial, setDisabledEditorial] = useState(false);
-    const [disabledAño, setDisabledAño] = useState(false);
-    const [disabledImagen, setDisabledImagen] = useState(false);
-    const [disabledLimpiarCampos, setDisabledLimpiarCampos] = useState(false);
+    const [errores, setErrores] = useState({});
+
+    const [disabledLibro, setDisabledLibro] = useState(solicitudAModificar?true:false);
+    const [disabledAutor, setDisabledAutor] = useState(solicitudAModificar?true:false);
+    const [disabledEditorial, setDisabledEditorial] = useState(solicitudAModificar?true:false);
+    const [disabledAño, setDisabledAño] = useState(solicitudAModificar?true:false);
+    const [disabledImagen, setDisabledImagen] = useState(solicitudAModificar?true:false);
+    const [disabledLimpiarCampos, setDisabledLimpiarCampos] = useState(solicitudAModificar?true:false);
     
     const [controlAlert, setControlAlert] = useState(false);
     const [mensajeAlert, setMensajeAlert] = useState('');
     const [severity, setSeverity] = useState('error');
     
     const [controlBoton, setcontrolBoton] = useState(true);
-    useEffect(() => {
-      if(solicitudAModificar){
-        setLibro(solicitudAModificar);
-        setDisabledLibro(true);
-        setDisabledAutor(true);
-        setDisabledEditorial(true);
-        setDisabledAño(true);
-        setDisabledImagen(true);
-        setDisabledLimpiarCampos(true);
-      }
-    }, [])
+    
 
         //CAMBIOS LIBRO Y PROPIETARIO
-    const controlCambios = (e)=>{
-      setLibro({...libro,[e.target.name]:e.target.value}) 
+    const controlCambios = (name, value)=>{
+      
+        setLibro({ ...libro,[name]:value })
+      
     }
 
         // BOTON EXAMINAR //
@@ -72,69 +57,18 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
       }));
     const classes = useStyles();
     //
-
-    const validacionLibro = () => {
-      console.log(libro);
-      if(libro.Nombre.trim()==="")//.trim sirve para eliminar los espacios en blanco
-        setControlLibro(true);
-        else{
-          setControlLibro(false);
-          setcontrolBoton(false);
-        }
-
-    }
     
-    const validacionDueño = () =>{
-      if(libro.Dueño.trim()==="")
-        setControlDueño(true);
+    const validarCampos = (name) => {
+      
+      if(libro[name].trim()==="")
+        setErrores({...errores,[name]:true});
       else{
-        setControlDueño(false);
+        setErrores({...errores,[name]:false});
         setcontrolBoton(false);
       }
+      console.log(errores);
     }
 
-    const validarFechaPrestamo = () =>{
-      if(libro.prestamo.trim()==="")
-        setcontrolFechaPrestamo(true);
-        else{
-          setcontrolFechaPrestamo(false);
-          setcontrolBoton(false);
-        }
-    }
-
-    const validarFechaDevolucion = () =>{
-      if(libro.devolucion.trim()==="")
-      setcontrolFechaDevolucion(true);
-      else{
-        setcontrolFechaDevolucion(false);
-        setcontrolBoton(false);
-      }
-    }
-    const validarAutor = () =>{
-      if(libro.Autor.trim()==="")
-      setcontrolAutor(true);
-      else{
-        setcontrolAutor(false);
-        setcontrolBoton(false);
-      }
-    }
-    const validarEditorial = () =>{
-      if(libro.Editorial.trim()==="")
-      setcontrolEditorial(true);
-      else{
-        setcontrolEditorial(false);
-        setcontrolBoton(false);
-      }
-    }
-    const validarAño = () =>{
-      if(libro.Año.trim()==="")
-      setcontrolAño(true);
-      else{
-        setcontrolAño(false);
-        setcontrolBoton(false);
-      }
-    }
-  
    function validarDatos () {
       const {Nombre, Dueño, Imagen, devolucion, prestamo, Autor, Editorial, Año}=libro;
       if(Nombre){
@@ -219,12 +153,12 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                       label="Fecha de Préstamo"
                       value={libro.prestamo}
                       className={classes.textField}
-                      onChange={ e =>controlCambios(e)}
+                      onChange={ e =>controlCambios(e.target.name, e.target.value)}
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      error={controlFechaPrestamo}
-                      onBlur={(e)=>validarFechaPrestamo(e)}
+                      error={errores.prestamo?errores.prestamo:false}
+                      onBlur={e=>validarCampos(e.target.name)}
                       required
                     />
                     <br/>
@@ -235,12 +169,12 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                       type="date"
                       value={libro.devolucion}
                       className={classes.textField}
-                      onChange={ e =>controlCambios(e)}
+                      onChange={ e =>controlCambios(e.target.name, e.target.value)}
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      error={controlFechaDevolucion}
-                      onBlur={(e)=>validarFechaDevolucion(e)}
+                      error={errores.devolucion?errores.devolucion:false}
+                      onBlur={e=>validarCampos(e.target.name)}
                       required
                     />
                     <br/>                    
@@ -250,9 +184,9 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                       label="Solicitante" 
                       variant="standard"
                       value={libro.Dueño}
-                      onChange={(e)=> controlCambios(e)}
-                      error={controlDueño}
-                      onBlur={validacionDueño}
+                      onChange={e => controlCambios(e.target.name, e.target.value)}
+                      error={errores.Dueño?errores.Dueño:false}
+                      onBlur={e=>validarCampos(e.target.name)}
                       required
                     />
                     <br/>
@@ -264,15 +198,15 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                         <h2>Detalles de Libro</h2>
                         <TextField
                           name="Nombre"
-                          error={controlLibro}
                           disabled={disabledLibro}
                           id="nombre" 
                           type="text"
                           label="Nombre de Libro" 
                           value={libro.Nombre}
                           variant="standard"
-                          onChange={(e)=> controlCambios(e)}
-                          onBlur={validacionLibro}
+                          onChange={(e)=> controlCambios(e.target.name, e.target.value)}
+                          error={errores.Nombre?errores.Nombre:false}
+                          onBlur={e=>validarCampos(e.target.name)}
                           helperText={''}
                           required
                         />
@@ -285,10 +219,10 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           variant="standard"
                           value={libro.Autor}
                           className={classes.textField}
-                          onChange={ e =>controlCambios(e)}
-                          error={controlAutor}
+                          onChange={ e =>controlCambios(e.target.name, e.target.value)}
                           disabled={disabledAutor}
-                          onBlur={validarAutor}
+                          error={errores.Autor?errores.Autor:false}
+                          onBlur={e=>validarCampos(e.target.name)}
                           required
                         />
                         <br/>
@@ -300,10 +234,10 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           variant="standard"
                           value={libro.Editorial}
                           className={classes.textField}
-                          onChange={ (e) =>controlCambios(e)}
-                          error={controlEditorial}
+                          onChange={ (e) =>controlCambios(e.target.name, e.target.value)}
                           disabled={disabledEditorial}
-                          onBlur={validarEditorial}
+                          error={errores.Editorial?errores.Editorial:false}
+                          onBlur={e=>validarCampos(e.target.name)}
                           required
                         />
                         <br/>
@@ -314,10 +248,10 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                           label="Año de Edición"
                           value={libro.Año}
                           variant="standard"
-                          onChange={ (e) =>controlCambios(e)}
-                          error={controlAño}
+                          onChange={ (e) =>controlCambios(e.target.name, e.target.value)}
                           disabled={disabledAño}
-                          onBlur={validarAño}
+                          error={errores.Año?errores.Año:false}
+                          onBlur={e=>validarCampos(e.target.name)}
                           required
                         />
                         <br/>
@@ -330,7 +264,7 @@ export const Libro = ({NuevoLibro , Volver, solicitudAModificar}) => {
                             id="contained-button-file"
                             multiple
                             type="file"
-                            onChange={(e)=>controlCambios(e)}
+                            onChange={(e)=>controlCambios(e.target.name, e.target.value)}
                             disabled={disabledImagen}
                         />
                         <label htmlFor="contained-button-file">

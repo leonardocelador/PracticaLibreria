@@ -49,30 +49,5 @@ const App = () => {
             )
         }
     }
-    // return (
-    //     <>
-    //          {(() => {
-  
-    //             switch (controlVista) {
-    //                 case 1:
-    //                     return (
-    //                         <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro}/>
-    //                     )
-    //                 case 2:
-    //                     return (
-    //                         <Libro NuevoLibro={AgregarNuevoLibro} Volver={controlVistaLibro}/>
-    //                     )
-    //                 case 3:
-    //                     return (
-    //                         <Libro NuevoLibro={ModificarLibro} Volver={controlVistaLibro} solicitudAModificar={LibroSelected}/>
-    //                     )
-    //                 default:
-    //                     return (
-    //                         <h1>hola</h1>
-    //                     )
-    //             }
-    //         })()}
-    //     </>
-    // )
 }
 export default App;
