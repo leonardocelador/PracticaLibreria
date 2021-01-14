@@ -99,16 +99,7 @@ export const Libro = ({solicitud , Volver, Dato}) => {
       }
     }
     const resetear = () => {
-      setLibro({
-        /* Nombre:'',
-        Dueño:'',
-        Imagen:'',
-        prestamo: '',
-        devolucion:'',
-        Autor:'',
-        Editorial:'',
-        Año:'' */
-      })
+      setLibro({});
     }
 
     return (
