@@ -75,7 +75,7 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
         color="primary"
         className={classes.margin} 
       >Nueva Solicitud</Button>
-      {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo} agregarNuevo={btnNuevo} /></Modal> : null}
+      {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo} agregarNuevo={btnNuevo}/></Modal> : null}
       </div>
     )
        

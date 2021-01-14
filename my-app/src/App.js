@@ -2,9 +2,16 @@ import React, { useState } from 'react'
 import Listar from './componentes/Listar/Listar';
 import { Libro } from './componentes/Libro/Libro';
 import {Libros} from '../src/data/Libros.json'
+import { useFetch } from './componentes/Fetch/UseFetch';
+
+const url = "https://agile-ocean-56695.herokuapp.com/LibrosTest/";
 
 const App = () => {
-    const [libres, ] = useState(Libros)
+
+    const { data, loading, error } = useFetch(url);
+    console.log(data)
+    const libres = data
+    console.log(libres)
     const [controlVista, setcontrolVista] = useState(true);
     const [LibroSelected, setLibroSelected] = useState({})
     
@@ -28,8 +35,6 @@ const App = () => {
         
     }
 
-   
-
     const ModLibro = (LibroUpdate) => {
         setLibroSelected(LibroUpdate)
     }
@@ -45,17 +50,11 @@ const App = () => {
     }else{
         return(
             
-            <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {LibroSelected}/>
+            // <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {LibroSelected}/>
+            <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {data}/>
         )
         
     }
     
 }
 export default App;
-
-/* {controlVistaLibro?
-    <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro}/>
-:
-    <Libro NuevoLibro={ModificarLibro} Volver={controlVistaLibro} Dato={LibroSelected}/>}
-
-} */

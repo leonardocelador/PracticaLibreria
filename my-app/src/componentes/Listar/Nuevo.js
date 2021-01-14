@@ -6,7 +6,7 @@ import Fade from '@material-ui/core/Fade';
 import { Button } from '@material-ui/core';
 
 
-const Nuevo = ({estadoNuevoModal, agregarNuevo, ctrlok}) => {
+const Nuevo = ({estadoNuevoModal, agregarNuevo}) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
 

@@ -26,7 +26,7 @@ const Listar = ({Libros, controlBtnNuevo, libr}) => {
     }else{
       return(
         <div>
-          <h1>Hubo un error tremendo</h1>
+          <h1>Cargando Datos!!!</h1>
         </div>
       );
     }

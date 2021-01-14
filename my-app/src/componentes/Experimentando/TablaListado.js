@@ -93,7 +93,7 @@ const TablaListado = ({librosC, btnModificarC, LlamaModalEliminarC }) => {
                     {librosC.map((libro) => {
                         if (Date.parse(libro.devolucion) < Date.now()) {
                         return (
-                            <TableRow className={classes.margin} id={libro.Id} onClick={(event) => seleccionar(event, libro.Id)}  key={libro.Id}>
+                            <TableRow className={classes.margin} id={libro.Id_Libro} onClick={(event) => seleccionar(event, libro.Id_libro)}  key={libro.Id_Libro}>
                               <StyledTableCell align="left">
                                 <i>
                                 <NotificationImportantIcon aria-label="modify" className={classes.estilosMorosos}>
@@ -101,15 +101,15 @@ const TablaListado = ({librosC, btnModificarC, LlamaModalEliminarC }) => {
                                 </NotificationImportantIcon>
                                 </i>
                               </StyledTableCell>
-                            <StyledTableCell align="left">{libro.Nombre}</StyledTableCell>
-                            <StyledTableCell align="left">{libro.Dueño}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Nom_Libro}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Autor_Libro}</StyledTableCell>
                             <StyledTableCell align="left">
                             
                               <PopOver Detalles={libro}/>
                               
                             </StyledTableCell> 
-                            <StyledTableCell align="left">{libro.prestamo}</StyledTableCell>
-                            <StyledTableCell align="left">{libro.devolucion}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Editorial_Libro}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Año_Libro}</StyledTableCell>
                             <StyledTableCell align="left">
 
                             <Grid container justify='space-around'>  {/* Utilice Componente Grid para poder alinear verticalmente y centrar elementos */}
@@ -131,15 +131,15 @@ const TablaListado = ({librosC, btnModificarC, LlamaModalEliminarC }) => {
                             </TableRow>);
                         }
                         return (
-                            <TableRow  id={libro.Id} onClick={(event) => seleccionar(event, libro.Id)}  key={libro.Id}>
+                            <TableRow  id={libro.Id_Libro} onClick={(event) => seleccionar(event, libro.Id_Libro)}  key={libro.Id_Libro}>
                             <StyledTableCell  align="left"><i></i></StyledTableCell>
-                            <StyledTableCell  align="left">{libro.Nombre}</StyledTableCell>
-                            <StyledTableCell  align="left">{libro.Dueño}</StyledTableCell>
+                            <StyledTableCell  align="left">{libro.Nom_Libro}</StyledTableCell>
+                            <StyledTableCell  align="left">{libro.Autor_Libro}</StyledTableCell>
                             <StyledTableCell  align="left">
                             <PopOver Detalles={libro}/>
                             </StyledTableCell>
-                            <StyledTableCell  align="left">{libro.prestamo}</StyledTableCell>
-                            <StyledTableCell  align="left">{libro.devolucion}</StyledTableCell>
+                            <StyledTableCell  align="left">{libro.Editorial_Libro}</StyledTableCell>
+                            <StyledTableCell  align="left">{libro.Año_Libro}</StyledTableCell>
                             <StyledTableCell  align="left">
                             <Grid container justify='space-around'>  
                                 <Grid item>

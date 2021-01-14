@@ -4,11 +4,18 @@ import {FormControl, TextField, Button, Grid, Container, Snackbar} from '@materi
 import ButtonAppBar from '../App Bar/ButtonAppBar';
 import '../Libro/libro.css';
 import Alert from '@material-ui/lab/Alert';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
     
 export const Libro = ({solicitud , Volver, Dato}) => {
     console.log(Object.values(Dato));
-
+    const [age, setAge] = React.useState('');
+    const handleChange = (event) => {
+      setAge(event.target.value);
+      console.log(age)
+    };
     const [libro, setLibro] =  useState(Dato)
     
     const [errores, setErrores] = useState({});
@@ -162,7 +169,36 @@ export const Libro = ({solicitud , Volver, Dato}) => {
                       required
                     />
                     <br/>
-                    
+                    <InputLabel id="demo-mutiple-checkbox-label">Libros</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={age}
+                      onChange={handleChange}
+                    >
+                      {Dato.map((name) => (
+                        <MenuItem key={name.Id_Libro} value={name.Id_Libro}>
+                            {name.Nom_Libro}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {/* <Select
+                      labelId="demo-mutiple-checkbox-label"
+                      id="demo-mutiple-checkbox"
+                      multiple
+                      value={personName}
+                      // onChange={handleChange}
+                      input={<Input />}
+                      renderValue={(selected) => selected.join(', ')}
+                      MenuProps={MenuProps}
+                    >
+                      {Dato.map((name) => (
+                        <MenuItem key={name.Id_Libro} value={name.Id_Libro}>
+                          <Checkbox checked={personName.indexOf(name) > -1} />
+                          <ListItemText primary={name} />
+                        </MenuItem>
+                      ))}
+                    </Select> */}
                     </FormControl>
                     </Grid>
                     <Grid item lg={5} className="">
