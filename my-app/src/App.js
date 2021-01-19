@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Listar from './componentes/Listar/Listar';
-import { Libro } from './componentes/Libro/Libro';
-import {Libros} from '../src/data/Libros.json'
+import { NuevaSolicitud } from './componentes/Libro/NuevaSolicitud';
 import { useFetch } from './componentes/Fetch/UseFetch';
 
 const url = "https://agile-ocean-56695.herokuapp.com/LibrosTest/";
@@ -75,7 +74,7 @@ const App = () => {
         return(
             
             // <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {LibroSelected}/>
-            <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {data}/>
+            <NuevaSolicitud solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {data}/>
         )
         
     }
