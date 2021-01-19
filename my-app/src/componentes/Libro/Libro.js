@@ -166,23 +166,7 @@ export const Libro = ({solicitud , Volver, Dato}) => {
                         </MenuItem>
                       ))}
                     </Select>
-                    {/* <Select
-                      labelId="demo-mutiple-checkbox-label"
-                      id="demo-mutiple-checkbox"
-                      multiple
-                      value={personName}
-                      // onChange={handleChange}
-                      input={<Input />}
-                      renderValue={(selected) => selected.join(', ')}
-                      MenuProps={MenuProps}
-                    >
-                      {Dato.map((name) => (
-                        <MenuItem key={name.Id_Libro} value={name.Id_Libro}>
-                          <Checkbox checked={personName.indexOf(name) > -1} />
-                          <ListItemText primary={name} />
-                        </MenuItem>
-                      ))}
-                    </Select> */}
+                    
                     </FormControl>
                     </Grid>
                     <Grid item lg={5} className="">
