@@ -1,17 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {FormControl, TextField, Button, Grid, Container, Snackbar} from '@material-ui/core';
+import {FormControl, TextField, Button, Grid, Container, Snackbar, IconButton} from '@material-ui/core';
+import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import ButtonAppBar from '../App Bar/ButtonAppBar';
 import '../Libro/libro.css';
 import Alert from '@material-ui/lab/Alert';
+import Validar from './Validar/Validar';
+import cargarErrores from './Validar/cargarErrores';
 
     
 export const Libro = ({solicitud , Volver, Dato}) => {
-  console.log(Object.values(Dato));
 
     const [libro, setLibro] =  useState(Dato)
     
-    const [errores, setErrores] = useState({});
+    const [errores, setErrores] = useState({
+      Nombre:false,
+      Autor:false,
+      Editorial:false,
+      Año:false,
+      Imagen:false,
+      prestamo:false,
+      devolucion:false,
+      Dueño:false,
+    });
 
     const [disabledCampos, setdisabledCampos] = useState(Object.keys(Dato).length>0?true:false);
     
@@ -23,81 +34,89 @@ export const Libro = ({solicitud , Volver, Dato}) => {
 
         //CAMBIOS LIBRO Y PROPIETARIO
     const controlCambios = (name, value)=>{
-      if(!value){
-        setErrores({...errores,[name]:true})
-      }
-      setLibro({ ...libro,[name]:value })
+      setLibro({ ...libro,[name]:value });
+      if(value!==''){
+      setErrores({...errores,[name]:false});
     }
-
+    else{
+      setErrores({...errores,[name]:true});
+    }
+  }
         // BOTON EXAMINAR //
     const useStyles = makeStyles((theme) => ({
         root: {
           '& > *': {
             margin: theme.spacing(1),
-          },
+          }
         },
         input: {
-          display: 'none',
+          display: 'none'
         },
       }));
     const classes = useStyles();
     //
+  
+   
 
-   function validarDatos () {
-      const {Nombre, Dueño, Imagen, devolucion, prestamo, Autor, Editorial, Año}=libro;
-      if(Nombre){
-        if(prestamo){
-          if(devolucion){
-            if(Date.parse(prestamo)>Date.parse(devolucion)){
-              setControlAlert(true);
-              setMensajeAlert("Fechas Inválidas! Verificar!!");}
-              else{
-                  if(Dueño){
-                    if(Año){
-                      if(Autor){
-                        if(Editorial){
-                          if(Imagen){
-                            setSeverity("success");
-                            setControlAlert(true);
-                            setMensajeAlert("Datos Correctos");
-                            
-                            setTimeout(()=>{solicitud(libro); },1000)
-                          }
-                        else{
-                          setControlAlert(true);
-                          setMensajeAlert("Debe cargar Imagen del Libro");
-                        }
-                      }
-                      else{
-                        setControlAlert(true);
-                        setMensajeAlert("Debe cargar Editorial del Libro");}
-                    }
-                    else{
-                      setControlAlert(true);
-                      setMensajeAlert("Debe cargar Autor del Libro");}
-                  }
-                  else{
-                    setControlAlert(true);
-                    setMensajeAlert("Debe cargar Año de Edición del Libro");}
-                  }
-                else{
-                  setControlAlert(true);
-                  setMensajeAlert("Debe cargar Solicitante");}
-               }
+   const validarDatos = () =>{
+   
+    const { devolucion, prestamo }=libro;
+    const array=Object.keys(libro)
+    const resultado = cargarErrores(libro, Object.keys(errores));
+    
+    setErrores(resultado);
+
+    Object.keys(resultado).map( error=>{
+
+      if(resultado[error]===true){
+        Validar(setControlAlert, setMensajeAlert);
+      }
+      else{
+        if( Date.parse( prestamo ) <= Date.parse( devolucion ) ){
+          if(libro.Imagen){
+            setSeverity("success")
+            solicitud(libro);
           }
           else{
             setControlAlert(true);
-            setMensajeAlert("Debe cargar Fecha de Devolución");}
+            setMensajeAlert("Debe Cargar Imagen!");
+          }
         }
         else{
           setControlAlert(true);
-          setMensajeAlert("Debe Cargar Fecha de Préstamo");}
+            setMensajeAlert("Fechas Inválidas, favor de Verificar!");
+        }
       }
-      else{
-        setControlAlert(true);
-        setMensajeAlert("Debe Cargar Nombre de Libro");
-      }
+    });
+    
+  }
+
+    /* if(Object.entries(errores).length != 0){
+      
+      Validar(errores, setControlAlert, setMensajeAlert);
+      
+      if( Date.parse( prestamo )<= Date.parse( devolucion )){
+        
+        if(libro.Imagen){
+        setSeverity("success");
+        setTimeout(()=>{solicitud(libro)},1000);
+        }
+            else{
+              setControlAlert(true);
+              setMensajeAlert("Debe cargar Imagen del Libro")
+            }
+            }
+            else{
+              setControlAlert(true);
+              setMensajeAlert("Fechas Incorrectas, Verificar!")
+            }  
     }
+    else{
+      setControlAlert(true);
+      setMensajeAlert("Debe completar los campos requeridos!");
+    }
+ */
+  
     const resetear = () => {
       setLibro({});
     }
@@ -112,7 +131,7 @@ export const Libro = ({solicitud , Volver, Dato}) => {
                       <h2>Detalles de Solicitud</h2>
                      <br/>
                     <TextField
-                      id="fechaPrestamo"
+                      id="prestamo"
                       name="prestamo"
                       type="date"
                       label="Fecha de Préstamo"
@@ -122,13 +141,12 @@ export const Libro = ({solicitud , Volver, Dato}) => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      error={errores.prestamo?errores.prestamo:false}
-                      
+                      error={errores.prestamo}
                       required
                     />
                     <br/>
                     <TextField
-                      id="fechaDevolucion"
+                      id="devolucion"
                       name="devolucion"
                       label="Fecha de Devolución"
                       type="date"
@@ -138,18 +156,18 @@ export const Libro = ({solicitud , Volver, Dato}) => {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      error={errores.devolucion?errores.devolucion:false}
+                      error={errores.devolucion}
                       required
                     />
                     <br/>                    
                     <TextField
                       name="Dueño" 
-                      id="dueño" 
+                      id="Dueño" 
                       label="Solicitante" 
                       variant="standard"
                       value={libro.Dueño?libro.Dueño:''}
                       onChange={e => controlCambios(e.target.name, e.target.value)}
-                      error={errores.Dueño?errores.Dueño:false}
+                      error={errores.Dueño}
                       required
                     />
                     <br/>
@@ -161,14 +179,14 @@ export const Libro = ({solicitud , Volver, Dato}) => {
                         <h2>Detalles de Libro</h2>
                         <TextField
                           name="Nombre"
+                          id="Nombre" 
                           disabled={disabledCampos}
-                          id="nombre" 
                           type="text"
                           label="Nombre de Libro" 
                           value={libro.Nombre?libro.Nombre:''}
                           variant="standard"
                           onChange={(e)=> controlCambios(e.target.name, e.target.value)}
-                          error={errores.Nombre?errores.Nombre:false}
+                          error={errores.Nombre}
                           helperText={''}
                           required
                         />
@@ -183,7 +201,7 @@ export const Libro = ({solicitud , Volver, Dato}) => {
                           className={classes.textField}
                           onChange={ e =>controlCambios(e.target.name, e.target.value)}
                           disabled={disabledCampos}
-                          error={errores.Autor?errores.Autor:false}
+                          error={errores.Autor}
                           required
                         />
                         <br/>
@@ -197,7 +215,7 @@ export const Libro = ({solicitud , Volver, Dato}) => {
                           className={classes.textField}
                           onChange={ (e) =>controlCambios(e.target.name, e.target.value)}
                           disabled={disabledCampos}
-                          error={errores.Editorial?errores.Editorial:false}
+                          error={errores.Editorial}
                           required
                         />
                         <br/>
@@ -210,28 +228,27 @@ export const Libro = ({solicitud , Volver, Dato}) => {
                           variant="standard"
                           onChange={ (e) =>controlCambios(e.target.name, e.target.value)}
                           disabled={disabledCampos}
-                          error={errores.Año?errores.Año:false}
+                          error={errores.Año}
                           required
                         />
                         <br/>
                         <br/>
-                        <div className="contained">
-                        <input
-                            name="Imagen"
-                            accept="image/*"
-                            className={classes.input}
-                            id="contained-button-file"
-                            multiple
-                            type="file"
-                            onChange={(e)=>controlCambios(e.target.name, e.target.value)}
-                            disabled={disabledCampos}
+                    <div className="contained">
+                      <input 
+                        name="Imagen"
+                        accept="image/*" 
+                        className={classes.input} 
+                        id="icon-button-file" 
+                        type="file" 
+                        value={libro.Imagen?libro.Imagen:''}
+                        onChange={ (e) =>controlCambios(e.target.name, e.target.value)}
                         />
-                        <label htmlFor="contained-button-file">
-                            <Button disabled={disabledCampos} variant="outlined" color="primary" component="span">
-                                Imagen Libro
-                            </Button>
-                            <span>{libro.Imagen}</span>
-                        </label>
+                      <label htmlFor="icon-button-file">
+                        <IconButton color="primary" aria-label="upload picture" component="span">
+                          <PhotoCamera />
+                        </IconButton>
+                        <span>{libro.Imagen?libro.Imagen:`No se cargó Imagen`}</span>
+                      </label>
                     </div>
                    </FormControl>
                     </Grid>
