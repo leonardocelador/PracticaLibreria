@@ -6,11 +6,14 @@ import './index.css';
 import App from './App';
 
 
+
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <App/>
-  </ThemeProvider>,
-    document.getElementById('root')
+  
+    <ThemeProvider theme={theme}>
+      <App/>
+    </ThemeProvider>,
+ 
+   document.getElementById('root')
 );
 
 

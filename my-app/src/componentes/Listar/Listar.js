@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import SearchAppBar from '../App Bar/SearchAppBar';
 import ListarConDatos from './ListarConDatos';
-
-const Listar = ({Libros, controlBtnNuevo, libr, elimina}) => {
-    if(Libros !== null){
-      if(Libros.length !== 0){
+import { UserContext } from '../UserContext/UserContext';
+// {Libros, controlBtnNuevo, libr, elimina}
+const Listar = () => {
+  const {libres} = useContext(UserContext)
+    if(libres !== null){
+      if(libres.length !== 0){
         return(
           <div>
-            <SearchAppBar  Solicitudes={Libros}/>
+            <SearchAppBar  Solicitudes={libres}/>
             <br></br>
-            <ListarConDatos libros={Libros} btnNuevo={controlBtnNuevo} Libr={libr} del={elimina}/>
+            {/* <ListarConDatos libros={Libros} btnNuevo={controlBtnNuevo} Libr={libr} del={elimina}/> */}
+            <ListarConDatos />
     
           </div>
         );
@@ -17,7 +20,7 @@ const Listar = ({Libros, controlBtnNuevo, libr, elimina}) => {
         return(
           <div>
     
-            <ListarConDatos libros={Libros} />
+            <ListarConDatos libros={libres} />
             <h2>No se encontraron Datos!!!</h2>
     
           </div>
