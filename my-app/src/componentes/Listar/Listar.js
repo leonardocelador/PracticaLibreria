@@ -2,14 +2,14 @@ import React from 'react';
 import SearchAppBar from '../App Bar/SearchAppBar';
 import ListarConDatos from './ListarConDatos';
 
-const Listar = ({Libros, controlBtnNuevo, libr}) => {
+const Listar = ({Libros, controlBtnNuevo, libr, elimina}) => {
     if(Libros !== null){
       if(Libros.length !== 0){
         return(
           <div>
             <SearchAppBar  Solicitudes={Libros}/>
             <br></br>
-            <ListarConDatos libros={Libros} btnNuevo={controlBtnNuevo} Libr={libr}/>
+            <ListarConDatos libros={Libros} btnNuevo={controlBtnNuevo} Libr={libr} del={elimina}/>
     
           </div>
         );

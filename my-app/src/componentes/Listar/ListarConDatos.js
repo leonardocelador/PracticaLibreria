@@ -7,9 +7,19 @@ import  Modal  from './Modal';
 import { Button } from '@material-ui/core';
 // import './ListarConDatos.css';
 import TablaListado from '../Experimentando/TablaListado';
+// import { useFetch } from '../Fetch/UseFetch';
 
+// async function postData(url, Id={}) {
+//   debugger;
+//   const response = await fetch(url, {
+//     method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+//     headers:{'Content-Type': 'application/json'},
+//     body: JSON.stringify(Id) // body data type must match "Content-Type" header
+//   });
+//   return response.json(); // parses JSON response into native JavaScript objects
+// }
 
-const ListarConDatos = ({libros, btnNuevo, Libr}) => {
+const ListarConDatos = ({libros, btnNuevo, Libr, del}) => {
 
         
 
@@ -50,15 +60,28 @@ const ListarConDatos = ({libros, btnNuevo, Libr}) => {
         }
         // funcionalidad al presionar Ok del modal eliminar, accion elimina el libro correspondiente
         const okEliminar = (idEliminado) => {
+          setestadoEliminar(false)
+          del(idEliminado)
+          // setestadoEliminar(false)
+          // debugger;
+          //  const url = "https://agile-ocean-56695.herokuapp.com/LibrosTest/";
+          //  console.log(idEliminado)
+          //  postData(url, {'id':idEliminado})
+          //  .then(response=>  console.log(response))
+          //  .catch(error => console.log(error))
+          //  rec()
           
-            setestadoEliminar(false)
-            const indice = libros.findIndex(element => element.Id === idEliminado);
-            libros.splice(indice, 1); // 1 es la cantidad de elemento a eliminar
+           
+           // localhost:3800/LibrosTest/{:id}
+             
+            // const indice = libros.findIndex(element => element.Id === idEliminado);
+             //libros.splice(indice, 1); // 1 es la cantidad de elemento a eliminar
            
         }
         
         // muestra u oculta modal eliminar y envia el id correspondiente del libro seleccionado
         const LlamaModalEliminar = (id) => {
+          debugger
           setestadoEliminar(!estadoEliminar)
           setidEliminar(id)
         }  

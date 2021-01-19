@@ -121,7 +121,7 @@ const TablaListado = ({librosC, btnModificarC, LlamaModalEliminarC }) => {
                                 </Grid>
                                 <Grid item>
                                 <Typography>Eliminar</Typography>
-                                <IconButton  aria-label="delete" className={classes.marginbtn} onClick={()=>LlamaModalEliminarC(libro.Id)}>
+                                <IconButton  aria-label="delete" className={classes.marginbtn} onClick={()=>LlamaModalEliminarC(libro.Id_Libro)}>
                                     <DeleteIcon fontSize="small" />
                                 </IconButton>
                                 </Grid>
@@ -150,7 +150,7 @@ const TablaListado = ({librosC, btnModificarC, LlamaModalEliminarC }) => {
                                 </Grid>
                                 <Grid item>
                                 <Typography>Eliminar</Typography>
-                                <IconButton  aria-label="delete" className={classes.marginbtn} onClick={()=>LlamaModalEliminarC(libro.Id)}>
+                                <IconButton  aria-label="delete" className={classes.marginbtn} onClick={()=>LlamaModalEliminarC(libro.Id_Libro)}>
                                 <DeleteIcon fontSize="small" />
                                 </IconButton>
                                 </Grid>

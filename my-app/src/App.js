@@ -1,20 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Listar from './componentes/Listar/Listar';
 import { Libro } from './componentes/Libro/Libro';
 import {Libros} from '../src/data/Libros.json'
 import { useFetch } from './componentes/Fetch/UseFetch';
 
 const url = "https://agile-ocean-56695.herokuapp.com/LibrosTest/";
-
+async function postData(url, Id={}) {
+    debugger;
+    const response = await fetch(url, {
+      method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+      headers:{'Content-Type': 'application/json'},
+      body: JSON.stringify(Id) // body data type must match "Content-Type" header
+    });
+    return response.json(); // parses JSON response into native JavaScript objects
+  }
 const App = () => {
 
     const { data, loading, error } = useFetch(url);
     console.log(data)
     const libres = data
-    console.log(libres)
+    // console.log(libres)
+    // const [libres, setlibres] = useState({});
+    // setlibres(data)
+
     const [controlVista, setcontrolVista] = useState(true);
     const [LibroSelected, setLibroSelected] = useState({})
     
+    // const [libres, setlibres] = useState({})
+    
+
     const SolicitudLibro = (nuevoLibro) => {
 
         if(nuevoLibro.Id){
@@ -34,7 +48,9 @@ const App = () => {
         }
         
     }
-
+    const RecargarEliminarLibros = () =>{
+        setcontrolVista(true)
+    }
     const ModLibro = (LibroUpdate) => {
         setLibroSelected(LibroUpdate)
     }
@@ -42,10 +58,18 @@ const App = () => {
         setcontrolVista(cerrar)
         setLibroSelected({})
     }
+    const eliminarLibro = (idEliminado) => {
+        const url = "https://agile-ocean-56695.herokuapp.com/LibrosTest/";
+           console.log(idEliminado)
+           postData(url, {'id':idEliminado})
+           .then(response=>  console.log(response))
+           .catch(error => console.log(error))
+           setcontrolVista(true)
+    }
     if(controlVista)
     {
         return (
-            <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro} />
+            <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro} elimina={eliminarLibro} />
         )
     }else{
         return(
