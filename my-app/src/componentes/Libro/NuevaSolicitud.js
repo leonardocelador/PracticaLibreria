@@ -12,12 +12,11 @@ import Select from '@material-ui/core/Select';
 import '../Libro/libro.css';
 
     
-export const NuevaSolicitud = ({solicitud , Volver, Dato}) => {
-    console.log(Object.values(Dato));
+export const NuevaSolicitud = ({solicitud , Volver, Dato, Libros}) => {
+    
     const [age, setAge] = React.useState('');
     const handleChange = (event) => {
       setAge(event.target.value);
-      console.log(age)
     };
     const [libro, setLibro] =  useState(Dato)
     
@@ -160,7 +159,7 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato}) => {
                       value={age}
                       onChange={handleChange}
                     >
-                      {Dato.map((name) => (
+                      { Libros.map((name) => (
                         <MenuItem key={name.Id_Libro} value={name.Id_Libro}>
                             {name.Nom_Libro}
                         </MenuItem>

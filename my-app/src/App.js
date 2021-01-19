@@ -71,10 +71,8 @@ const App = () => {
             <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro} elimina={eliminarLibro} />
         )
     }else{
-        return(
-            
-            // <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {LibroSelected}/>
-            <NuevaSolicitud solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {data}/>
+        return(            
+            <NuevaSolicitud solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {LibroSelected} Libros={data}/>
         )
         
     }
