@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Listar from './componentes/Listar/Listar';
-import { Libro } from './componentes/Libro/Libro';
 // import {Libros} from '../src/data/Libros.json'
+import { NuevaSolicitud } from './componentes/Libro/NuevaSolicitud';
 import { useFetch } from './componentes/Fetch/UseFetch';
 import { UserContext } from './componentes/UserContext/UserContext';
 
@@ -79,10 +79,9 @@ const App = () => {
         )
     }else{
         return(
-            <UserContext.Provider value={{}}>
-            {/* <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {LibroSelected}/> */}
-            <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {data}/>
-            </UserContext.Provider>
+            
+            // <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {LibroSelected}/>
+            <NuevaSolicitud solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {data}/>
         )
         
     }

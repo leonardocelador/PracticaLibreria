@@ -3,16 +3,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import {FormControl, TextField, Button, Grid, Container, Snackbar, IconButton} from '@material-ui/core';
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import ButtonAppBar from '../App Bar/ButtonAppBar';
-import '../Libro/libro.css';
 import Alert from '@material-ui/lab/Alert';
 import Validar from './Validar/Validar';
 import cargarErrores from './Validar/cargarErrores';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import '../Libro/libro.css';
 
     
-export const Libro = ({solicitud , Volver, Dato}) => {
+export const NuevaSolicitud = ({solicitud , Volver, Dato}) => {
     console.log(Object.values(Dato));
     const [age, setAge] = React.useState('');
     const handleChange = (event) => {
@@ -166,23 +166,7 @@ export const Libro = ({solicitud , Volver, Dato}) => {
                         </MenuItem>
                       ))}
                     </Select>
-                    {/* <Select
-                      labelId="demo-mutiple-checkbox-label"
-                      id="demo-mutiple-checkbox"
-                      multiple
-                      value={personName}
-                      // onChange={handleChange}
-                      input={<Input />}
-                      renderValue={(selected) => selected.join(', ')}
-                      MenuProps={MenuProps}
-                    >
-                      {Dato.map((name) => (
-                        <MenuItem key={name.Id_Libro} value={name.Id_Libro}>
-                          <Checkbox checked={personName.indexOf(name) > -1} />
-                          <ListItemText primary={name} />
-                        </MenuItem>
-                      ))}
-                    </Select> */}
+                    
                     </FormControl>
                     </Grid>
                     <Grid item lg={5} className="">
@@ -294,5 +278,5 @@ export const Libro = ({solicitud , Volver, Dato}) => {
     )
 }
 
-export default Libro;
+export default NuevaSolicitud;
 
