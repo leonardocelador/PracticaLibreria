@@ -6,7 +6,7 @@ import Fade from '@material-ui/core/Fade';
 import { Button } from '@material-ui/core';
 
 
-const Modificar = ({cancelar, UpdLibro, LibroSeleccionado, AsignarLib}) => {
+const Modificar = ({cancelar, UpdLibro, LibroSeleccionado, AsignarLib, ctrlOk}) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
 
@@ -19,7 +19,7 @@ const Modificar = ({cancelar, UpdLibro, LibroSeleccionado, AsignarLib}) => {
 
   const OK = () => {
     // okEliminado(id)
-    UpdLibro(3)
+    UpdLibro(false)
     AsignarLib(LibroSeleccionado)
     }
   const NoCerrarModal = () =>{

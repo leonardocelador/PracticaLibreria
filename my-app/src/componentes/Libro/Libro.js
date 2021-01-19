@@ -7,10 +7,18 @@ import '../Libro/libro.css';
 import Alert from '@material-ui/lab/Alert';
 import Validar from './Validar/Validar';
 import cargarErrores from './Validar/cargarErrores';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
     
 export const Libro = ({solicitud , Volver, Dato}) => {
-
+    console.log(Object.values(Dato));
+    const [age, setAge] = React.useState('');
+    const handleChange = (event) => {
+      setAge(event.target.value);
+      console.log(age)
+    };
     const [libro, setLibro] =  useState(Dato)
     
     const [errores, setErrores] = useState({
@@ -91,32 +99,6 @@ export const Libro = ({solicitud , Volver, Dato}) => {
     
   }
 
-    /* if(Object.entries(errores).length != 0){
-      
-      Validar(errores, setControlAlert, setMensajeAlert);
-      
-      if( Date.parse( prestamo )<= Date.parse( devolucion )){
-        
-        if(libro.Imagen){
-        setSeverity("success");
-        setTimeout(()=>{solicitud(libro)},1000);
-        }
-            else{
-              setControlAlert(true);
-              setMensajeAlert("Debe cargar Imagen del Libro")
-            }
-            }
-            else{
-              setControlAlert(true);
-              setMensajeAlert("Fechas Incorrectas, Verificar!")
-            }  
-    }
-    else{
-      setControlAlert(true);
-      setMensajeAlert("Debe completar los campos requeridos!");
-    }
- */
-  
     const resetear = () => {
       setLibro({});
     }
@@ -171,7 +153,36 @@ export const Libro = ({solicitud , Volver, Dato}) => {
                       required
                     />
                     <br/>
-                    
+                    <InputLabel id="demo-mutiple-checkbox-label">Libros</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={age}
+                      onChange={handleChange}
+                    >
+                      {Dato.map((name) => (
+                        <MenuItem key={name.Id_Libro} value={name.Id_Libro}>
+                            {name.Nom_Libro}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {/* <Select
+                      labelId="demo-mutiple-checkbox-label"
+                      id="demo-mutiple-checkbox"
+                      multiple
+                      value={personName}
+                      // onChange={handleChange}
+                      input={<Input />}
+                      renderValue={(selected) => selected.join(', ')}
+                      MenuProps={MenuProps}
+                    >
+                      {Dato.map((name) => (
+                        <MenuItem key={name.Id_Libro} value={name.Id_Libro}>
+                          <Checkbox checked={personName.indexOf(name) > -1} />
+                          <ListItemText primary={name} />
+                        </MenuItem>
+                      ))}
+                    </Select> */}
                     </FormControl>
                     </Grid>
                     <Grid item lg={5} className="">

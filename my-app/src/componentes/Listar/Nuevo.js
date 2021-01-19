@@ -18,7 +18,7 @@ const Nuevo = ({estadoNuevoModal, agregarNuevo}) => {
 
   const OK = () => {
     // okEliminado(id)
-    agregarNuevo(2)
+    agregarNuevo(false)
     }
     
   return (

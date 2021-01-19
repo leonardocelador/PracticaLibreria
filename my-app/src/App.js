@@ -2,59 +2,59 @@ import React, { useState } from 'react'
 import Listar from './componentes/Listar/Listar';
 import { Libro } from './componentes/Libro/Libro';
 import {Libros} from '../src/data/Libros.json'
+import { useFetch } from './componentes/Fetch/UseFetch';
+
+const url = "https://agile-ocean-56695.herokuapp.com/LibrosTest/";
 
 const App = () => {
-    const [libres, ] = useState(Libros)
-    const [controlVista, setcontrolVista] = useState(1);
+
+    const { data, loading, error } = useFetch(url);
+    console.log(data)
+    const libres = data
+    console.log(libres)
+    const [controlVista, setcontrolVista] = useState(true);
     const [LibroSelected, setLibroSelected] = useState({})
     
-    const AgregarNuevoLibro = (nuevoLibro) => {
-        const cant = libres.length+1;
-        nuevoLibro.Id=cant;
-        libres.push(nuevoLibro);
-        setcontrolVista(1)
-    }
+    const SolicitudLibro = (nuevoLibro) => {
 
-    const ModificarLibro = (LibroModif) => {
-        const id = LibroModif.Id
-        const found = libres.findIndex(element => element.Id === id);
-        libres[found].Nombre = LibroModif.Nombre
-        libres[found].Dueño = LibroModif.Dueño
-        libres[found].prestamo = LibroModif.prestamo
-        libres[found].devolucion = LibroModif.devolucion
-        setcontrolVista(1)
+        if(nuevoLibro.Id){
+            const id = nuevoLibro.Id
+            const found = libres.findIndex(element => element.Id === id);
+            libres[found].Nombre = nuevoLibro.Nombre
+            libres[found].Dueño = nuevoLibro.Dueño
+            libres[found].prestamo = nuevoLibro.prestamo
+            libres[found].devolucion = nuevoLibro.devolucion
+            setcontrolVista(!controlVista)   
+            setLibroSelected({})
+        }else{
+            const cant = libres.length+1;
+            nuevoLibro.Id=cant;
+            libres.push(nuevoLibro);
+            setcontrolVista(!controlVista)
+        }
+        
     }
-
 
     const ModLibro = (LibroUpdate) => {
         setLibroSelected(LibroUpdate)
     }
     const controlVistaLibro = (cerrar) =>{
         setcontrolVista(cerrar)
+        setLibroSelected({})
     }
-    if(controlVista===1)
+    if(controlVista)
     {
         return (
-            <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro}/>
+            <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro} />
         )
     }else{
-        if(controlVista===2)
-        {
-            return (
-                <Libro solicitud={AgregarNuevoLibro} Volver={controlVistaLibro} Dato={{}}/>
-            )
-        }else{
-            return (
-                <Libro solicitud={ModificarLibro} Volver={controlVistaLibro} Dato={LibroSelected}/>
-            )
-        }
+        return(
+            
+            // <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {LibroSelected}/>
+            <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {data}/>
+        )
+        
     }
+    
 }
 export default App;
-
-/* {controlVistaLibro?
-    <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro}/>
-:
-    <Libro NuevoLibro={ModificarLibro} Volver={controlVistaLibro} Dato={LibroSelected}/>}
-
-} */
