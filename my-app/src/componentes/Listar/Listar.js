@@ -5,7 +5,7 @@ import { UserContext } from '../UserContext/UserContext';
 import ListaLibros from './ListaLibros';
 // {Libros, controlBtnNuevo, libr, elimina}
 const Listar = () => {
-  const {libres, ListarLibros, loading} = useContext(UserContext)
+  const {libreSol, ListarLibros, loading} = useContext(UserContext)
    if(loading){
      return(
        <div>
@@ -14,13 +14,13 @@ const Listar = () => {
      )
      
    }else{
-    if(libres !== null){
-      if(libres.length !== 0){
+    if(libreSol !== null){
+      if(libreSol.length !== 0){
         if(ListarLibros === false)
         {
             return(
               <div>
-                <SearchAppBar  Solicitudes={libres}/>
+                <SearchAppBar  Solicitudes={libreSol}/>
                 <br></br>
                 {/* <ListarConDatos libros={Libros} btnNuevo={controlBtnNuevo} Libr={libr} del={elimina}/> */}
                 <ListarConDatos />
@@ -30,7 +30,7 @@ const Listar = () => {
         }else{
              return(
                <div>
-                <SearchAppBar  Solicitudes={libres}/>
+                <SearchAppBar  Solicitudes={libreSol}/>
                 <br></br>
                 <ListaLibros />
               </div>
@@ -44,7 +44,7 @@ const Listar = () => {
         {
             return(
               <div>
-                <SearchAppBar  Solicitudes={libres}/>
+                <SearchAppBar  Solicitudes={libreSol}/>
                 <br></br>
                 {/* <ListarConDatos libros={Libros} btnNuevo={controlBtnNuevo} Libr={libr} del={elimina}/> */}
                 <ListarConDatos />
@@ -54,7 +54,7 @@ const Listar = () => {
         }else{
              return(
                <div>
-                <SearchAppBar  Solicitudes={libres}/>
+                <SearchAppBar  Solicitudes={libreSol}/>
                 <br></br>
                 <ListaLibros />
               </div>
