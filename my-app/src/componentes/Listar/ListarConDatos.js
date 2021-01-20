@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Borrar from './Eliminar';
 import Modificar from './Modificar';
@@ -7,21 +7,11 @@ import  Modal  from './Modal';
 import { Button } from '@material-ui/core';
 // import './ListarConDatos.css';
 import TablaListado from '../Experimentando/TablaListado';
-// import { useFetch } from '../Fetch/UseFetch';
+import { UserContext } from '../UserContext/UserContext';
 
-// async function postData(url, Id={}) {
-//   debugger;
-//   const response = await fetch(url, {
-//     method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
-//     headers:{'Content-Type': 'application/json'},
-//     body: JSON.stringify(Id) // body data type must match "Content-Type" header
-//   });
-//   return response.json(); // parses JSON response into native JavaScript objects
-// }
+const ListarConDatos = () => {
 
-const ListarConDatos = ({libros, btnNuevo, Libr, del}) => {
-
-        
+        const {ModLibro, setcontrolVista, eliminarLibro } = useContext(UserContext)
 
         const [idEliminar, setidEliminar] = useState("") 
         const [estadoEliminar, setestadoEliminar] = useState(false)//ocultar - mostrar modal
@@ -61,36 +51,23 @@ const ListarConDatos = ({libros, btnNuevo, Libr, del}) => {
         // funcionalidad al presionar Ok del modal eliminar, accion elimina el libro correspondiente
         const okEliminar = (idEliminado) => {
           setestadoEliminar(false)
-          del(idEliminado)
-          // setestadoEliminar(false)
-          // debugger;
-          //  const url = "https://agile-ocean-56695.herokuapp.com/LibrosTest/";
-          //  console.log(idEliminado)
-          //  postData(url, {'id':idEliminado})
-          //  .then(response=>  console.log(response))
-          //  .catch(error => console.log(error))
-          //  rec()
-          
-           
-           // localhost:3800/LibrosTest/{:id}
-             
-            // const indice = libros.findIndex(element => element.Id === idEliminado);
-             //libros.splice(indice, 1); // 1 es la cantidad de elemento a eliminar
+          eliminarLibro(idEliminado)
+        
            
         }
         
         // muestra u oculta modal eliminar y envia el id correspondiente del libro seleccionado
         const LlamaModalEliminar = (id) => {
-          debugger
+         
           setestadoEliminar(!estadoEliminar)
           setidEliminar(id)
         }  
 
       return (
       <div>
-      <TablaListado librosC={libros} btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} />
+      <TablaListado btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} />
       {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
-      {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={btnNuevo} LibroSeleccionado={libroaModificar} AsignarLib={Libr}  /> : null}
+      {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={setcontrolVista} LibroSeleccionado={libroaModificar} AsignarLib={ModLibro}  /> : null}
       <br></br>
       <Button 
         onClick={()=>setestadoNuevo(!estadoNuevo)} 
@@ -98,7 +75,7 @@ const ListarConDatos = ({libros, btnNuevo, Libr, del}) => {
         color="primary"
         className={classes.margin} 
       >Nueva Solicitud</Button>
-      {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo} agregarNuevo={btnNuevo}/></Modal> : null}
+      {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo} agregarNuevo={setcontrolVista}/></Modal> : null}
       </div>
     )
        

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,6 +13,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
 import PopOver from '../PopOver/PopOver'
+import { UserContext } from '../UserContext/UserContext';
 
 const array = [];
 const seleccionar = (event, Id) => {
@@ -33,7 +34,9 @@ const seleccionar = (event, Id) => {
   }
  
 }
-const TablaListado = ({librosC, btnModificarC, LlamaModalEliminarC }) => {
+
+const TablaListado = ({btnModificarC, LlamaModalEliminarC }) => {
+  const {libres} = useContext(UserContext)
     const useStyles = makeStyles((theme)=>({  
         margin: {
           border: "#eccfcf  5px solid"
@@ -62,13 +65,7 @@ const TablaListado = ({librosC, btnModificarC, LlamaModalEliminarC }) => {
           },
         }))(TableCell);
         
-        // const StyledTableRow = withStyles((theme) => ({
-        //   root: {
-        //     '&:nth-of-type(odd)': {
-        //       backgroundColor: theme.palette.action.hover,
-        //     },
-        //   },
-        // }))(TableRow);
+     
 
       const classes = useStyles();
 
@@ -90,7 +87,7 @@ const TablaListado = ({librosC, btnModificarC, LlamaModalEliminarC }) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {librosC.map((libro) => {
+                    {libres.map((libro) => {
                         if (Date.parse(libro.devolucion) < Date.now()) {
                         return (
                             <TableRow className={classes.margin} id={libro.Id_Libro} onClick={(event) => seleccionar(event, libro.Id_libro)}  key={libro.Id_Libro}>

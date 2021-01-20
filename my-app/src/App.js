@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Listar from './componentes/Listar/Listar';
+// import {Libros} from '../src/data/Libros.json'
 import { NuevaSolicitud } from './componentes/Libro/NuevaSolicitud';
 import { useFetch } from './componentes/Fetch/UseFetch';
+import { UserContext } from './componentes/UserContext/UserContext';
 
 const url = "https://agile-ocean-56695.herokuapp.com/LibrosTest/";
 async function postData(url, Id={}) {
-    debugger;
     const response = await fetch(url, {
       method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
       headers:{'Content-Type': 'application/json'},
@@ -15,7 +16,7 @@ async function postData(url, Id={}) {
   }
 const App = () => {
 
-    const { data, loading, error } = useFetch(url);
+    const { data} = useFetch(url);
     console.log(data)
     const libres = data
     // console.log(libres)
@@ -47,9 +48,7 @@ const App = () => {
         }
         
     }
-    const RecargarEliminarLibros = () =>{
-        setcontrolVista(true)
-    }
+    
     const ModLibro = (LibroUpdate) => {
         setLibroSelected(LibroUpdate)
     }
@@ -65,10 +64,18 @@ const App = () => {
            .catch(error => console.log(error))
            setcontrolVista(true)
     }
+    
     if(controlVista)
-    {
+    {   
         return (
-            <Listar Libros={libres} controlBtnNuevo={setcontrolVista} libr={ModLibro} elimina={eliminarLibro} />
+            <UserContext.Provider value={{
+                libres, 
+                setcontrolVista,
+                ModLibro,
+                eliminarLibro
+            }}>
+            <Listar/>
+            </UserContext.Provider>
         )
     }else{
         return(            
