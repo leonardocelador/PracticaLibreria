@@ -264,6 +264,7 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato, Libros}) => {
             variant="outlined" 
             color="primary" 
             className="boton2">Agregar Solicitud</Button>
+            
           <Snackbar 
             open={controlAlert} 
             autoHideDuration={2000} 
