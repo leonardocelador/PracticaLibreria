@@ -18,7 +18,7 @@ const cargarErrores = (libro, errores) => {
             else{
                 result[propiedad]=true;
             }
-            
+            return true;
         }
         )
         return result;
@@ -26,6 +26,7 @@ const cargarErrores = (libro, errores) => {
     else{
         Object.keys(errores).map((error)=>{
             result[error]=true;
+            return true;
         })
         return result;
     }

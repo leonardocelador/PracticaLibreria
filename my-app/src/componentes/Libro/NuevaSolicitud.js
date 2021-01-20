@@ -12,12 +12,11 @@ import Select from '@material-ui/core/Select';
 import '../Libro/libro.css';
 
     
-export const NuevaSolicitud = ({solicitud , Volver, Dato}) => {
-    console.log(Object.values(Dato));
+export const NuevaSolicitud = ({solicitud , Volver, Dato, Libros}) => {
+    
     const [age, setAge] = React.useState('');
     const handleChange = (event) => {
       setAge(event.target.value);
-      console.log(age)
     };
     const [libro, setLibro] =  useState(Dato)
     
@@ -32,7 +31,7 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato}) => {
       Dueño:false,
     });
 
-    const [disabledCampos, setdisabledCampos] = useState(Object.keys(Dato).length>0?true:false);
+    const disabledCampos = Object.keys(Dato).length>0?true:false;
     
     const [controlAlert, setControlAlert] = useState(false);
     const [mensajeAlert, setMensajeAlert] = useState('');
@@ -69,7 +68,6 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato}) => {
    const validarDatos = () =>{
    
     const { devolucion, prestamo }=libro;
-    const array=Object.keys(libro)
     const resultado = cargarErrores(libro, Object.keys(errores));
     
     setErrores(resultado);
@@ -95,6 +93,8 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato}) => {
             setMensajeAlert("Fechas Inválidas, favor de Verificar!");
         }
       }
+     
+      return true;
     });
     
   }
@@ -153,25 +153,26 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato}) => {
                       required
                     />
                     <br/>
-                    <InputLabel id="demo-mutiple-checkbox-label">Libros</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={age}
-                      onChange={handleChange}
-                    >
-                      {Dato.map((name) => (
-                        <MenuItem key={name.Id_Libro} value={name.Id_Libro}>
-                            {name.Nom_Libro}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                    
                     </FormControl>
                     </Grid>
                     <Grid item lg={5} className="">
                     <FormControl size="medium" id="formulario" className="formulario-right">
                         <h2>Detalles de Libro</h2>
+                        <InputLabel id="demo-mutiple-checkbox-label">Libros</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={age}
+                            onChange={handleChange}
+                        >
+
+                          { Libros.map((name) => (
+                            <MenuItem key={name.Id_Libro} value={name.Id_Libro}>
+                              {name.Nom_Libro}
+                              </MenuItem>
+                          ))}
+                          
+                        </Select>
                         <TextField
                           name="Nombre"
                           id="Nombre" 
@@ -266,7 +267,7 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato}) => {
           <Snackbar 
             open={controlAlert} 
             autoHideDuration={2000} 
-            onClose={controlAlert,()=>setControlAlert(false)}
+            onClose={controlAlert, ()=>setControlAlert(false)}
             anchorOrigin={{ vertical:'top', horizontal:'center' }}
           >
             <Alert onClose={controlAlert, ()=>setControlAlert(false)} severity={severity} variant="filled">

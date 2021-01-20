@@ -7,21 +7,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import estilista from './estilista';
 
-export default function SearchAppBar({Solicitudes}) {
+export default function SearchAppBar() {
   
   const classes = estilista();
-  
-  const escucharBuscar = (e) => {  
-    const texto = e.target.value.toUpperCase();
-
-    Solicitudes.map((solicitud)=>{
-      console.log(solicitud)
-      if(solicitud.Nombre.toUpperCase() === texto)
-        console.log("se encontró",solicitud.Nombre);
-      else
-        console.log("No se encontró");
-    })
-  }
 
   return (
     <div className={classes.root}>
@@ -39,7 +27,6 @@ export default function SearchAppBar({Solicitudes}) {
               placeholder="Buscar Libro…"
               id="search"
               autoComplete="off"
-              onChange={escucharBuscar}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
