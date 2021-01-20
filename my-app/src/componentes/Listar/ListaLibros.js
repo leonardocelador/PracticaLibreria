@@ -9,7 +9,7 @@ import { Button } from '@material-ui/core';
 import TablaListado from '../Experimentando/TablaListado';
 import { UserContext } from '../UserContext/UserContext';
 
-const ListarConDatos = () => {
+const ListaLibros = () => {
 
         const {ModLibro, setcontrolVista, eliminarLibro, setListarLibros } = useContext(UserContext)
 
@@ -23,16 +23,16 @@ const ListarConDatos = () => {
 
         // Estilos del Table
         const useStyles = makeStyles((theme)=>({
-          margin: {
-            margin: theme.spacing(1),
-            marginLeft: '4rem',
-          },
-            table: {
-              minWidth: 650,
-            },
-          marginLibros:{
-            marginLeft: '61rem',
-          }
+            margin: {
+                margin: theme.spacing(1),
+                marginLeft: '4rem',
+              },
+                table: {
+                  minWidth: 650,
+                },
+              marginLibros:{
+                marginLeft: '61rem',
+              }
           }));
 
          const classes = useStyles();
@@ -69,26 +69,27 @@ const ListarConDatos = () => {
 
       return (
       <div>
+       <h1>Listar de Libros</h1>
       <TablaListado btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} />
       {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
       {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={setcontrolVista} LibroSeleccionado={libroaModificar} AsignarLib={ModLibro}  /> : null}
       <br></br>
       <Button 
-        onClick={()=>setestadoNuevo(!estadoNuevo)} 
+        onClick={()=>setListarLibros(false)} 
         variant="outlined" 
         color="primary"
         className={classes.margin} 
-      >Nueva Solicitud</Button>
-      <Button 
+      >Volver</Button>
+       <Button 
        variant="outlined" 
        color="primary"
-        onClick={()=>setListarLibros(true)}
+        onClick={()=>alert("Llama a modal crear Nuevo Libro - componente hecha por maxi")}
         className={classes.marginLibros} 
-      >Libros</Button>
+      >Nuevo Libro</Button>
       {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo} agregarNuevo={setcontrolVista}/></Modal> : null}
       </div>
     )
        
 }
 
-export default ListarConDatos
+export default ListaLibros

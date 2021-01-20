@@ -2,37 +2,76 @@ import React, { useContext } from 'react';
 import SearchAppBar from '../App Bar/SearchAppBar';
 import ListarConDatos from './ListarConDatos';
 import { UserContext } from '../UserContext/UserContext';
+import ListaLibros from './ListaLibros';
 // {Libros, controlBtnNuevo, libr, elimina}
 const Listar = () => {
-  const {libres} = useContext(UserContext)
+  const {libres, ListarLibros, loading} = useContext(UserContext)
+   if(loading){
+     return(
+       <div>
+          <h1>Cargando Datos</h1>
+       </div>
+     )
+     
+   }else{
     if(libres !== null){
       if(libres.length !== 0){
-        return(
-          <div>
-            <SearchAppBar  Solicitudes={libres}/>
-            <br></br>
-            {/* <ListarConDatos libros={Libros} btnNuevo={controlBtnNuevo} Libr={libr} del={elimina}/> */}
-            <ListarConDatos />
-    
-          </div>
-        );
+        if(ListarLibros === false)
+        {
+            return(
+              <div>
+                <SearchAppBar  Solicitudes={libres}/>
+                <br></br>
+                {/* <ListarConDatos libros={Libros} btnNuevo={controlBtnNuevo} Libr={libr} del={elimina}/> */}
+                <ListarConDatos />
+        
+              </div>
+            );
+        }else{
+             return(
+               <div>
+                <SearchAppBar  Solicitudes={libres}/>
+                <br></br>
+                <ListaLibros />
+              </div>
+             );
+             
+        }
+        
       }else{
-        return(
-          <div>
-    
-            <ListarConDatos libros={libres} />
-            <h2>No se encontraron Datos!!!</h2>
-    
-          </div>
-        );
+
+        if(ListarLibros === false)
+        {
+            return(
+              <div>
+                <SearchAppBar  Solicitudes={libres}/>
+                <br></br>
+                {/* <ListarConDatos libros={Libros} btnNuevo={controlBtnNuevo} Libr={libr} del={elimina}/> */}
+                <ListarConDatos />
+                <h2>No se encontraron Datos!!!</h2>
+              </div>
+            );
+        }else{
+             return(
+               <div>
+                <SearchAppBar  Solicitudes={libres}/>
+                <br></br>
+                <ListaLibros />
+              </div>
+             );
+             
+        }
+        
       }
     }else{
       return(
         <div>
-          <h1>Cargando Datos!!!</h1>
+          <h1>Error al cargar Datos!!!</h1>
         </div>
       );
     }
+   }
+   
   
 }
 export default Listar
