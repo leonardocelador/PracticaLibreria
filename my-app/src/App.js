@@ -96,9 +96,9 @@ const App =  () => {
         setLibroSelected({})
     }
     const eliminarLibro = (idEliminado) => {
-        const url = "https://agile-ocean-56695.herokuapp.com/LibrosTest/";
+        const url = "https://agile-ocean-56695.herokuapp.com/SolicitudesTest/";
            console.log(idEliminado)
-           postData(url, {'idSol':idEliminado})
+           postData(url, {"idSol":idEliminado})
            .then( resp => resp.json())
                 .then( resp => {
                    console.log(resp)
@@ -106,7 +106,7 @@ const App =  () => {
                             
                 })
         .catch(error => console.log(error))
-        const result = libreSol.filter(libre => libre.Id_Libro !== idEliminado);
+        const result = libreSol.filter(libre => libre.Id_Solicitud !== idEliminado);
         setlibreSol(result)
         setcontrolVista(true)
         //    setloading(false)
