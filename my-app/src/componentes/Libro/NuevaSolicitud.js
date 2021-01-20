@@ -152,25 +152,26 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato, Libros}) => {
                       required
                     />
                     <br/>
-                    <InputLabel id="demo-mutiple-checkbox-label">Libros</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={age}
-                      onChange={handleChange}
-                    >
-                      { Libros.map((name) => (
-                        <MenuItem key={name.Id_Libro} value={name.Id_Libro}>
-                            {name.Nom_Libro}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                    
                     </FormControl>
                     </Grid>
                     <Grid item lg={5} className="">
                     <FormControl size="medium" id="formulario" className="formulario-right">
                         <h2>Detalles de Libro</h2>
+                        <InputLabel id="demo-mutiple-checkbox-label">Libros</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={age}
+                            onChange={handleChange}
+                        >
+
+                          { Libros.map((name) => (
+                            <MenuItem key={name.Id_Libro} value={name.Id_Libro}>
+                              {name.Nom_Libro}
+                              </MenuItem>
+                          ))}
+                          
+                        </Select>
                         <TextField
                           name="Nombre"
                           id="Nombre" 
