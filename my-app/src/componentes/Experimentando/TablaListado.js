@@ -36,7 +36,7 @@ const seleccionar = (event, Id) => {
 }
 
 const TablaListado = ({btnModificarC, LlamaModalEliminarC }) => {
-  const {libres} = useContext(UserContext)
+  const {libreSol} = useContext(UserContext)
     const useStyles = makeStyles((theme)=>({  
         margin: {
           border: "#eccfcf  5px solid"
@@ -78,19 +78,21 @@ const TablaListado = ({btnModificarC, LlamaModalEliminarC }) => {
                 <TableHead>
                     <TableRow>
                     <StyledTableCell align="left"></StyledTableCell>  
-                    <StyledTableCell align="left">Mis Libros</StyledTableCell>
-                    <StyledTableCell align="left">Responsable</StyledTableCell>
-                    <StyledTableCell align="left">Detalle</StyledTableCell>
-                    <StyledTableCell align="left">Fecha de Prestamo</StyledTableCell>
-                    <StyledTableCell align="left">Fecha de Devolucion</StyledTableCell>
+                    <StyledTableCell align="left">Mis solicitudes</StyledTableCell>
+                    <StyledTableCell align="left">Fecha_Pedido</StyledTableCell>
+                    <StyledTableCell align="left">Detalles</StyledTableCell>
+                    <StyledTableCell align="left">Fecha_Devolucion_pactada</StyledTableCell>
+                    <StyledTableCell align="left">Fecha_devolucion</StyledTableCell>
+                    <StyledTableCell align="left">Usuario</StyledTableCell>
+                    <StyledTableCell align="left">Id_Libro</StyledTableCell>
                     <StyledTableCell align="left">Acciones</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {libres.map((libro) => {
+                    {libreSol.map((libro) => {
                         if (Date.parse(libro.devolucion) < Date.now()) {
                         return (
-                            <TableRow className={classes.margin} id={libro.Id_Libro} onClick={(event) => seleccionar(event, libro.Id_libro)}  key={libro.Id_Libro}>
+                            <TableRow className={classes.margin} id={libro.Id_Solicitud} onClick={(event) => seleccionar(event, libro.Id_Solicitud)}  key={libro.Id_Solicitud}>
                               <StyledTableCell align="left">
                                 <i>
                                 <NotificationImportantIcon aria-label="modify" className={classes.estilosMorosos}>
@@ -98,15 +100,17 @@ const TablaListado = ({btnModificarC, LlamaModalEliminarC }) => {
                                 </NotificationImportantIcon>
                                 </i>
                               </StyledTableCell>
-                            <StyledTableCell align="left">{libro.Nom_Libro}</StyledTableCell>
-                            <StyledTableCell align="left">{libro.Autor_Libro}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Id_Solicitud}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Fecha_Pedido}</StyledTableCell>
                             <StyledTableCell align="left">
                             
                               <PopOver Detalles={libro}/>
                               
                             </StyledTableCell> 
-                            <StyledTableCell align="left">{libro.Editorial_Libro}</StyledTableCell>
-                            <StyledTableCell align="left">{libro.Año_Libro}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Fecha_Dev_Obligatoria}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Fecha_devolucion}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Nombre_Usuario}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Id_Libro}</StyledTableCell>
                             <StyledTableCell align="left">
 
                             <Grid container justify='space-around'>  {/* Utilice Componente Grid para poder alinear verticalmente y centrar elementos */}
@@ -118,7 +122,7 @@ const TablaListado = ({btnModificarC, LlamaModalEliminarC }) => {
                                 </Grid>
                                 <Grid item>
                                 <Typography>Eliminar</Typography>
-                                <IconButton  aria-label="delete" className={classes.marginbtn} onClick={()=>LlamaModalEliminarC(libro.Id_Libro)}>
+                                <IconButton  aria-label="delete" className={classes.marginbtn} onClick={()=>LlamaModalEliminarC(libro.Id_Solicitud)}>
                                     <DeleteIcon fontSize="small" />
                                 </IconButton>
                                 </Grid>
@@ -128,15 +132,19 @@ const TablaListado = ({btnModificarC, LlamaModalEliminarC }) => {
                             </TableRow>);
                         }
                         return (
-                            <TableRow  id={libro.Id_Libro} onClick={(event) => seleccionar(event, libro.Id_Libro)}  key={libro.Id_Libro}>
+                            <TableRow  id={libro.Id_Solicitud} onClick={(event) => seleccionar(event, libro.Id_Solicitud)}  key={libro.Id_Solicitud}>
                             <StyledTableCell  align="left"><i></i></StyledTableCell>
-                            <StyledTableCell  align="left">{libro.Nom_Libro}</StyledTableCell>
-                            <StyledTableCell  align="left">{libro.Autor_Libro}</StyledTableCell>
-                            <StyledTableCell  align="left">
-                            <PopOver Detalles={libro}/>
-                            </StyledTableCell>
-                            <StyledTableCell  align="left">{libro.Editorial_Libro}</StyledTableCell>
-                            <StyledTableCell  align="left">{libro.Año_Libro}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Id_Solicitud}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Fecha_Pedido}</StyledTableCell>
+                            <StyledTableCell align="left">
+                            
+                              <PopOver Detalles={libro}/>
+                              
+                            </StyledTableCell> 
+                            <StyledTableCell align="left">{libro.Fecha_Dev_Obligatoria}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Fecha_devolucion}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Nombre_Usuario}</StyledTableCell>
+                            <StyledTableCell align="left">{libro.Id_Libro}</StyledTableCell>
                             <StyledTableCell  align="left">
                             <Grid container justify='space-around'>  
                                 <Grid item>
@@ -147,7 +155,7 @@ const TablaListado = ({btnModificarC, LlamaModalEliminarC }) => {
                                 </Grid>
                                 <Grid item>
                                 <Typography>Eliminar</Typography>
-                                <IconButton  aria-label="delete" className={classes.marginbtn} onClick={()=>LlamaModalEliminarC(libro.Id_Libro)}>
+                                <IconButton  aria-label="delete" className={classes.marginbtn} onClick={()=>LlamaModalEliminarC(libro.Id_Solicitud)}>
                                 <DeleteIcon fontSize="small" />
                                 </IconButton>
                                 </Grid>
