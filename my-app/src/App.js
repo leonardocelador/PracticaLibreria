@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Listar from './componentes/Listar/Listar';
 // import {Libros} from '../src/data/Libros.json'
 import { NuevaSolicitud } from './componentes/Libro/NuevaSolicitud';
@@ -15,18 +15,21 @@ async function postData(url, Id={}) {
     return response.json(); // parses JSON response into native JavaScript objects
   }
 const App = () => {
-
-    const { data} = useFetch(url);
+    
+    const {data, loading} = useFetch(url);
     console.log(data)
-    const libres = data
+    // const libres = data
     // console.log(libres)
     // const [libres, setlibres] = useState({});
-    // setlibres(data)
-
+    const [libres, setlibres] = useState({})
+    
     const [controlVista, setcontrolVista] = useState(true);
     const [LibroSelected, setLibroSelected] = useState({})
+    const [ListarLibros, setListarLibros] = useState(false)
     
-    // const [libres, setlibres] = useState({})
+    useEffect(() => {
+        setlibres(data)
+    }, [data])
     
 
     const SolicitudLibro = (nuevoLibro) => {
@@ -63,6 +66,8 @@ const App = () => {
            .then(response=>  console.log(response))
            .catch(error => console.log(error))
            setcontrolVista(true)
+           
+           
     }
     
     if(controlVista)
@@ -72,7 +77,10 @@ const App = () => {
                 libres, 
                 setcontrolVista,
                 ModLibro,
-                eliminarLibro
+                eliminarLibro,
+                ListarLibros,
+                setListarLibros,
+                loading
             }}>
             <Listar/>
             </UserContext.Provider>
