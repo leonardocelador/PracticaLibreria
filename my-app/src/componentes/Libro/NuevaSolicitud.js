@@ -267,10 +267,10 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato, Libros}) => {
           <Snackbar 
             open={controlAlert} 
             autoHideDuration={2000} 
-            onClose={controlAlert? controlAlert: ()=>setControlAlert(false)}
+            onClose={controlAlert, ()=>setControlAlert(false)}
             anchorOrigin={{ vertical:'top', horizontal:'center' }}
           >
-            <Alert onClose={controlAlert?controlAlert:()=>setControlAlert(false)} severity={severity} variant="filled">
+            <Alert onClose={controlAlert, ()=>setControlAlert(false)} severity={severity} variant="filled">
               {mensajeAlert}
             </Alert>
           </Snackbar>
