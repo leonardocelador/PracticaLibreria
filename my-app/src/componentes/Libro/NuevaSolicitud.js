@@ -31,7 +31,7 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato, Libros}) => {
       Dueño:false,
     });
 
-    const [disabledCampos, setdisabledCampos] = useState(Object.keys(Dato).length>0?true:false);
+    const disabledCampos = Object.keys(Dato).length>0?true:false;
     
     const [controlAlert, setControlAlert] = useState(false);
     const [mensajeAlert, setMensajeAlert] = useState('');
@@ -68,7 +68,6 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato, Libros}) => {
    const validarDatos = () =>{
    
     const { devolucion, prestamo }=libro;
-    const array=Object.keys(libro)
     const resultado = cargarErrores(libro, Object.keys(errores));
     
     setErrores(resultado);
@@ -94,6 +93,8 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato, Libros}) => {
             setMensajeAlert("Fechas Inválidas, favor de Verificar!");
         }
       }
+     
+      return true;
     });
     
   }
@@ -266,10 +267,10 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato, Libros}) => {
           <Snackbar 
             open={controlAlert} 
             autoHideDuration={2000} 
-            onClose={controlAlert,()=>setControlAlert(false)}
+            onClose={controlAlert? controlAlert: ()=>setControlAlert(false)}
             anchorOrigin={{ vertical:'top', horizontal:'center' }}
           >
-            <Alert onClose={controlAlert, ()=>setControlAlert(false)} severity={severity} variant="filled">
+            <Alert onClose={controlAlert?controlAlert:()=>setControlAlert(false)} severity={severity} variant="filled">
               {mensajeAlert}
             </Alert>
           </Snackbar>
