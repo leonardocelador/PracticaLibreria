@@ -20,11 +20,23 @@ const useStyles = makeStyles((theme) => ({
   }));
 
   
+const url = "https://agile-ocean-56695.herokuapp.com/LibrosTest";
+
+async function postData(url, Id={}){
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers:{'Content-Type': 'application/json'},
+        body: JSON.stringify(Id)
+    });
+
+    return response;
+}
+
+
 
 export const NuevoLibro = () => {
     
-    //const petición
-
     const classes = useStyles();
     const [libro, setLibro] = useState({});
     const [errores, setErrores] = useState({
@@ -73,6 +85,7 @@ export const NuevoLibro = () => {
             setControlAlert(true);
             setMensajeAlert("Datos Correctos!");
         }
+        
     }
 
     return (

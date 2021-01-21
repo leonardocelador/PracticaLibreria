@@ -5,6 +5,7 @@ import { NuevaSolicitud } from './componentes/Libro/NuevaSolicitud';
 import { UserContext } from './componentes/UserContext/UserContext';
 
 const url = "https://agile-ocean-56695.herokuapp.com/SolicitudesTest/";
+
 async function postData(url, Id={}) {
     debugger
     const response = await fetch(url, {
@@ -34,11 +35,15 @@ const App =  () => {
     const [libreSol, setlibreSol] = useState([])
     // const [libros, setlibros] = useState([])
     const [loading, setloading] = useState(true)
+    
     useEffect(() => {
         console.log("ejecuto useefect")
         cargarDatos()
        
     }, [])
+
+
+
    const cargarDatos =()=>{
        console.log("ejecuto cargar datos")
         getData(url)
