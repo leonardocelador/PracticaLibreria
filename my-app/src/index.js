@@ -11,7 +11,8 @@ import { NuevoLibro } from './componentes/NuevoLibro/NuevoLibro';
 ReactDOM.render(
   
     <ThemeProvider theme={theme}>
-      <NuevoLibro/>
+      {/* <NuevoLibro/> */}
+      <App/> 
     </ThemeProvider>,
  
    document.getElementById('root')

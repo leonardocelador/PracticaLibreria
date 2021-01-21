@@ -69,6 +69,7 @@ const ListarConDatos = () => {
 
       return (
       <div>
+        <h1>Solicitudes</h1>
       <TablaListado btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} />
       {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
       {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={setcontrolVista} LibroSeleccionado={libroaModificar} AsignarLib={ModLibro}  /> : null}
