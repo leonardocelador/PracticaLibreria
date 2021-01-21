@@ -3,6 +3,7 @@ import { Button, Container, FormControl, IconButton, TextField, Snackbar } from 
 import Alert from '@material-ui/lab/Alert';
 import cargarErrores from '../Libro/Validar/cargarErrores';
 import Validar from '../Libro/Validar/Validar';
+import Base64 from './Base64';
 
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { makeStyles } from '@material-ui/core/styles';
@@ -24,12 +25,14 @@ const url = "https://agile-ocean-56695.herokuapp.com/LibrosTest";
 
 async function postData(url, Id={}){
 
+  console.log(url)
+  Id.Año_Libro= parseInt(Id.Año_Libro)
+  console.log(Id)
     const response = await fetch(url, {
         method: 'POST',
         headers:{'Content-Type': 'application/json'},
-        body: JSON.stringify(Id)
+        body: Id
     });
-
     return response;
 }
 
@@ -52,8 +55,10 @@ export const NuevoLibro = () => {
     const [severity, setSeverity] = useState('error');
 
     const controlCambios = (name, value)=>{
-        setLibro({ ...libro,[name]:value });
-        if(value!==''){
+      
+      setLibro({ ...libro,[name]:value });
+      
+      if(value!==''){
         setErrores({...errores,[name]:false});
       }
       else{
@@ -61,33 +66,38 @@ export const NuevoLibro = () => {
       }
     }
 
+    const cargarImagen = (name, value) => {
+      Base64(value, name, controlCambios);
+    }
     const validarDatos = () =>{
    
-        var resultMap='';
+        var isError=false;
         const resultado = cargarErrores(libro, Object.keys(errores));
         setErrores(resultado);
         
         Object.keys(resultado).map( error=>{
             if(resultado[error]===true){
                 Validar(setControlAlert, setMensajeAlert);
-                resultMap=false;
+                isError=true;
             }
-            else{
-                resultMap=true;
-            }
-         
-          return resultMap;
+          return isError;
         });
 
-        if(resultMap===true){
-            console.log(libro);
-            setSeverity("success");
-            setControlAlert(true);
-            setMensajeAlert("Datos Correctos!");
+        console.log(isError);
+        if(isError!==true)
+        {
+          setSeverity("success");
+          setControlAlert(true);
+          setMensajeAlert("Datos Correctos!");
+
+          postData(url, libro)
+          .then(resp =>console.log(resp))
+          .catch(error=>console.log(error))
         }
+        else 
+        Validar(setControlAlert,setMensajeAlert);
         
     }
-
     return (
         <>
             <Container maxWidth="sm" className="container">
@@ -150,16 +160,16 @@ export const NuevoLibro = () => {
                         className={classes.input} 
                         id="icon-button-file" 
                         type="file" 
-                        value={libro.Imagen_Libro?libro.Imagen_Libro:''}
-                        onChange={ (e) =>controlCambios(e.target.name, e.target.value)}
+                        onChange={ (e) =>cargarImagen(e.target.name, e.target.files)}
                         />
                     <label htmlFor="icon-button-file">
                         <IconButton color="primary" aria-label="upload picture" component="span">
                           <PhotoCamera />
                         </IconButton>
-                        <span>{libro.Imagen_Libro?libro.Imagen_Libro:'No se cargó Imagen'}</span>
+                        <span>{libro.Imagen_Libro?"Imagen Cargada":"Debe cargar Imagen"}</span>
                     </label>
-
+                    {libro.Imagen_Libro && <img style={{width: "300px",height: "160px"}} alt="" src={libro.Imagen_Libro}/>}
+                    <br/>
                     <Container>
                         <Button
                             variant="outlined"
