@@ -8,17 +8,21 @@ import { Button } from '@material-ui/core';
 // import './ListarConDatos.css';
 import TablaListado from '../Experimentando/TablaListado';
 import { UserContext } from '../UserContext/UserContext';
+import TablaListadoLibros from '../Experimentando/TablaListadoLibros';
+import { NuevoLibro } from '../NuevoLibro/NuevoLibro';
 
 const ListaLibros = () => {
 
-        const {ModLibro, setcontrolVista, eliminarLibro, setListarLibros } = useContext(UserContext)
+        const {ModLibro, setcontrolVista, eliminarLibro, setListarLibros, libros} = useContext(UserContext)
 
         const [idEliminar, setidEliminar] = useState("") 
+        const [LibrosCache, setLibrosCache] = useState(libros)
+        const [estadoTablaLibr, setestadoTablaLibr] = useState(true)
+        const [visibilidad, setvisibilidad] = useState(true)
         const [estadoEliminar, setestadoEliminar] = useState(false)//ocultar - mostrar modal
         const [estadomodif, setestadomodif] = useState(false) //ocultar - mostrar modal
         const [estadoNuevo, setestadoNuevo] = useState(false) //ocultar - mostrar modal
         const [libroaModificar, setlibroaModificar] = useState();
-        
         
 
         // Estilos del Table
@@ -59,37 +63,82 @@ const ListaLibros = () => {
         
            
         }
+
+        const ReacargarListarLibros = (Libro) =>{
+          console.log(Libro)
+          Libro.Id_Libro = LibrosCache[LibrosCache.length - 1].Id_Libro + 1
+          console.log(Libro)
+          const LibroAux = LibrosCache
+          LibroAux.push(Libro)
+          console.log(LibroAux)
+          setLibrosCache(LibroAux)
+          setestadoTablaLibr(!estadoTablaLibr)
+          setestadoNuevo(!estadoNuevo)
+          setvisibilidad(!visibilidad)
+        }
         
+        const nuevoLibro = () =>{
+          setestadoTablaLibr(false)
+          setestadoNuevo(true)
+          setvisibilidad(false)
+        }
+
+        const CancelarNuevoLibro = () =>{
+          setestadoTablaLibr(!estadoTablaLibr)
+          setestadoNuevo(!estadoNuevo)
+          setvisibilidad(!visibilidad)
+        }
+
         // muestra u oculta modal eliminar y envia el id correspondiente del libro seleccionado
         const LlamaModalEliminar = (id) => {
          
           setestadoEliminar(!estadoEliminar)
           setidEliminar(id)
         }  
+     
+        return (
+          <div>
+          {estadoTablaLibr?<h1>Libros</h1> :null}
+          {estadoTablaLibr? <TablaListadoLibros btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} Libros={LibrosCache}/> :null}
+          {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
+          {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={setcontrolVista} LibroSeleccionado={libroaModificar} AsignarLib={ModLibro}  /> : null}
+          <br></br>
+    
+          {visibilidad? 
+          <Button 
+            onClick={()=>setListarLibros(false)} 
+            variant="outlined" 
+            color="primary"
+            className={classes.margin} 
+          >Volver</Button>  
+          :null}
+    
+          {visibilidad? 
+           <Button 
+           variant="outlined" 
+           color="primary"
+            onClick={()=>nuevoLibro()}
+            className={classes.marginLibros} 
+          >Nuevo Libro</Button>
+          :null}
+        
+          {estadoNuevo? <Modal><NuevoLibro Reacargar={ReacargarListarLibros}/></Modal> : null}
+    
+          {estadoNuevo? 
+          <Button 
+            onClick={()=>CancelarNuevoLibro(false)} 
+            variant="outlined" 
+            color="primary"
+            className={classes.margin} 
+          >Volver</Button>  
+          :null}
+    
+          </div>
+        )
 
-      return (
-      <div>
-       <h1>Listar de Libros</h1>
-      <TablaListado btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} />
-      {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
-      {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={setcontrolVista} LibroSeleccionado={libroaModificar} AsignarLib={ModLibro}  /> : null}
-      <br></br>
-      <Button 
-        onClick={()=>setListarLibros(false)} 
-        variant="outlined" 
-        color="primary"
-        className={classes.margin} 
-      >Volver</Button>
-       <Button 
-       variant="outlined" 
-       color="primary"
-        onClick={()=>alert("Llama a modal crear Nuevo Libro - componente hecha por maxi")}
-        className={classes.marginLibros} 
-      >Nuevo Libro</Button>
-      {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo} agregarNuevo={setcontrolVista}/></Modal> : null}
-      </div>
-    )
-       
+      
+      
+                                         
 }
 
 export default ListaLibros

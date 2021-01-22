@@ -31,15 +31,14 @@ async function postData(url, Id={}){
     const response = await fetch(url, {
         method: 'POST',
         headers:{'Content-Type': 'application/json'},
-        body: Id
+        body: JSON.stringify(Id)
     });
     return response;
 }
 
 
 
-export const NuevoLibro = () => {
-
+export const NuevoLibro = ({Reacargar}) => {
     const classes = useStyles();
     const [libro, setLibro] = useState({});
     const [errores, setErrores] = useState({
@@ -94,7 +93,7 @@ export const NuevoLibro = () => {
           setMensajeAlert("Datos Correctos!");
 
           postData(url, libro)
-          .then(resp =>console.log(resp))
+          .then(resp =>console.log(resp), Reacargar(libro))
           .catch(error=>console.log(error))
         }
         else 

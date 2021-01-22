@@ -23,8 +23,8 @@ async function getData(url) {
     });
     return response; // parses JSON response into native JavaScript objects
   }
-async function getDataLibros(url) {
-    const response = await fetch(url, {
+async function getDataLibros(urlibros) {
+    const response = await fetch(urlibros, {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       headers:{'Content-Type': 'application/json'}
     });
@@ -33,12 +33,14 @@ async function getDataLibros(url) {
 
 const App =  () => {
     const [libreSol, setlibreSol] = useState([])
-    // const [libros, setlibros] = useState([])
+    const [libros, setlibros] = useState([])
     const [loading, setloading] = useState(true)
-    
+    const [loadingLibros, setloadingLibros] = useState(true)
+    const [libroAgregado, setlibroAgregado] = useState(false)
     useEffect(() => {
         console.log("ejecuto useefect")
         cargarDatos()
+        cargarLibros()
        
     }, [])
 
@@ -55,17 +57,18 @@ const App =  () => {
                 })
         .catch(error => console.log(error))
             }
-    // const cargarLibros =()=>{
-    //     console.log("ejecuto cargar datos")
-    //     getData(url)
-    //     .then( resp => resp.json())
-    //             .then( data => {
-    //                 console.log(data)
-    //                 setlibreSol(data)
-    //                 setloading(false)
-    //                      })
-    //              .catch(error => console.log(error))
-    // }
+    const cargarLibros =()=>{
+        console.log("ejecuto cargar datos")
+        const urlibros = "https://agile-ocean-56695.herokuapp.com/LibrosTest/"
+        getDataLibros(urlibros)
+        .then( resp => resp.json())
+                .then( data => {
+                    console.log(data)
+                    setlibros(data)
+                    setloadingLibros(false)
+                         })
+                 .catch(error => console.log(error))
+    }
     //cargarDatos();
     console.log(libreSol)
     const [controlVista, setcontrolVista] = useState(true);
@@ -124,6 +127,8 @@ const App =  () => {
             return (
                 <UserContext.Provider value={{
                     libreSol, 
+                    libros,
+                    setlibros,
                     setcontrolVista,
                     ModLibro,
                     eliminarLibro,
