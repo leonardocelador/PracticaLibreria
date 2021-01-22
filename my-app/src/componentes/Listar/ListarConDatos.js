@@ -68,26 +68,29 @@ const ListarConDatos = () => {
         }  
 
       return (
-      <div>
+      <>
         <h1>Solicitudes</h1>
-      <TablaListado btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} />
-      {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
-      {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={setcontrolVista} LibroSeleccionado={libroaModificar} AsignarLib={ModLibro}  /> : null}
-      <br></br>
-      <Button 
-        onClick={()=>setestadoNuevo(!estadoNuevo)} 
-        variant="outlined" 
-        color="primary"
-        className={classes.margin} 
-      >Nueva Solicitud</Button>
-      <Button 
-       variant="outlined" 
-       color="primary"
-        onClick={()=>setListarLibros(true)}
-        className={classes.marginLibros} 
-      >Libros</Button>
-      {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo} agregarNuevo={setcontrolVista}/></Modal> : null}
+        
+        <div>
+          <Button 
+            onClick={()=>setestadoNuevo(!estadoNuevo)} 
+            variant="outlined" 
+            color="primary"
+            className={classes.margin} 
+          >Nueva Solicitud</Button>
+          <Button 
+            variant="outlined" 
+            color="primary"
+            onClick={()=>setListarLibros(true)}
+            className={classes.marginLibros} 
+          >Libros</Button>
+          {estadoNuevo? <Modal><Nuevo estadoNuevoModal={setestadoNuevo} agregarNuevo={setcontrolVista}/></Modal> : null}
       </div>
+          <TablaListado btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} />
+          {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
+          {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={setcontrolVista} LibroSeleccionado={libroaModificar} AsignarLib={ModLibro}  /> : null}
+      <br></br>
+      </>
     )
        
 }
