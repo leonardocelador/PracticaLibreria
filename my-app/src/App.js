@@ -171,9 +171,12 @@ const App =  () => {
             )
         }else{
             return(
-                
+                <UserContext.Provider value={{
+                    libros
+                }}>
+                    <NuevaSolicitud solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {LibroSelected}/>
+                </UserContext.Provider>
                 // <Libro solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {LibroSelected}/>
-                <NuevaSolicitud solicitud={SolicitudLibro} Volver={controlVistaLibro} Dato = {LibroSelected}/>
             )
             
         }
