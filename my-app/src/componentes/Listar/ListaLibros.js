@@ -6,6 +6,8 @@ import { Button } from '@material-ui/core';
 import { UserContext } from '../UserContext/UserContext';
 import TablaListadoLibros from '../Experimentando/TablaListadoLibros';
 import { NuevoLibro } from '../NuevoLibro/NuevoLibro';
+import AlertOk from '../Alert/AlertOk';
+
 
 
 const ListaLibros = () => {
@@ -21,6 +23,7 @@ const ListaLibros = () => {
         const [estadoNuevo, setestadoNuevo] = useState(false) //ocultar - mostrar modal
         const [libroSelected, setLibroSelected] = useState({});
         const [deloMod, setdeloMod] = useState(true)
+        const [alertime, setalertime] = useState(false)
         
 
         // Estilos del Table
@@ -91,6 +94,9 @@ const ListaLibros = () => {
             setestadoTablaLibr(!estadoTablaLibr)
             setestadoNuevo(!estadoNuevo)
             setvisibilidad(!visibilidad)
+            setalertime(true)
+            setTimeout(function(){ setalertime(false) }, 3000);
+            
           }else{
             const found = LibrosCache.findIndex(element => element.Id_Libro === Libro.Id_Libro);
             const LibroAuxMod = LibrosCache
@@ -150,7 +156,7 @@ const ListaLibros = () => {
           >Nuevo Libro</Button>
           :null}
           {estadoTablaLibr? <TablaListadoLibros btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} Libros={LibrosCache}/> :null}
-          
+          {alertime?<AlertOk></AlertOk>:null}
           {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
           
           <br></br>
