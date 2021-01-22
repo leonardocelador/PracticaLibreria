@@ -35,16 +35,16 @@ export default function AppCard({detalles}) {
           <Typography component="h5" variant="h5">
             Detalles de Libro
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">Nombre del Libro:{detalles.Nombre}</Typography>
-          <Typography variant="subtitle1" color="textSecondary">Autor:{detalles.Autor}</Typography>
-          <Typography variant="subtitle1" color="textSecondary">Editorial:{detalles.Editorial}</Typography>
-          <Typography variant="subtitle1" color="textSecondary">Año:{detalles.Año}</Typography>
+          <Typography variant="subtitle1" color="textSecondary">Nombre del Libro:{detalles.Nom_Libro}</Typography>
+          <Typography variant="subtitle1" color="textSecondary">Autor:{detalles.Autor_Libro}</Typography>
+          <Typography variant="subtitle1" color="textSecondary">Editorial:{detalles.Editorial_Libro}</Typography>
+          <Typography variant="subtitle1" color="textSecondary">Año:{detalles.Año_Libro}</Typography>
         </CardContent>
       </div>
       <CardMedia
         component="img"
         className={classes.cover}
-        image={detalles.Imagen}
+        image={detalles.Imagen_Libro}
         title="Título de Libro"
       />
     </Card>

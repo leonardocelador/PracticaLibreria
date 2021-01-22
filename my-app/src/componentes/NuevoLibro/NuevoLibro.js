@@ -43,7 +43,7 @@ export const NuevoLibro = ({Recargar, Dato}) => {
     const [severity, setSeverity] = useState('error');
 
     const disabledCampos = Object.keys(Dato).length>0?true:false;
-
+    const TextoBtn = Object.keys(Dato).length>0?'MODIFICAR':'AGREGAR';
 
     const controlCambios = (name, value)=>{
       
@@ -77,13 +77,19 @@ export const NuevoLibro = ({Recargar, Dato}) => {
 
         if(isError!==true)
         {
-          setSeverity("success");
-          setControlAlert(true);
-          setMensajeAlert("Datos Correctos!");
-
-          postData(url, libro)
-          .then(resp =>console.log(resp), Recargar(libro))
-          .catch(error=>console.log(error))
+          if(Object.keys(Dato).length===0){
+            setSeverity("success");
+            setControlAlert(true);
+            setMensajeAlert("Datos Correctos!");
+  
+            postData(url, libro)
+            .then(resp =>console.log(resp), Recargar(libro))
+            .catch(error=>console.log(error))
+          }else{
+            alert("aca iria lo de modificar")
+            Recargar(libro)
+          }
+          
           
         }
         else 
@@ -175,7 +181,7 @@ export const NuevoLibro = ({Recargar, Dato}) => {
                             className={classes.button}
                             onClick={validarDatos}
                         >
-                            Agregar
+                            {TextoBtn}
                         </Button>
                         <Button 
                           className={classes.button}

@@ -32,6 +32,12 @@ const ListarConDatos = () => {
             },
           marginLibros:{
             marginLeft: '61rem',
+          },
+          estiloTitulo:{
+            textAlign: 'center',
+            fontStyle: 'oblique',
+            fontWeight: 'normal',
+
           }
           }));
 
@@ -69,7 +75,7 @@ const ListarConDatos = () => {
 
       return (
       <>
-        <h1>Solicitudes</h1>
+        <h1 className={classes.estiloTitulo}>Solicitudes</h1>
         
         <div>
           <Button 
