@@ -14,7 +14,7 @@ import { NuevoLibro } from '../NuevoLibro/NuevoLibro';
 
 const ListaLibros = () => {
 
-        const {ModLibro, setcontrolVista, eliminarLibro, setListarLibros, libros} = useContext(UserContext)
+        const {ModLibro, setcontrolVista, eliminarLibro, setListarLibros, libros} = useContext(UserContext);
 
         const [idEliminar, setidEliminar] = useState("") 
         const [LibrosCache, setLibrosCache] = useState(libros)

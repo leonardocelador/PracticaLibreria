@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {FormControl, TextField, Button, Grid, Container, Snackbar, IconButton} from '@material-ui/core';
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
@@ -9,6 +9,7 @@ import cargarErrores from './Validar/cargarErrores';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import { UserContext } from '../UserContext/UserContext';
 import '../Libro/libro.css';
 
     
@@ -18,6 +19,8 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato, Libros}) => {
     const handleChange = (event) => {
       setAge(event.target.value);
     };
+
+    const {libros} = useContext(UserContext)
     const [libro, setLibro] =  useState(Dato)
     
     const [errores, setErrores] = useState({
@@ -166,7 +169,7 @@ export const NuevaSolicitud = ({solicitud , Volver, Dato, Libros}) => {
                             onChange={handleChange}
                         >
 
-                          { Libros.map((name) => (
+                          { libros.map((name) => (
                             <MenuItem key={name.Id_Libro} value={name.Id_Libro}>
                               {name.Nom_Libro}
                               </MenuItem>
