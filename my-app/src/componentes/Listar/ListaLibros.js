@@ -11,6 +11,7 @@ import { UserContext } from '../UserContext/UserContext';
 import TablaListadoLibros from '../Experimentando/TablaListadoLibros';
 import { NuevoLibro } from '../NuevoLibro/NuevoLibro';
 
+
 const ListaLibros = () => {
 
         const {ModLibro, setcontrolVista, eliminarLibro, setListarLibros, libros, eliminarLibroSelected} = useContext(UserContext)
@@ -23,6 +24,7 @@ const ListaLibros = () => {
         const [estadomodif, setestadomodif] = useState(false) //ocultar - mostrar modal
         const [estadoNuevo, setestadoNuevo] = useState(false) //ocultar - mostrar modal
         const [libroaModificar, setlibroaModificar] = useState();
+        const [libroSelected, setLibroSelected] = useState({});
         
 
         // Estilos del Table
@@ -105,12 +107,8 @@ const ListaLibros = () => {
      
         return (
           <div>
+
           {estadoTablaLibr?<h1>Libros</h1> :null}
-          {estadoTablaLibr? <TablaListadoLibros btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} Libros={LibrosCache}/> :null}
-          {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
-          {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={setcontrolVista} LibroSeleccionado={libroaModificar} AsignarLib={ModLibro}  /> : null}
-          <br></br>
-    
           {visibilidad? 
           <Button 
             onClick={()=>setListarLibros(false)} 
@@ -122,14 +120,20 @@ const ListaLibros = () => {
     
           {visibilidad? 
            <Button 
-           variant="outlined" 
-           color="primary"
+            variant="outlined" 
+            color="primary"
             onClick={()=>nuevoLibro()}
             className={classes.marginLibros} 
           >Nuevo Libro</Button>
           :null}
+          {estadoTablaLibr? <TablaListadoLibros btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} Libros={LibrosCache}/> :null}
+          {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
+          {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={setcontrolVista} LibroSeleccionado={libroaModificar} AsignarLib={ModLibro}  /> : null}
+          <br></br>
+    
+          
         
-          {estadoNuevo? <Modal><NuevoLibro Reacargar={ReacargarListarLibros}/></Modal> : null}
+          {estadoNuevo? <Modal><NuevoLibro Reacargar={ReacargarListarLibros} Dato={libroSelected}/></Modal> : null}
     
           {estadoNuevo? 
           <Button 

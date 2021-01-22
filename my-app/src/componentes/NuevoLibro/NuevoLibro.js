@@ -9,17 +9,6 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { makeStyles } from '@material-ui/core/styles';
 import '../NuevoLibro/Style_NuevoLibro.css'
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-    input: {
-      display: 'none',
-    },
-  }));
-
   
 const url = "https://agile-ocean-56695.herokuapp.com/LibrosTest";
 
@@ -38,9 +27,9 @@ async function postData(url, Id={}){
 
 
 
-export const NuevoLibro = ({Reacargar}) => {
+export const NuevoLibro = ({Recargar, Dato}) => {
     const classes = useStyles();
-    const [libro, setLibro] = useState({});
+    const [libro, setLibro] = useState(Dato);
     const [errores, setErrores] = useState({
         Nom_Libro:false,
         Autor_Libro:false,
@@ -52,6 +41,9 @@ export const NuevoLibro = ({Reacargar}) => {
     const [controlAlert, setControlAlert] = useState(false);
     const [mensajeAlert, setMensajeAlert] = useState('');
     const [severity, setSeverity] = useState('error');
+
+    const disabledCampos = Object.keys(Dato).length>0?true:false;
+
 
     const controlCambios = (name, value)=>{
       
@@ -68,6 +60,7 @@ export const NuevoLibro = ({Reacargar}) => {
     const cargarImagen = (name, value) => {
       Base64(value, name, controlCambios);
     }
+
     const validarDatos = () =>{
    
         var isError=false;
@@ -82,7 +75,6 @@ export const NuevoLibro = ({Reacargar}) => {
           return isError;
         });
 
-        console.log(isError);
         if(isError!==true)
         {
           setSeverity("success");
@@ -90,13 +82,18 @@ export const NuevoLibro = ({Reacargar}) => {
           setMensajeAlert("Datos Correctos!");
 
           postData(url, libro)
-          .then(resp =>console.log(resp), Reacargar(libro))
+          .then(resp =>console.log(resp), Recargar(libro))
           .catch(error=>console.log(error))
         }
         else 
         Validar(setControlAlert,setMensajeAlert);
         
     }
+
+    const resetear = () => {
+      setLibro({});
+    }
+    
     return (
         <>
             <Container maxWidth="sm" className="container">
@@ -169,7 +166,7 @@ export const NuevoLibro = ({Reacargar}) => {
                     </label>
                     {libro.Imagen_Libro && <img style={{width: "300px",height: "160px"}} alt="" src={libro.Imagen_Libro}/>}
                     <br/>
-                    <Container>
+                    <div className="container-botones" >
                         <Button
                             variant="outlined"
                             color="primary"
@@ -179,7 +176,18 @@ export const NuevoLibro = ({Reacargar}) => {
                         >
                             Agregar
                         </Button>
-                    </Container>
+                        <Button 
+                          className={classes.button}
+                          onClick={e=>resetear(e)} 
+                          variant="outlined"
+                          disabled={disabledCampos}
+                          color="primary"
+                        >
+                            Limpiar Campos
+                        </Button>
+                        <br/>
+
+                    </div>
 
                     <Snackbar 
                         open={controlAlert} 
@@ -198,3 +206,14 @@ export const NuevoLibro = ({Reacargar}) => {
         </>
     )
 }
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  input: {
+    display: 'none',
+  },
+}));
