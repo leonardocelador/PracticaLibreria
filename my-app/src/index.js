@@ -4,7 +4,6 @@ import theme from '../src/componentes/Theme/theme';
 import { ThemeProvider } from '@material-ui/core';
 import './index.css';
 import App from './App';
-import { NuevoLibro } from './componentes/NuevoLibro/NuevoLibro';
 
 
 

@@ -24,6 +24,7 @@ const ListaLibros = () => {
         const [estadomodif, setestadomodif] = useState(false) //ocultar - mostrar modal
         const [estadoNuevo, setestadoNuevo] = useState(false) //ocultar - mostrar modal
         const [libroaModificar, setlibroaModificar] = useState();
+        const [libroSelected, setLibroSelected] = useState({});
         
 
         // Estilos del Table
@@ -112,8 +113,8 @@ const ListaLibros = () => {
     
           {visibilidad? 
            <Button 
-           variant="outlined" 
-           color="primary"
+            variant="outlined" 
+            color="primary"
             onClick={()=>nuevoLibro()}
             className={classes.marginLibros} 
           >Nuevo Libro</Button>
@@ -125,7 +126,7 @@ const ListaLibros = () => {
     
           
         
-          {estadoNuevo? <Modal><NuevoLibro Reacargar={ReacargarListarLibros}/></Modal> : null}
+          {estadoNuevo? <Modal><NuevoLibro Reacargar={ReacargarListarLibros} Dato={libroSelected}/></Modal> : null}
     
           {estadoNuevo? 
           <Button 

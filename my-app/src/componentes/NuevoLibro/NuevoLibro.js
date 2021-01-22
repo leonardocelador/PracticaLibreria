@@ -9,17 +9,6 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { makeStyles } from '@material-ui/core/styles';
 import '../NuevoLibro/Style_NuevoLibro.css'
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-    input: {
-      display: 'none',
-    },
-  }));
-
   
 const url = "https://agile-ocean-56695.herokuapp.com/LibrosTest";
 
@@ -38,9 +27,9 @@ async function postData(url, Id={}){
 
 
 
-export const NuevoLibro = ({Reacargar}) => {
+export const NuevoLibro = ({Recargar, Dato}) => {
     const classes = useStyles();
-    const [libro, setLibro] = useState({});
+    const [libro, setLibro] = useState(Dato);
     const [errores, setErrores] = useState({
         Nom_Libro:false,
         Autor_Libro:false,
@@ -53,7 +42,7 @@ export const NuevoLibro = ({Reacargar}) => {
     const [mensajeAlert, setMensajeAlert] = useState('');
     const [severity, setSeverity] = useState('error');
 
-    //const disabledCampos = Object.keys().length>0?true:false;
+    const disabledCampos = Object.keys(Dato).length>0?true:false;
 
 
     const controlCambios = (name, value)=>{
@@ -93,7 +82,7 @@ export const NuevoLibro = ({Reacargar}) => {
           setMensajeAlert("Datos Correctos!");
 
           postData(url, libro)
-          .then(resp =>console.log(resp), Reacargar(libro))
+          .then(resp =>console.log(resp), Recargar(libro))
           .catch(error=>console.log(error))
         }
         else 
@@ -191,7 +180,7 @@ export const NuevoLibro = ({Reacargar}) => {
                           className={classes.button}
                           onClick={e=>resetear(e)} 
                           variant="outlined"
-                          //disabled={disabledCampos}
+                          disabled={disabledCampos}
                           color="primary"
                         >
                             Limpiar Campos
@@ -217,3 +206,14 @@ export const NuevoLibro = ({Reacargar}) => {
         </>
     )
 }
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  input: {
+    display: 'none',
+  },
+}));
