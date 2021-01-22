@@ -39,7 +39,7 @@ async function postData(url, Id={}){
 
 
 export const NuevoLibro = () => {
-    
+
     const classes = useStyles();
     const [libro, setLibro] = useState({});
     const [errores, setErrores] = useState({
@@ -53,6 +53,9 @@ export const NuevoLibro = () => {
     const [controlAlert, setControlAlert] = useState(false);
     const [mensajeAlert, setMensajeAlert] = useState('');
     const [severity, setSeverity] = useState('error');
+
+    //const disabledCampos = Object.keys().length>0?true:false;
+
 
     const controlCambios = (name, value)=>{
       
@@ -69,6 +72,7 @@ export const NuevoLibro = () => {
     const cargarImagen = (name, value) => {
       Base64(value, name, controlCambios);
     }
+
     const validarDatos = () =>{
    
         var isError=false;
@@ -83,7 +87,6 @@ export const NuevoLibro = () => {
           return isError;
         });
 
-        console.log(isError);
         if(isError!==true)
         {
           setSeverity("success");
@@ -98,6 +101,11 @@ export const NuevoLibro = () => {
         Validar(setControlAlert,setMensajeAlert);
         
     }
+
+    const resetear = () => {
+      setLibro({});
+    }
+    
     return (
         <>
             <Container maxWidth="sm" className="container">
@@ -170,7 +178,7 @@ export const NuevoLibro = () => {
                     </label>
                     {libro.Imagen_Libro && <img style={{width: "300px",height: "160px"}} alt="" src={libro.Imagen_Libro}/>}
                     <br/>
-                    <Container>
+                    <div className="container-botones" >
                         <Button
                             variant="outlined"
                             color="primary"
@@ -180,7 +188,18 @@ export const NuevoLibro = () => {
                         >
                             Agregar
                         </Button>
-                    </Container>
+                        <Button 
+                          className={classes.button}
+                          onClick={e=>resetear(e)} 
+                          variant="outlined"
+                          //disabled={disabledCampos}
+                          color="primary"
+                        >
+                            Limpiar Campos
+                        </Button>
+                        <br/>
+
+                    </div>
 
                     <Snackbar 
                         open={controlAlert} 

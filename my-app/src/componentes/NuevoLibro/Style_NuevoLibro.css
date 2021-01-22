@@ -1,6 +1,6 @@
 .container {
   background: #fbfbfb;
-  padding-bottom: 25px;
+  padding: 25px;
 }
 
 .titulos {
@@ -9,4 +9,10 @@
 
 .formulario {
   text-align: center;
+}
+
+.container-botones {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 83px;
 }
