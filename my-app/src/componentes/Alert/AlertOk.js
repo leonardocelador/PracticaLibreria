@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 const AlertOk = () => {
     const classes = useStyles();
     return (
-        <div className="animate__animated animate__backInRight">
+        <div className="animate__animated animate__bounceInUp">
             <div className={classes.root}>
                 <Alert >
                     <AlertTitle>Correcto</AlertTitle>
