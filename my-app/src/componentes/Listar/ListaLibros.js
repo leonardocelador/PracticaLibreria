@@ -133,7 +133,7 @@ const ListaLibros = () => {
     
           
         
-          {estadoNuevo? <Modal><NuevoLibro Reacargar={ReacargarListarLibros} Dato={libroSelected}/></Modal> : null}
+          {estadoNuevo? <Modal><NuevoLibro Recargar={ReacargarListarLibros} Dato={libroSelected}/></Modal> : null}
     
           {estadoNuevo? 
           <Button 
