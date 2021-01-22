@@ -84,6 +84,7 @@ export const NuevoLibro = ({Recargar, Dato}) => {
           postData(url, libro)
           .then(resp =>console.log(resp), Recargar(libro))
           .catch(error=>console.log(error))
+          
         }
         else 
         Validar(setControlAlert,setMensajeAlert);

@@ -14,7 +14,7 @@ import { NuevoLibro } from '../NuevoLibro/NuevoLibro';
 
 const ListaLibros = () => {
 
-        const {ModLibro, setcontrolVista, eliminarLibro, setListarLibros, libros} = useContext(UserContext);
+        const {ModLibro, setcontrolVista, eliminarLibro, setListarLibros, libros, eliminarLibroSelected} = useContext(UserContext)
 
         const [idEliminar, setidEliminar] = useState("") 
         const [LibrosCache, setLibrosCache] = useState(libros)
@@ -60,8 +60,15 @@ const ListaLibros = () => {
         }
         // funcionalidad al presionar Ok del modal eliminar, accion elimina el libro correspondiente
         const okEliminar = (idEliminado) => {
+          
           setestadoEliminar(false)
-          eliminarLibro(idEliminado)
+          const LibroAuxDel = LibrosCache
+          const found = LibrosCache.findIndex(element => element.Id_Libro === idEliminado);
+          LibroAuxDel.splice(found,1);
+          setLibrosCache(LibroAuxDel)
+          eliminarLibroSelected(idEliminado)
+          
+          // eliminarLibro(idEliminado)
         
            
         }
@@ -126,7 +133,7 @@ const ListaLibros = () => {
     
           
         
-          {estadoNuevo? <Modal><NuevoLibro Reacargar={ReacargarListarLibros} Dato={libroSelected}/></Modal> : null}
+          {estadoNuevo? <Modal><NuevoLibro Recargar={ReacargarListarLibros} Dato={libroSelected}/></Modal> : null}
     
           {estadoNuevo? 
           <Button 

@@ -4,10 +4,20 @@ import Listar from './componentes/Listar/Listar';
 import { NuevaSolicitud } from './componentes/Libro/NuevaSolicitud';
 import { UserContext } from './componentes/UserContext/UserContext';
 
-const url = "https://agile-ocean-56695.herokuapp.com/SolicitudesTest/";
-
+const urlSol = "https://agile-ocean-56695.herokuapp.com/SolicitudesTest/";
+const urlLib = "https://agile-ocean-56695.herokuapp.com/LibrosTest/";
 async function postData(url, Id={}) {
-    debugger
+    
+    const response = await fetch(url, {
+      method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+      headers:{'Content-Type': 'application/json'},
+      body: JSON.stringify(Id) // body data type must match "Content-Type" header
+    });
+    return response; // parses JSON response into native JavaScript objects
+  }
+
+  async function postDataDelLibro(url, Id={}) {
+    
     const response = await fetch(url, {
       method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
       headers:{'Content-Type': 'application/json'},
@@ -48,7 +58,7 @@ const App =  () => {
 
    const cargarDatos =()=>{
        console.log("ejecuto cargar datos")
-        getData(url)
+        getData(urlSol)
         .then( resp => resp.json())
                 .then( data => {
                    console.log(data)
@@ -59,8 +69,8 @@ const App =  () => {
             }
     const cargarLibros =()=>{
         console.log("ejecuto cargar datos")
-        const urlibros = "https://agile-ocean-56695.herokuapp.com/LibrosTest/"
-        getDataLibros(urlibros)
+        // const urlibros = "https://agile-ocean-56695.herokuapp.com/LibrosTest/"
+        getDataLibros(urlLib)
         .then( resp => resp.json())
                 .then( data => {
                     console.log(data)
@@ -104,9 +114,9 @@ const App =  () => {
         setLibroSelected({})
     }
     const eliminarLibro = (idEliminado) => {
-        const url = "https://agile-ocean-56695.herokuapp.com/SolicitudesTest/";
+        // const url = "https://agile-ocean-56695.herokuapp.com/LibrosTest/";
            console.log(idEliminado)
-           postData(url, {"idSol":idEliminado})
+           postData(urlSol, {"idSol":idEliminado})
            .then( resp => resp.json())
                 .then( resp => {
                    console.log(resp)
@@ -117,6 +127,25 @@ const App =  () => {
         const result = libreSol.filter(libre => libre.Id_Solicitud !== idEliminado);
         setlibreSol(result)
         setcontrolVista(true)
+        //    setloading(false)
+          
+        
+    }
+
+    const eliminarLibroSelected = (idEliminado) => {
+        // const url = "https://agile-ocean-56695.herokuapp.com/SolicitudesTest/";
+           console.log(idEliminado)
+           postDataDelLibro(urlLib, {"id":idEliminado})
+           .then( resp => resp.json())
+                .then( resp => {
+                   console.log(resp)
+                  
+                            
+                })
+        .catch(error => console.log(error))
+        // const result = libreSol.filter(libre => libre.Id_Solicitud !== idEliminado);
+        // setlibreSol(result)
+        // setcontrolVista(true)
         //    setloading(false)
           
         
@@ -134,7 +163,8 @@ const App =  () => {
                     eliminarLibro,
                     ListarLibros,
                     setListarLibros,
-                    loading
+                    loading,
+                    eliminarLibroSelected
                 }}>
                 <Listar/>
                 </UserContext.Provider>
