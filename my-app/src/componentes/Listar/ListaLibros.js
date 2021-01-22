@@ -11,6 +11,7 @@ import { UserContext } from '../UserContext/UserContext';
 import TablaListadoLibros from '../Experimentando/TablaListadoLibros';
 import { NuevoLibro } from '../NuevoLibro/NuevoLibro';
 
+
 const ListaLibros = () => {
 
         const {ModLibro, setcontrolVista, eliminarLibro, setListarLibros, libros} = useContext(UserContext)
@@ -98,12 +99,8 @@ const ListaLibros = () => {
      
         return (
           <div>
+
           {estadoTablaLibr?<h1>Libros</h1> :null}
-          {estadoTablaLibr? <TablaListadoLibros btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} Libros={LibrosCache}/> :null}
-          {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
-          {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={setcontrolVista} LibroSeleccionado={libroaModificar} AsignarLib={ModLibro}  /> : null}
-          <br></br>
-    
           {visibilidad? 
           <Button 
             onClick={()=>setListarLibros(false)} 
@@ -121,6 +118,12 @@ const ListaLibros = () => {
             className={classes.marginLibros} 
           >Nuevo Libro</Button>
           :null}
+          {estadoTablaLibr? <TablaListadoLibros btnModificarC={btnModificar} LlamaModalEliminarC={LlamaModalEliminar} Libros={LibrosCache}/> :null}
+          {estadoEliminar? <Modal><Borrar id={idEliminar} cancelar={cancelarEliminar} okEliminado={okEliminar} estadoEliminarModal={setestadoEliminar}/></Modal> :  null}
+          {estadomodif? <Modificar cancelar={cerrarModificar} UpdLibro={setcontrolVista} LibroSeleccionado={libroaModificar} AsignarLib={ModLibro}  /> : null}
+          <br></br>
+    
+          
         
           {estadoNuevo? <Modal><NuevoLibro Reacargar={ReacargarListarLibros}/></Modal> : null}
     
